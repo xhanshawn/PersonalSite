@@ -8,7 +8,8 @@
       <th>Name</th>
       <th>Introduction</th>
       <th>Education</th>
-      <th colspan="3"></th>
+      <th>homepage_content</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -18,6 +19,7 @@
         <td><%= developer.name %></td>
         <td><%= developer.introduction %></td>
         <td><%= developer.education %></td>
+        <td><%= developer.homepage_content %></td>
         <td><%= link_to 'Show', developer %></td>
         <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
         <td><%= link_to 'Destroy', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -10,6 +10,13 @@ class DevelopersController < ApplicationController
   # GET /developers/1
   # GET /developers/1.json
   def show
+
+    @developer = Developer.find(params[:id])
+    if @developer.homepage_content
+      respond_to do |format|
+        format.html { render :text => @developer.homepage_content }
+      end
+    end
   end
 
   # GET /developers/new
@@ -69,6 +76,6 @@ class DevelopersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def developer_params
-      params.require(:developer).permit(:name, :introduction, :education)
+      params.require(:developer).permit(:name, :introduction, :education, :homepage_content)
     end
 end
