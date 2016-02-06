@@ -1,4 +1,4 @@
-<%= form_for(@developer) do |f| %>
+<%= form_for(@developer, :url => developer_path(@developer.name)) do |f| %>
   <% if @developer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@developer.errors.count, "error") %> prohibited this developer from being saved:</h2>
@@ -26,6 +26,10 @@
   <div class="field">
     <%= f.label :homepage_content %><br>
     <%= f.text_area :homepage_content %>
+  </div>
+  <div class="field">
+    <%= f.label :edupage_content %><br>
+    <%= f.text_area :edupage_content %>
   </div>
   <div class="actions">
     <%= f.submit %>

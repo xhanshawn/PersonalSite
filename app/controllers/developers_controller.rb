@@ -7,11 +7,11 @@ class DevelopersController < ApplicationController
     @developers = Developer.all
   end
 
-  # GET /developers/1
-  # GET /developers/1.json
+  # GET /developers/:name
+  # GET /developers/:name.json
   def show
 
-    @developer = Developer.find(params[:id])
+
     if @developer.homepage_content
       respond_to do |format|
         require 'erb'
@@ -19,6 +19,12 @@ class DevelopersController < ApplicationController
         # format.html { render :text => @developer.homepage_content }
       end
     end
+  end
+
+  # GET /developers/:name/education
+  # GET /developers/:name/education.json
+  def show_edupage
+    render :text => @developer.name
   end
 
   # GET /developers/new
@@ -49,9 +55,10 @@ class DevelopersController < ApplicationController
   # PATCH/PUT /developers/1
   # PATCH/PUT /developers/1.json
   def update
+    # @developer = Developer.find(params[:name])
     respond_to do |format|
       if @developer.update(developer_params)
-        format.html { redirect_to @developer, notice: 'Developer was successfully updated.' }
+        format.html { redirect_to developer_path(@developer.name), notice: 'Developer was successfully updated.' }
         format.json { render :show, status: :ok, location: @developer }
       else
         format.html { render :edit }
@@ -73,11 +80,11 @@ class DevelopersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_developer
-      @developer = Developer.find(params[:id])
+      @developer = Developer.find_by(name: params[:name])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def developer_params
-      params.require(:developer).permit(:name, :introduction, :education, :homepage_content)
+      params.require(:developer).permit(:name, :introduction, :education, :homepage_content, :edupage_content)
     end
 end
