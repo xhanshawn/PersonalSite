@@ -14,7 +14,9 @@ class DevelopersController < ApplicationController
     @developer = Developer.find(params[:id])
     if @developer.homepage_content
       respond_to do |format|
-        format.html { render :text => @developer.homepage_content }
+        require 'erb'
+        format.html { render :inline => @developer.homepage_content }
+        # format.html { render :text => @developer.homepage_content }
       end
     end
   end
