@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
+  skip_before_action :authorize, only: [:new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name)
+    set_users_by_type
   end
 
-  # GET /users/1
+  # GET /users/:name
   # GET /users/1.json
   def show
   end
@@ -64,11 +65,19 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by(name: params[:name])
+    end
+
+    def set_users_by_type
+      if params[:type]
+        @users = User.where(type: params[:type]).order(:name)
+      else
+        @users = User.order(:name)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation)
+      params.require(:user).permit(:name, :password, :password_confirmation, :type)
     end
 end

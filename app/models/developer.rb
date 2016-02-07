@@ -1,4 +1,4 @@
-class Developer < ActiveRecord::Base
+class Developer < User
 	validates :name, presence: true
 	validates :name, uniqueness: true
 end

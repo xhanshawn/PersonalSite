@@ -10,5 +10,13 @@ class ApplicationController < ActionController::Base
   	  	redirect_to login_url, notice: "Please log in"
   	  end
   	end
+
+    def authorize_by_name
+
+      unless User.find_by(id: session[:user_id])
+        render :text, notice: "you are "
+      end
+    end
+
   protect_from_forgery with: :exception
 end

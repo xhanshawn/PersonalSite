@@ -1,4 +1,5 @@
 class DevelopersController < ApplicationController
+  skip_before_action :authorize, except: [:index, :edit, :update, :destroy]
   before_action :set_developer, only: [:show, :edit, :update, :destroy]
 
   # GET /developers
@@ -10,8 +11,6 @@ class DevelopersController < ApplicationController
   # GET /developers/:name
   # GET /developers/:name.json
   def show
-
-
     if @developer.homepage_content.to_s != ''
       respond_to do |format|
         require 'erb'

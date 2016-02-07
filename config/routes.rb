@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
 
-  resources :users
+  resources :users, param: :name
 
-  resources :developers, param: :name
+  get 'users/:name/profile' => 'users#show'
+
+  resources :developers, controller: 'users', type: 'Developer', param: :name
 
 
   get 'developers/:name' => 'developers#show'
