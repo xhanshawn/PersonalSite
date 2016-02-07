@@ -1,4 +1,9 @@
-<%= form_for(@developer, :url => developer_path(@developer.name)) do |f| %>
+<% if @developer.name %>
+  <% @form_url = developer_path(@developer.name) %>
+<% else %>
+  <% @form_url = nil %>
+<% end %>
+<%= form_for(@developer, :url => @form_url) do |f| %>
   <% if @developer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@developer.errors.count, "error") %> prohibited this developer from being saved:</h2>

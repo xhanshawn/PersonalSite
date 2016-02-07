@@ -12,7 +12,7 @@ class DevelopersController < ApplicationController
   def show
 
 
-    if @developer.homepage_content
+    if @developer.homepage_content.to_s != ''
       respond_to do |format|
         require 'erb'
         format.html { render :inline => @developer.homepage_content }
@@ -43,7 +43,7 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.save
-        format.html { redirect_to @developer, notice: 'Developer was successfully created.' }
+        format.html { redirect_to developer_path(@developer.name), notice: 'Developer was successfully created.' }
         format.json { render :show, status: :created, location: @developer }
       else
         format.html { render :new }

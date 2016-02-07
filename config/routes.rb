@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'developers/:name' => 'developers#show'
   get 'developers/:name/education' => 'developers#show_edupage' 
-
+  delete 'developers/:name' => 'developers#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
