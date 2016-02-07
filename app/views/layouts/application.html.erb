@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PersonalSite</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Personal Site</title>
+  <%= stylesheet_link_tag    "application", media: "all",
+    "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<!-- END:head -->
+<body class="<%= controller.controller_name %>">
+  <div id="banner">
+    <%= @page_title || "Pragmatic Bookshelf" %>
+  </div>
+  
+  <div id="columns">
+    <div id="side">
+      <ul>
+        <li><a href="http://www....">Home</a></li>
+        <li><a href="http://www..../faq">Questions</a></li>
+        <li><a href="http://www..../news">News</a></li>
+        <li><a href="http://www..../contact">Contact</a></li>
+      </ul>
+<!-- START_HIGHLIGHT -->
 
-<%= yield %>
-
+      <% if session[:user_id] %>
+        <ul>
+          <li><%= link_to 'Orders',   ""   %></li>
+          <li><%= link_to 'Products', "" %></li>
+          <li><%= link_to 'Users',    ""    %></li>
+        </ul>
+        <%= button_to 'Logout', logout_path, method: :delete   %>
+      <% end %>
+<!-- END_HIGHLIGHT -->
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
+
