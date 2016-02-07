@@ -24,6 +24,7 @@ class DevelopersController < ApplicationController
   # GET /developers/:name/education
   # GET /developers/:name/education.json
   def show_edupage
+    set_developer
     render :text => @developer.name
   end
 
