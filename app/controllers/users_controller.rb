@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   skip_before_action :authorize, only: [:new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize_developer, only: [:index]
+  before_action :authorize_name, only: [:show]
   # GET /users
   # GET /users.json
   def index
@@ -11,6 +12,9 @@ class UsersController < ApplicationController
   # GET /users/:name
   # GET /users/1.json
   def show
+    unless @user 
+      render :text => "user not found", :layout => true
+    end
   end
 
   # GET /users/new
