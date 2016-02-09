@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'admin' => 'admin#index'
+  get 'dummy-index' => 'application#dummy_index', as: :dummy_index
+
+  get 'users/:name/admin' => 'admin#index', as: :admin
 
   controller :sessions do
 

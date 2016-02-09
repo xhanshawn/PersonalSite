@@ -1,5 +1,7 @@
 module UsersHelper
   def user_profile_path(user)
-  	"/users/#{user.name}/profile"
+  	if(user)
+  	  "/users/#{user.name}/profile"
+  	end
   end
 end
