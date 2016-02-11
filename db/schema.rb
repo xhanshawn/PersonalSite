@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209161243) do
+ActiveRecord::Schema.define(version: 20160211204259) do
+
+  create_table "page_contents", force: :cascade do |t|
+    t.integer  "developer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.text     "html_content"
+    t.string   "page_name"
+  end
+
+  add_index "page_contents", ["developer_id"], name: "index_page_contents_on_developer_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

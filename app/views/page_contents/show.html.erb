@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Developer:</strong>
+  <%= @page_content.developer %>
+  <%= @page_content.page_name %>
+  <%= @page_content.html_content %>
+
+</p>
+
+<%= link_to 'Edit', edit_page_content_path(@page_content) %> |
+<%= link_to 'Back', page_contents_path %>

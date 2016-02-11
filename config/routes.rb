@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :page_contents
+
   get 'dummy-index' => 'application#dummy_index', as: :dummy_index
 
   get 'users/:name/admin' => 'admin#index', as: :admin
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :developers, controller: 'users', type: 'Developer', param: :name
 
+
+  get ':name/:page_name' => 'page_contents#show_by_name'
 
   # get 'developers/:name' => 'developers#show'
   # get 'developers/:name/education' => 'developers#show_edupage' 

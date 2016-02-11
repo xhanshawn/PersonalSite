@@ -12,14 +12,25 @@
 </p>
 
 <% if @user.is_dev? %>
+  <% developer = @user %>
   <p>
   	<strong>Introduction:</strong>
-  	<%= @user.introduction %>
+  	<%= developer.introduction %>
   </p>
   <p>
   	<strong>Contact Info:</strong>
-  	<%= @user.contact_info %>
+  	<%= developer.contact_info %>
   </p>
+  <% developer.page_contents.each do |page| %>
+    <p>
+      <strong>Page Content Name:</strong>
+      <%= page.page_name %>
+    </p>
+    <p>
+      <strong>Page Content HTML:</strong>
+      <%= page.html_content %>
+    </p>
+  <% end %>
 <% end %>
 
 
