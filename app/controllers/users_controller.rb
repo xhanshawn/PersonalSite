@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :authorize, only: [:new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_developer, only: [:index]
-  before_action :authorize_name, only: [:show]
+  before_action :authorize_name, only: [:show, :edit, :update, :destroy]
   # GET /users
   # GET /users.json
   def index
