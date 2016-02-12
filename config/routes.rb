@@ -21,13 +21,16 @@ Rails.application.routes.draw do
   resources :users, param: :name
 
   get 'users/:name/profile' => 'users#show'
+  get 'developers/:name/profile' => 'users#show'
 
-  resources :developers, controller: 'users', type: 'Developer', param: :name
+  resources :developers, controller: 'users', type: 'Developer', param: :name, except: [:show]
 
 
-  get ':name/:page_name' => 'page_contents#show_by_name'
+  get 'developers/:name/:page_name' => 'page_contents#show_by_name'
 
-  # get 'developers/:name' => 'developers#show'
+  get 'developers/:name' => 'page_contents#show_index_by_name'
+
+
   # get 'developers/:name/education' => 'developers#show_edupage' 
   # delete 'developers/:name' => 'developers#destroy'
 

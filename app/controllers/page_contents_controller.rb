@@ -17,9 +17,24 @@ class PageContentsController < ApplicationController
     if developer 
       page_content = developer.page_contents.find_by(:page_name => params[:page_name])
       if page_content 
-        render :inline => page_content.html_content
+        render :inline => page_content.html_content, :layout => "head_only"
       else
         render :text => "This page not found in this user's pages"
+      end
+    else
+      render :text => "User not found"
+    end
+    
+  end
+
+  def show_index_by_name
+    developer = Developer.find_by(:name => params[:name])
+    if developer 
+      page_content = developer.page_contents.find_by(:page_name => "index")
+      if page_content 
+        render :inline => page_content.html_content, :layout => "head_only"
+      else
+        render :text => "Index page not found in this user's pages"
       end
     else
       render :text => "User not found"

@@ -1,6 +1,26 @@
-<h1>Editing Page Content</h1>
 
-<%= render 'form' %>
+<div class="container">
+  <div class="row">
+  	<div class="col-xs-offset-0">
+	  <div class="panel panel-default">
+  		<div class="panel-heading">
+    	  <h3 class="panel-title">
+    	  	<%= current_user_name + "'s personal webpages" %>
+    	  </h3>
+  		</div>
+  		<div class="panel-body">
+    	  <%= render 'form', :action_name => "Update" %>
+    	  <br>
 
-<%= link_to 'Show', @page_content %> |
-<%= link_to 'Back', page_contents_path %>
+    	  <div class="row">
+    	  	<div class="col-xs-offset-0 col-md-11">
+  			<iframe src="/developers/dev2" class="embed-responsive-item" style="height: 600px; width:100%;" scrolling="yes"></iframe>
+  			</div>
+    	  </div>
+  		</div>
+	  </div>
+    </div>
+</div>
+
+
+
