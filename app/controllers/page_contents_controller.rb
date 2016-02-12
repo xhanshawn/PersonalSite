@@ -5,6 +5,9 @@ class PageContentsController < ApplicationController
   # GET /page_contents.json
   def index
     @page_contents = PageContent.all
+    if params[:pages_belong_to_developer]
+      @page_contents = PageContent.where(developer_id: current_user.id)
+    end
   end
 
   # GET /page_contents/1
@@ -17,7 +20,7 @@ class PageContentsController < ApplicationController
     if developer 
       page_content = developer.page_contents.find_by(:page_name => params[:page_name])
       if page_content 
-        render :inline => page_content.html_content, :layout => "head_only"
+        render :inline => page_content.html_content, :layout => true
       else
         render :text => "This page not found in this user's pages"
       end
@@ -32,7 +35,7 @@ class PageContentsController < ApplicationController
     if developer 
       page_content = developer.page_contents.find_by(:page_name => "index")
       if page_content 
-        render :inline => page_content.html_content, :layout => "head_only"
+        render :text => page_content.html_content, :layout => "head_only"
       else
         render :text => "Index page not found in this user's pages"
       end
@@ -42,6 +45,23 @@ class PageContentsController < ApplicationController
     
   end
 
+  # POST /page_contents/1/preview
+
+  # def preview_html
+
+  #   developer = PageContent.find(params[:id])
+  #   if developer.developer_id == current_user.id
+
+  #     # temp_preview_page = developer.page_contents.find_by(:page_name => 'temp_preview_page')
+  #     # if temp_preview_page
+  #     #   temp_preview_page.update_attribute(:html_content => )
+
+  #     render :nothing => true
+  #     # render :inline => params[:preview_content], :layout => "head_only"
+  #   else
+  #     redner :text => "not the user"
+  #   end
+  # end
 
   # GET /page_contents/new
   def new

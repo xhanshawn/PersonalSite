@@ -22,9 +22,18 @@
         <br>
         <div class="field">
           <%= f.label :html_content %><br>
-          <%= f.text_area :html_content, :class => "form-control", :rows => "15" %>
+          <%= f.text_area :html_content, :class => "form-control", :id => "html-content", :rows => "15" %>
         </div>
         <br>
+        <%# content_tag(:a, 'Preview', class: "btn btn-default", id: "preview-button", onclick: "true") %>
+        <br>
+
+        <%# link_to "Pre", {:controller => "page_contents", :action => "preview_html", :id => @page_content.id, :preview_content => @page_content.html_content}, :id => "preview", :method => :post, :remote => true %>
+        <%# content_tag(:iframe, '', id: "preview-iframe", src: "", width: 560, height: 315, frameborder: 3) %>
+        <br>
+        
+
+        
         <div class="actions">
           <%= f.submit action_name, :class => "btn btn-default" %>
         </div>
@@ -32,3 +41,23 @@
     </div>
   </div>
 </div>
+
+<script>
+  
+  // $('#preview-button').click(function(){
+  //   var preview_src = "";
+  //   $('#preview-iframe').attr('src', preview_src + $('#html-content').val());
+  //   console.log($('#preview-iframe').attr('src'));
+  //   // console.log($('#html-content').val());
+    
+  //   // console.log($('#html-content').val());
+  //   // $('#preview-iframe').contents().find('html').html($('#html-content').val());
+  //   $('#preview-iframe').load();
+  // });
+  // $('#preview').bind('ajax:complete', function() {
+    
+  // });
+
+    
+
+</script>

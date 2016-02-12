@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
+
   # GET /users/new
   def new
     @user = User.new
@@ -29,8 +30,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    if not params[:developer_code] == '1234'
+      render :text => "your developer code is incorrect"
+      return
+    end
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created." }

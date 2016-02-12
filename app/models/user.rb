@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_secure_password
 
 
+  attr_accessor :developer_code
+
   def is_dev?
   	self.type == 'Developer'
   end

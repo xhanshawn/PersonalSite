@@ -30,7 +30,6 @@ Rails.application.routes.draw do
 
   get 'developers/:name' => 'page_contents#show_index_by_name'
 
-
   # get 'developers/:name/education' => 'developers#show_edupage' 
   # delete 'developers/:name' => 'developers#destroy'
 
