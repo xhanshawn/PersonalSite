@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    if params[:type] == "Developer" and not params[:developer_code] == '1234'
+    if params[:type] == "Developer" and not params[:developer_code] == 'wpiece2guys'
       render :text => "your developer code is incorrect"
       return
     end
