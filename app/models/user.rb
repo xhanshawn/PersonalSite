@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
     message: "%{value} is not a valid type" }
   has_secure_password
 
+  validates :password, length: { minimum: 8 }, allow_nil: true
+  
+
 
   attr_accessor :developer_code
 

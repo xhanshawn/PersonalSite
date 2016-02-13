@@ -20,7 +20,7 @@ class PageContentsController < ApplicationController
     if developer 
       page_content = developer.page_contents.find_by(:page_name => params[:page_name])
       if page_content 
-        render :inline => page_content.html_content, :layout => true
+        render :inline => page_content.html_content, :layout => "head_only"
       else
         render :text => "This page not found in this user's pages"
       end
@@ -78,6 +78,10 @@ class PageContentsController < ApplicationController
     developer = current_user
     # developer = Developer.find(params[:developer_id])
     # @page_content = PageContent.new(page_content_params.merge(:developer_id => current_user.id))
+    # if developer.page_contents.where(page_name: params[:page_name])
+    #   render :text => "contains this page_name"
+    #   return
+    # end
     @page_content = developer.page_contents.build(page_content_params)
     # @page_content = PageContent.new(:developer_id => 6)
     respond_to do |format|
