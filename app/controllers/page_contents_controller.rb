@@ -1,6 +1,6 @@
 class PageContentsController < ApplicationController
   before_action :set_page_content, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authorize, only: [:show_index_by_name, :show_by_name]
   # GET /page_contents
   # GET /page_contents.json
   def index
@@ -35,6 +35,7 @@ class PageContentsController < ApplicationController
     if developer 
       page_content = developer.page_contents.find_by(:page_name => "index")
       if page_content 
+        record_client_info developer
         render :text => page_content.html_content, :layout => "head_only"
       else
         render :text => "Index page not found in this user's pages"
@@ -44,6 +45,7 @@ class PageContentsController < ApplicationController
     end
     
   end
+
 
   # POST /page_contents/1/preview
 
@@ -128,5 +130,13 @@ class PageContentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_content_params
       params.require(:page_content).permit(:developer_id, :html_content, :page_name)
+    end
+
+
+    def record_client_info developer
+      client_page = developer.page_contents.find_by(page_name: "client_info_page")
+      client_page = developer.page_contents.build(page_name: "client_info_page") if not client_page 
+      client_content = client_page.html_content.to_s + "\n" + request.remote_ip
+      client_page.update_attribute(:html_content, client_content)
     end
 end
