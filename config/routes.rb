@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resources :page_contents
 
+  root 'application#dummy_index'
+  
   get 'dummy-index' => 'application#dummy_index', as: :dummy_index
 
   get 'users/:name/admin' => 'admin#index', as: :admin
