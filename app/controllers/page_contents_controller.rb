@@ -136,7 +136,7 @@ class PageContentsController < ApplicationController
     def record_client_info developer
       client_page = developer.page_contents.find_by(page_name: "client_info_page")
       client_page = developer.page_contents.build(page_name: "client_info_page") if not client_page 
-      client_content = client_page.html_content.to_s + "\n" + request.remote_ip
+      client_content = client_page.html_content.to_s + "\n" + request.remote_ip + "    Time: " + Time.now.to_s
       client_page.update_attribute(:html_content, client_content)
     end
 end
