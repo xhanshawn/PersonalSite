@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:new]
+  skip_before_action :authorize, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_developer, only: [:index]
   before_action :authorize_name, only: [:show, :edit, :update, :destroy]
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created." }
+        format.html { redirect_to admin_url(@user), notice: "User #{@user.name} was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
