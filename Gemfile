@@ -33,7 +33,7 @@ gem 'bootstrap-sass', '3.3.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+group :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -48,7 +48,7 @@ group :development, :test do
 end
 
 
-group :production do
+group :development, :production do
   # Use PostgreSQL as the database for Active Record
   gem 'pg', '~> 0.18.4'
 end
