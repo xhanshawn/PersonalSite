@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
   def dummy_index
     render :inline => 'The site is still being developing. Some other functionalities are pending.
 <br>
-Contact xhanbbuing@gmail.com if you want to give us some advices.', :layout => true
+Contact xhanbbuing@gmail.com if you want to give us some advices. <br>
+My page <a href="http://auniv.elasticbeanstalk.com/developers/xhan">
+http://auniv.elasticbeanstalk.com/developers/xhan</a>', :layout => true
   end
 
   protected
