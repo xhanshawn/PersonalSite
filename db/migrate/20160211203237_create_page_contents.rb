@@ -1,7 +1,7 @@
 class CreatePageContents < ActiveRecord::Migration
   def change
     create_table :page_contents do |t|
-      t.references :developer, index: true
+      t.references :user, index: true
 
       t.timestamps null: false
     end
