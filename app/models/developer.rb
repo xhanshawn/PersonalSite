@@ -1,7 +1,7 @@
 class Developer < User
   validates :name, presence: true
   validates :name, uniqueness: true
-  has_many :page_contents, dependent: :destroy
+  
   before_destroy :ensure_not_referenced_by_any_page_content
 
   private

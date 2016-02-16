@@ -15,7 +15,7 @@
   <tbody>
     <% @page_contents.each do |page_content| %>
       <tr>
-        <td><%= page_content.developer.id %></td>
+        <td><%= page_content.user.id %></td>
         <td><%= page_content.html_content %></td>
         <td><%= page_content.page_name %></td>
         <td><%= link_to 'Show', page_content %></td>

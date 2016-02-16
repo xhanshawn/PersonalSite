@@ -14,14 +14,14 @@
 ActiveRecord::Schema.define(version: 20160211204259) do
 
   create_table "page_contents", force: :cascade do |t|
-    t.integer  "developer_id"
+    t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.text     "html_content"
     t.string   "page_name"
   end
 
-  add_index "page_contents", ["developer_id"], name: "index_page_contents_on_developer_id"
+  add_index "page_contents", ["user_id"], name: "index_page_contents_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

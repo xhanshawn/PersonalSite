@@ -6,7 +6,7 @@ class PageContentsController < ApplicationController
   def index
     @page_contents = PageContent.all
     if params[:pages_belong_to_developer]
-      @page_contents = PageContent.where(developer_id: current_user.id)
+      @page_contents = PageContent.where(user_id: current_user.id)
     end
   end
 
@@ -77,14 +77,14 @@ class PageContentsController < ApplicationController
   # POST /page_contents
   # POST /page_contents.json
   def create
-    developer = current_user
+    user = current_user
     # developer = Developer.find(params[:developer_id])
     # @page_content = PageContent.new(page_content_params.merge(:developer_id => current_user.id))
     # if developer.page_contents.where(page_name: params[:page_name])
     #   render :text => "contains this page_name"
     #   return
     # end
-    @page_content = developer.page_contents.build(page_content_params)
+    @page_content = user.page_contents.build(page_content_params)
     # @page_content = PageContent.new(:developer_id => 6)
     respond_to do |format|
       if @page_content.save
@@ -129,7 +129,7 @@ class PageContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_content_params
-      params.require(:page_content).permit(:developer_id, :html_content, :page_name)
+      params.require(:page_content).permit(:user_id, :html_content, :page_name)
     end
 
 
