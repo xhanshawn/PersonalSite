@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 <br>
 Contact xhanbbuing@gmail.com if you want to give us some advices. <br>
 My page <a href="/developers/xhan">
-http://<%= base_url %>/developers/xhan</a>', :layout => true
+/developers/xhan</a>', :layout => true
   end
 
   protected
