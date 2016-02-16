@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
     render :inline => 'The site is still being developing. Some other functionalities are pending.
 <br>
 Contact xhanbbuing@gmail.com if you want to give us some advices. <br>
-My page <a href="http://auniv.elasticbeanstalk.com/developers/xhan">
-http://auniv.elasticbeanstalk.com/developers/xhan</a>', :layout => true
+My page <a href="/developers/xhan">
+http://<%= base_url %>/developers/xhan</a>', :layout => true
   end
 
   protected
