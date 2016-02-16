@@ -1,6 +1,6 @@
 module ApplicationHelper
   def brand_name
-  	"AlgorithmUniverse"
+  	"Archare"
   end
 
   def current_user_name
