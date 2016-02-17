@@ -7,11 +7,12 @@ class ApplicationController < ActionController::Base
   skip_before_action :authorize, only: [:dummy_index]
 
   def dummy_index
-    render :inline => 'The site is still being developing. Some other functionalities are pending.
-<br>
-Contact xhanbbuing@gmail.com if you want to give us some advices. <br>
-My page <a href="/developers/xhan">
-/developers/xhan</a>', :layout => true
+#     render :inline => 'The site is still being developing. Some other functionalities are pending.
+# <br>
+# Contact xhanbbuing@gmail.com if you want to give us some advices. <br>
+# My page <a href="/developers/xhan">
+# /developers/xhan</a>', :layout => true
+    render file: 'public/index', :layout => true
   end
 
   protected
