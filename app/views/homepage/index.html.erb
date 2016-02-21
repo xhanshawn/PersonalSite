@@ -1,0 +1,17 @@
+<h1><%= brand_name %></h1>
+
+<p>The site has been developing by <%= link_to "xhan", "/developers/xhan" %>.</p>
+<p>Post feature are being developed.</p>
+<p>Current developers who have profile homepages:
+  <br>
+  <table>
+  	<% @developers = User.joins(:page_contents).where("page_contents.page_name = 'index'") %>
+  	<% @developers.each do |developer| %>
+  	  <tr>
+  	  	<td class="col-sm-1"><%= "Developer: " + developer.name %></td>
+  	  	<td class="col-sm-1">Homepage: <%= link_to "/developers/" + developer.name, "/developers/" + developer.name %></td>
+	  </tr>
+	<% end %>
+
+  </table>
+</p>
