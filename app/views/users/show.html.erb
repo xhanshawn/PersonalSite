@@ -11,6 +11,13 @@
   <%= @user.type %>
 </p>
 
+<% if @user.name == "xhan" %>
+  <p>
+    <strong>Developer Code:</strong>
+    <%= get_developer_code %>
+  </p>
+<% end %>
+
 <% if @user.is_dev? %>
   <% developer = @user %>
   <p>
@@ -25,10 +32,6 @@
     <p>
       <strong>Page Content Name:</strong>
       <%= page.page_name %>
-    </p>
-    <p>
-      <strong>Page Content HTML:</strong>
-      <%= page.html_content %>
     </p>
   <% end %>
 <% end %>

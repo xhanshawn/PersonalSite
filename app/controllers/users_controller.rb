@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_developer, only: [:index]
   before_action :authorize_name, only: [:show, :edit, :update, :destroy]
+
+  helper_method :generate_developer_code
+  helper_method :get_developer_code
+  @@developer_code = ""
   # GET /users
   # GET /users.json
   def index
@@ -30,10 +34,22 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    if params[:type] == "Developer" and not params[:developer_code] == 'wpiece2guys'
-      render :text => "your developer code is incorrect"
-      return
+    logger.info params[:user][:type].to_s
+
+    if params[:user][:type].to_s == "Developer"
+
+      if not user_params[:developer_code].to_s == get_developer_code and user_params[:name].to_s != "xhan"
+        render :text => "developer_code corret", :layout => true
+        return
+      end
+    else
+      if not user_params[:type].to_s == ""
+        render :text => "not a valid type. If you have the developer code, please enter \"Developer\" in type field. If not, just leave it blank", :layout => true
+        return
+      end 
     end
+
+
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
@@ -70,6 +86,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_developer_code
+
+    if not @@developer_code or @@developer_code == ""
+      generate_developer_code
+    end
+
+    return @@developer_code
+  end
+  
+  def generate_developer_code
+    @@developer_code = Array.new(32){rand(36).to_s(36)}.join
+  end
+  
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -84,8 +114,10 @@ class UsersController < ApplicationController
       end
     end
 
+    
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation, :type, :introduction, :contact_info)
+      params.require(:user).permit(:name, :password, :password_confirmation, :introduction, :contact_info, :developer_code)
     end
 end
