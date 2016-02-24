@@ -14,6 +14,6 @@
   <strong>Education:</strong>
   <%= @developer.education %>
 </p>
-
+<a href='/developers/<%= @developer.name  %>/client_info_page'><p><strong>client information:</strong></p></a>
 <%= link_to 'Edit', edit_developer_path(@developer) %> |
 <%= link_to 'Back', developers_path %>

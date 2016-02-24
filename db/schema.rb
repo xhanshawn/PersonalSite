@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211204259) do
+ActiveRecord::Schema.define(version: 20160223163733) do
+
+  create_table "client_infos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "ip"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "client_infos", ["user_id"], name: "index_client_infos_on_user_id"
 
   create_table "page_contents", force: :cascade do |t|
     t.integer  "user_id"
@@ -31,6 +41,13 @@ ActiveRecord::Schema.define(version: 20160211204259) do
     t.string   "type"
     t.text     "introduction"
     t.text     "contact_info"
+  end
+
+  create_table "webpages", force: :cascade do |t|
+    t.string   "name"
+    t.text     "html_content"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end
