@@ -19,11 +19,11 @@ class PageContentsController < ApplicationController
     developer = Developer.find_by(:name => params[:name])
 
     if developer 
-      page_content = developer.page_contents.find_by(:page_name => params[:page_name])
+       page_content = developer.page_contents.find_by(:page_name => params[:page_name])
       if(params[:page_name] == 'client_info')
         render('client_info')
       elsif  
-      # if
+        # if
         # page_content = developer.page_contents.find_by(:page_name => params[:page_name])
         render :inline => page_content.html_content, :layout => "head_only"
       else
@@ -143,11 +143,11 @@ class PageContentsController < ApplicationController
 
 
     def record_client_info developer
-      # client_page = developer.page_contents.find_by(page_name: "client_info_page")
-      # client_page = developer.page_contents.build(page_name: "client_info_page") if not client_page 
-      # client_content = client_page.html_content.to_s + "\n" + request.remote_ip + "    Time: " + Time.now.to_s
-      # client_page.update_attribute(:html_content, client_content)
-      client_info = ClientInfo.create(user_id: developer.id, ip: request.remote_ip, date: DateTime.parse(Time.now.to_s))
-      client_info.save
+      client_page = developer.page_contents.find_by(page_name: "client_info_page")
+      client_page = developer.page_contents.build(page_name: "client_info_page") if not client_page 
+      client_content = client_page.html_content.to_s + "IP: " + request.remote_ip + " Time: " + Time.now.to_s + "\n"
+      client_page.update_attribute(:html_content, client_content)
+      # client_info = ClientInfo.create(user_id: developer.id, ip: request.remote_ip, date: DateTime.parse(Time.now.to_s))
+      # client_info.save
     end
 end
