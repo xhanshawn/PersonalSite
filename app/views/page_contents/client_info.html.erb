@@ -1,0 +1,46 @@
+
+<div class="container">
+  <h2>Client Information</h2>
+              
+  <table class="table">
+    <thead>
+      <tr>
+        <th>IP</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+  <!--     <tr>
+        <td>John</td>
+        <td>Doe</td>
+        
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+       
+      </tr> -->
+       
+      <!--  <% ClientInfo.find_each do |client_info| %> 
+          <td><%= client_info.ip %></td>
+          <td><%= client_info.date %></td>
+        </tr>
+       <% end %> -->
+      <% info_list = current_user.page_contents.find_by(:page_name => "client_info_page").html_content.split("\n")
+
+       %>
+       <% info_list.each do |client_info| %>
+        <% list = client_info.split(" ")  %>
+       <tr>
+        <td><%= list[1] %></td>
+        <td><%= list[3]+ " "+list[4] %></td>
+       </tr>
+       <% end %>
+    </tbody>
+  </table>
+</div>

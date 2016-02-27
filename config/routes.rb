@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   get 'developers/:name/:page_name' => 'page_contents#show_by_name'
 
   get 'developers/:name' => 'page_contents#show_index_by_name'
-
+  # get '/client_info' => redirect('client_info.html')
+  # get 'developers/:name/client_info'  => 'page_contents#showClient'
+  # get 'developers/:name/:client_info_page' => 'page_contents#show_client'
   # get 'developers/:name/education' => 'developers#show_edupage' 
   # delete 'developers/:name' => 'developers#destroy'
 
