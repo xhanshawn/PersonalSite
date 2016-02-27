@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   helper_method :generate_developer_code
   helper_method :get_developer_code
   @@developer_code = ""
+  
   # GET /users
   # GET /users.json
   def index
