@@ -50,6 +50,6 @@ end
 
 group :production do
   # Use PosxtgreSQL as the database for Active Record
-  # gem 'pg', '~> 0.18.4'
+  gem 'pg', '~> 0.18.4'
 end
 
