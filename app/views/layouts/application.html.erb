@@ -52,6 +52,8 @@
                 <li><%= link_to 'Profile', user_profile_path(current_user) %></li>
                 <% if current_user and current_user.is_dev? %>
                   <li><%= link_to 'Page Contents', :controller => 'page_contents', :action => 'index', :pages_belong_to_developer => true %></li>
+                  <li><%= link_to 'My Homepage', developer_homepage_path(current_user) %></li>
+                  <li><%= link_to 'Client Records', developer_client_record_path(current_user) %></li>
                 <% end %>
 
                 <li role="separator" class="divider"></li>

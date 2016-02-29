@@ -4,4 +4,15 @@ module UsersHelper
   	  "/users/#{user.name}/profile"
   	end
   end
+  def developer_homepage_path(user)
+  	if(user)
+  	  "/developers/#{user.name}"
+  	end
+  end
+
+  def developer_client_record_path(user)
+  	if(user)
+  	  "/developers/#{user.name}/client_info"
+  	end
+  end
 end

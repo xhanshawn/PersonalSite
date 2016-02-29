@@ -21,10 +21,12 @@ class PageContentsController < ApplicationController
     if developer 
        page_content = developer.page_contents.find_by(:page_name => params[:page_name])
       if(params[:page_name] == 'client_info')
-        render('client_info')
-      elsif  
-        # if
-        # page_content = developer.page_contents.find_by(:page_name => params[:page_name])
+        if(current_user.id == developer.id)
+          render('client_info')
+        else
+          render :text => "Client record is private.", :layout => true
+        end
+      elsif page_content
         render :inline => page_content.html_content, :layout => "head_only"
       else
         render :text => "This page not found in this user's pages"
@@ -145,7 +147,7 @@ class PageContentsController < ApplicationController
     def record_client_info developer
       client_page = developer.page_contents.find_by(page_name: "client_info_page")
       client_page = developer.page_contents.build(page_name: "client_info_page") if not client_page 
-      client_content = client_page.html_content.to_s + "IP: " + request.remote_ip + " Time: " + Time.now.to_s + "\n"
+      client_content = client_page.html_content.to_s + request.remote_ip + " Time: " + Time.now.to_s + "\n"
       client_page.update_attribute(:html_content, client_content)
       # client_info = ClientInfo.create(user_id: developer.id, ip: request.remote_ip, date: DateTime.parse(Time.now.to_s))
       # client_info.save
