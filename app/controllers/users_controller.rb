@@ -3,9 +3,15 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_developer, only: [:index]
   before_action :authorize_name, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: :record_visitors_for_user
+
+
 
   helper_method :generate_developer_code
   helper_method :get_developer_code
+
+
+
   @@developer_code = ""
   
   # GET /users
@@ -88,6 +94,27 @@ class UsersController < ApplicationController
     end
   end
 
+
+
+  # PATCH/PUT /users/:name/record_visitors
+
+  def record_visitors_for_user
+
+    @user = User.find_by(:name => params[:name])
+    record_visitors_api_page = @user.page_contents.find_by(page_name: "visitor_records_page")
+    record_visitors_api_page = @user.page_contents.create(page_name: "visitor_records_page") if not record_visitors_api_page 
+    
+    record_visitors_api_content = record_visitors_api_page.html_content.to_s + client_api_record(params[:page_url].to_s, params[:visitor_ip].to_s)
+    record_visitors_api_page.update_attribute(:html_content, record_visitors_api_content)
+
+
+    render :text => "your record has been updated"
+
+  end
+
+
+
+
   def get_developer_code
 
     if not @@developer_code or @@developer_code == ""
@@ -116,6 +143,10 @@ class UsersController < ApplicationController
       end
     end
 
+
+    def client_api_record(url, ip)
+      record = "Page_url: " + url + " IP: " + ip + " Time: " + Time.now.to_s + "\n"
+    end
     
 
     # Never trust parameters from the scary internet, only allow the white list through.

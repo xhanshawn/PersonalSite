@@ -15,4 +15,6 @@ module UsersHelper
   	  "/developers/#{user.name}/client_info"
   	end
   end
+
+  
 end

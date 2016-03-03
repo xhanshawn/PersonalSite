@@ -26,7 +26,11 @@ Rails.application.routes.draw do
   resources :users, param: :name
 
   get 'users/:name/profile' => 'users#show'
+
   get 'developers/:name/profile' => 'users#show'
+
+  patch 'users/:name/record_visitors' => 'users#record_visitors_for_user'
+
 
   resources :developers, controller: 'users', type: 'Developer', param: :name, except: [:show]
 
