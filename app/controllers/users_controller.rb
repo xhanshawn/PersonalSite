@@ -101,8 +101,8 @@ class UsersController < ApplicationController
   def record_visitors_for_user
 
     @user = User.find_by(:name => params[:name])
-    record_visitors_api_page = @user.page_contents.find_by(page_name: "visitor_records_page")
-    record_visitors_api_page = @user.page_contents.create(page_name: "visitor_records_page") if not record_visitors_api_page 
+    record_visitors_api_page = @user.page_contents.find_by(page_name: "client_info_page")
+    record_visitors_api_page = @user.page_contents.create(page_name: "client_info_page") if not record_visitors_api_page 
     
     record_visitors_api_content = record_visitors_api_page.html_content.to_s + client_api_record(params[:page_url].to_s, params[:visitor_ip].to_s)
     record_visitors_api_page.update_attribute(:html_content, record_visitors_api_content)
@@ -145,7 +145,7 @@ class UsersController < ApplicationController
 
 
     def client_api_record(url, ip)
-      record = "Page_url: " + url + " IP: " + ip + " Time: " + Time.now.to_s + "\n"
+      record = "visitor_record_api{Page_url: " + url + " IP: " + ip + " Time: " + Time.now.to_s + "}\n"
     end
     
 
