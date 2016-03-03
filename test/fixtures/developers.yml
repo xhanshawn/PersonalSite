@@ -1,11 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  introduction: MyText
-  education: MyText
-
-two:
-  name: MyString
-  introduction: MyText
-  education: MyText

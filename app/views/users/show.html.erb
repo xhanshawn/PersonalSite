@@ -28,17 +28,14 @@
   	<strong>Contact Info:</strong>
   	<%= developer.contact_info %>
   </p>
+  <a href='/developers/<%= @user.name  %>/client_info'><p><strong>Client visiting records</strong></p></a>
   <% developer.page_contents.each do |page| %>
     <p>
       <strong>Page Content Name:</strong>
       <%= page.page_name %>
     </p>
 
-    <a href='/developers/<%= @user.name  %>/client_info' style="color:black;"><p><strong>Client information</strong></p></a>
-    <p>
-      <strong>Page Content HTML:</strong>
-      <%= page.html_content %>
-    </p>
+    
 
   <% end %>
 <% end %>

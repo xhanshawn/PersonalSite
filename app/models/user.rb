@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
 
   has_many :page_contents, dependent: :destroy
+  has_many :posts, dependent: :destroy
   
   # validates :password, length: { minimum: 8 }, allow_nil: true
   
