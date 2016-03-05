@@ -21,7 +21,7 @@
         </div>
         <div class="field">
           <%= f.label :body %><br>
-          <%= f.text_area :body, :class => "form-control" %>
+          <%= f.text_area :body, :class => "form-control", data:{ provider: :summernote } %>
           <span id="helpBlock" class="help-block">Share some cool stories with us.</span>
         </div>
         <div class="actions">
