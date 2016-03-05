@@ -1,25 +1,33 @@
-<%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-11">      
+      <%= form_for(@post) do |f| %>
+        <% if @post.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :title %><br>
+          <%= f.text_field :title, :class => "form-control" %>
+          <span id="helpBlock" class="help-block">Input the title of your post.</span>
+        </div>
+        <div class="field">
+          <%= f.label :body %><br>
+          <%= f.text_area :body, :class => "form-control" %>
+          <span id="helpBlock" class="help-block">Share some cool stories with us.</span>
+        </div>
+        <div class="actions">
+          <%= f.submit "create", :class => "btn btn-info"%>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
