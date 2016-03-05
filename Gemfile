@@ -27,6 +27,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap-sass', '3.3.6'
 
+# gem 'bootstrap', '~> 4.0.0.alpha3'
+
+# gem 'sprockets-rails', :require => 'sprockets/railtie'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
