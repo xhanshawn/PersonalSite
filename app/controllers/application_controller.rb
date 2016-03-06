@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     def authorize_name
 
       unless User.find_by(id: session[:user_id]) == User.find_by(name: params[:name])
-        render :text => "user's profile setting page are private", :layout => true
+        redirect_to posts_url, notice: "you don't have authorization"
       end
     end
 

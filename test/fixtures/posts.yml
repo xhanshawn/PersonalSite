@@ -1,2 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+img_post:
+  title: post has image
+  body: a<img></img>b

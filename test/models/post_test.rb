@@ -1,5 +1,6 @@
 require 'test_helper'
 
+
 class PostTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
@@ -29,4 +30,10 @@ class PostTest < ActiveSupport::TestCase
     assert post2.errors[:title].any?
     assert_not post2.errors[:body].any?
   end
+
+  # include ActionView::Helpers
+  
+  # test "get intro" do
+  #   assert_equal "ab", get_intro(posts(:img_post).body)
+  # end
 end
