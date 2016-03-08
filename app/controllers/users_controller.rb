@@ -47,20 +47,23 @@ class UsersController < ApplicationController
     if params[:user][:type].to_s == "Developer"
 
       if not user_params[:developer_code].to_s == get_developer_code and user_params[:name].to_s != "xhan"
-        render :text => "developer_code corret", :layout => true
+        render :text => "developer_code incorret", :layout => true
         return
       end
+
+      @user = User.create(user_params)
+      @user.update_attribute(:type, "Developer")
     else
       if not user_params[:type].to_s == ""
         render :text => "not a valid type. If you have the developer code, please enter \"Developer\" in type field. If not, just leave it blank", :layout => true
         return
       end 
+      @user = User.new(user_params)
     end
 
-
-    @user = User.new(user_params)
+    
     respond_to do |format|
-      if @user.save
+      if @user.type == "Developer" or @user.save
         format.html { redirect_to admin_url(@user), notice: "User #{@user.name} was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else

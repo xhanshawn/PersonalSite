@@ -19,5 +19,4 @@ class User < ActiveRecord::Base
   	self.type == 'Developer'
   end
 
-  class Developer < User; end
 end
