@@ -3,7 +3,18 @@
 test_user:
   name: test_user
   password_digest: <%= BCrypt::Password.create('123') %>
-  type: Developer
   introduction: Student
   contact_info: +1-234-567-8910
 
+test_user2:
+  name: test_user2
+  password_digest: <%= BCrypt::Password.create('123') %>
+  introduction: Student
+  contact_info: +1-234-567-8910
+
+test_dev:
+  name: test_dev
+  password_digest: <%= BCrypt::Password.create('123') %>
+  type: Developer
+  introduction: Student
+  contact_info: +1-234-567-8910

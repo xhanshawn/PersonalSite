@@ -4,4 +4,4 @@ $ ->
       height: null,
       minHeight: 200,
       maxHeight: null,
-      focus: true               
+      focus: true          

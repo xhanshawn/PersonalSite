@@ -9,7 +9,7 @@
   	<% @developers.each do |developer| %>
   	  <tr>
   	  	<td class="col-sm-1"><%= "Developer: " + developer.name %></td>
-  	  	<td class="col-sm-1">Homepage: <%= link_to "/developers/" + developer.name, "/developers/" + developer.name %></td>
+  	  	<td class="col-sm-1">Homepage: <%= link_to developer_homepage_path(developer), developer_homepage_path(developer) %></td>
 	  </tr>
 	<% end %>
 

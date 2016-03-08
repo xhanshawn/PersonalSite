@@ -1,5 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+plain_post:
+  id: 1
+  title: normal post
+  body: this is a normal post, very normal
+
 img_post:
+  id: 2
   title: post has image
   body: a<img></img>b

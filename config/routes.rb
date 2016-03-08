@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :comments
+
   resources :posts
 
   get 'homepage/index'

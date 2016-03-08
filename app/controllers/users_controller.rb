@@ -51,8 +51,10 @@ class UsersController < ApplicationController
         return
       end
 
-      @user = User.create(user_params)
-      @user.update_attribute(:type, "Developer")
+      @user = User.new(user_params)
+      if @user.save 
+        @user.update_attribute(:type, "Developer")
+      end
     else
       if not user_params[:type].to_s == ""
         render :text => "not a valid type. If you have the developer code, please enter \"Developer\" in type field. If not, just leave it blank", :layout => true
