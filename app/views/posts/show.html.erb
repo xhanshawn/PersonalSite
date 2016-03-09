@@ -3,19 +3,20 @@
 
 <div class="container">
   
+  <div class="row">
+		<div class="panel panel-default col-md-10">
 
-	<div class="panel panel-default col-md-10">
-
-	  <div class="panel-body">
-	    <div class="page-header">
-	    	<h3><%= @post.title %></h3>
-	    </div>
-			<%= @post.body.html_safe %>
-		 	<div class="pull-right">
-		  	<p><%= link_to @post.user.name, developer_homepage_path(@post.user), class: "text-right text-muted" %></p>
+		  <div class="panel-body">
+		    <div class="page-header">
+		    	<h3><%= @post.title %></h3>
+		    </div>
+				<%= @post.body.html_safe %>
+			 	<div class="pull-right">
+			  	<p><%= link_to @post.user.name, developer_homepage_path(@post.user), class: "text-right text-muted" %></p>
+			  </div>
 		  </div>
-	  </div>
-	  
+		  
+		</div>
 	</div>
 	
 	
@@ -25,13 +26,16 @@
 		  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-info col-md-offset-9" %>
 		</div>
   <% end %>
-  <div>
-  	<h4 class="page-header">Comments</h4>
-  	<div id="comments">
-	  <%= render :partial => @post.comments.reverse %>  		
-    </div>
+
+
+  <div class="row">
+	  <div>
+	  	<h4 class="page-header">Comments</h4>
+	  	<div id="comments">
+		  <%= render :partial => @post.comments.reverse %>  		
+	    </div>
+	  </div>
   </div>
-  
   
   <div class="row">
   	<div class="col-md-8">
