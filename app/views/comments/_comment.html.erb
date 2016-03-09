@@ -1,0 +1,11 @@
+<%= div_for comment do %>
+  
+  <div class="row"><p>
+    <strong>Posted <%= time_ago_in_words(comment.created_at) %></strong><br />	
+    <%= h(comment.body.html_safe) %>
+
+  </p></div>
+  <div class="row">
+  	<p><%= comment.user.name if comment.user %></p>
+  </div>
+<% end %>
