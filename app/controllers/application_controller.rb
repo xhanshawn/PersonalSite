@@ -24,16 +24,13 @@ class ApplicationController < ActionController::Base
   	  end
   	end
 
-    def authorize_name
+    # def authorize_user user_id
 
-      unless User.find_by(id: session[:user_id]) == User.find_by(name: params[:name])
-        redirect_to posts_url, notice: "you don't have authorization"
-      end
-    end
+      
+    # end
 
 
     def authorize_developer
-
       unless Developer.find_by(id: session[:user_id])
         render :text => "you are not a developer", :layout => true
       end

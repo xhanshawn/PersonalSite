@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authorize, except: [:index, :show]
-  before_action :authorize_name, only: [:edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
   # GET /posts
   # GET /posts.json
   def index
@@ -68,6 +68,12 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    def authorize_user
+      unless session[:user_id] == @post.user_id
+        redirect_to :back, notice: "you don't have authorization"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

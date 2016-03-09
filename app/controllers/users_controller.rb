@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :authorize, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_developer, only: [:index]
-  before_action :authorize_name, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
   protect_from_forgery except: :record_visitors_for_user
 
 
@@ -145,6 +145,12 @@ class UsersController < ApplicationController
         @users = User.where(type: params[:type]).order(:name)
       else
         @users = User.order(:name)
+      end
+    end
+
+    def authorize_user
+      unless session[:user_id] == @user.id
+        redirect_to :back, notice: "you don't have authorization"
       end
     end
 
