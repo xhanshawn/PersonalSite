@@ -2,28 +2,29 @@
 
 
 <div class="container">
-  <div class="row">
+  
 
-	<div class="panel panel-default">
-	  
+	<div class="panel panel-default col-md-10">
+
 	  <div class="panel-body">
 	    <div class="page-header">
-	      <h3><%= @post.title %></h3>
-	  	  <h4>
-		    <cite><%= link_to @post.user.name, developer_homepage_path(@post.user) %></cite>
-		  </h4>
-		</div>
-		<div class="col-md-12">
-		  <%= @post.body.html_safe %>
-		</div>
-	    
+	    	<h3><%= @post.title %></h3>
+	    </div>
+			<%= @post.body.html_safe %>
+		 	<div class="pull-right">
+		  	<p><%= link_to @post.user.name, developer_homepage_path(@post.user), class: "text-right text-muted" %></p>
+		  </div>
 	  </div>
+	  
 	</div>
 	
-	<% if current_user and @post.user.name == current_user.name %>
-	  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-info" %>
-	<% end %>
-  </div>
+	
+
+  <% if current_user and @post.user.name == current_user.name %>
+		<div class="row">
+		  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-info col-md-offset-9" %>
+		</div>
+  <% end %>
   <div>
   	<h4 class="page-header">Comments</h4>
   	<div id="comments">
@@ -35,20 +36,20 @@
   <div class="row">
   	<div class="col-md-8">
   	  <% @comment = @post.comments.new(user_id: current_user.id) %>
-	  <%= form_for(@comment, remote: true) do |f| %>
+		  <%= form_for(@comment, remote: true) do |f| %>
 
-	    <h4 class="page-header">Your comment</h4>
-		<div class="field">
-		  <%= f.text_area :body, :class => "form-control", data:{ provider: :summernote } %>
-		  <span id="helpBlock" class="help-block">Say something about this post</span>
-	    </div>
-		<div class="actions">
-		  <%= f.hidden_field :post_id %>
-		  <%= f.hidden_field :user_id %>
-		  
-		  <%= f.submit "Post your comment", :class => "btn btn-info" %>
-		</div>
-	  <% end %>
+		    <h4 class="page-header">Your comment</h4>
+				<div class="field">
+				  <%= f.text_area :body, :class => "form-control", data:{ provider: :summernote } %>
+				  <span id="helpBlock" class="help-block">Say something about this post</span>
+			  </div>
+				<div class="actions">
+				  <%= f.hidden_field :post_id %>
+				  <%= f.hidden_field :user_id %>
+				  
+				  <%= f.submit "Post your comment", :class => "btn btn-info" %>
+				</div>
+		  <% end %>
   	</div>
   </div>
 </div>

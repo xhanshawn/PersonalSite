@@ -1,11 +1,22 @@
 <%= div_for comment do %>
-  
-  <div class="row"><p>
-    <strong>Posted <%= time_ago_in_words(comment.created_at) %></strong><br />	
-    <%= h(comment.body.html_safe) %>
-
-  </p></div>
-  <div class="row">
-  	<p><%= comment.user.name if comment.user %></p>
+  <div class="panel panel-default col-md-8">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-4">
+           
+           <p class="text-muted"><span class="glyphicon glyphicon-user"></span> <%= link_to comment.user.name, user_profile_path(comment.user), class: "text-muted" %></p>
+        </div>
+      	<div class="col-md-offset-4 col-md-4">
+           <p class="text-right text-muted"><%= comment.created_at.strftime("%b %d, %Y") %></p>
+        </div>
+      	
+      </div>
+	 
+	  
+	  <%= h(comment.body.html_safe) %>
+	  <br>
+	  
+	  
+    </div>
   </div>
 <% end %>
