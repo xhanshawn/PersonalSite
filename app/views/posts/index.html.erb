@@ -8,9 +8,13 @@
     
       <% @posts.each do |post| %>
         <div class="row">
-          <div class="col-md-2"><blockquote><h4><%= link_to post.title, post, method: :get %></h4></blockquote></div>
+          <div class=""><blockquote><h4><%= link_to post.title, post, method: :get %></h4></blockquote></div>
+        </div>
+      
+        <div class="row">
+
           
-          <div class="col-md-8"><%= get_intro(post.body).html_safe %></div>
+          <div class="col-md-10"><%= get_intro(post.body).html_safe %></div>
           <div>
             <h5>
             <% if post.user.is_dev? %>
@@ -21,6 +25,7 @@
             </h5>
           </div>
         </div>
+        <hr>
       <% end %>
     </div>
   </div>
