@@ -23,7 +23,7 @@
 
   <% if current_user and @post.user.name == current_user.name %>
 		<div class="row">
-		  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-info col-md-offset-9" %>
+		  <%= link_to 'Edit', edit_post_path(@post), method: :get, class: "btn btn-info col-md-offset-9" %>
 		</div>
   <% end %>
 
@@ -39,21 +39,26 @@
   
   <div class="row">
   	<div class="col-md-8">
-  	  <% @comment = @post.comments.new(user_id: current_user.id) %>
-		  <%= form_for(@comment, remote: true) do |f| %>
+  	  <% if(current_user) %>
+  	  	<% @comment = @post.comments.new(user_id: current_user.id) %>
 
-		    <h4 class="page-header">Your comment</h4>
-				<div class="field">
-				  <%= f.text_area :body, :class => "form-control", data:{ provider: :summernote } %>
-				  <span id="helpBlock" class="help-block">Say something about this post</span>
-			  </div>
-				<div class="actions">
-				  <%= f.hidden_field :post_id %>
-				  <%= f.hidden_field :user_id %>
-				  
-				  <%= f.submit "Post your comment", :class => "btn btn-info" %>
-				</div>
-		  <% end %>
+			  <%= form_for(@comment, remote: true) do |f| %>
+
+			    <h4 class="page-header">Your comment</h4>
+					<div class="field">
+					  <%= f.text_area :body, :class => "form-control", data:{ provider: :summernote } %>
+					  <span id="helpBlock" class="help-block">Say something about this post</span>
+				  </div>
+					<div class="actions">
+					  <%= f.hidden_field :post_id %>
+					  <%= f.hidden_field :user_id %>
+					  
+					  <%= f.submit "Post your comment", :class => "btn btn-info" %>
+					</div>
+			  <% end %>
+			<% else %>
+			  <%= link_to "You can leave comments after logged in", login_url %>
+			<% end %>
   	</div>
   </div>
 </div>
