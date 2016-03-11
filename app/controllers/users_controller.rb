@@ -33,6 +33,11 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    if(params[:is_developer] == "1") 
+      render 'new_developer'
+    else
+      render 'new'
+    end
   end
 
   # GET /users/1/edit
@@ -47,7 +52,9 @@ class UsersController < ApplicationController
     if params[:user][:type].to_s == "Developer"
 
       if not user_params[:developer_code].to_s == get_developer_code and user_params[:name].to_s != "xhan"
-        render :text => "developer_code incorret", :layout => true
+        @user = User.new
+        flash[:notice] = "your developer_code is incorrect"
+        render "new_developer"
         return
       end
 
@@ -66,7 +73,8 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.type == "Developer" or @user.save
-        format.html { redirect_to admin_url(@user), notice: "User #{@user.name} was successfully created." }
+        flash[:alert] = "User #{@user.name} was successfully created."
+        format.html { redirect_to login_url, notice: "User #{@user.name} was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -135,6 +143,7 @@ class UsersController < ApplicationController
   
   
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find_by(name: params[:name])
@@ -164,4 +173,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation, :introduction, :contact_info, :developer_code)
     end
+
+
 end

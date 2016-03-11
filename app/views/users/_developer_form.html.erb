@@ -24,9 +24,18 @@
     <%= f.password_field :password_confirmation, placeholder: "confirm you password", class: "form-control" %>
   </div>
 
+  <div class="field">
+    <h5>Developer code</h5>
+    <%= f.password_field :developer_code %>
+  </div>
 
 
-  <p><%= link_to "sign up as a developer for Archare.", { controller: "users", action: "new", is_developer: "1"}, class: "text-muted" %></p>
+  <p class="text-muted">No developer code? contact <%= link_to "xhan", "/developers/xhan" %> to get it.</p>
+
+  <%= f.hidden_field :type, value: "Developer" %>
+
+
+
   <div class="actions">
     <%= f.submit "Sign up", :class => "btn btn-info" %>
   </div>
