@@ -1,10 +1,10 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-md-11">      
       <%= form_for(@post) do |f| %>
         <% if @post.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <div class="alert alert-warning" id="error_explanation">
+            
 
             <ul>
             <% @post.errors.full_messages.each do |message| %>

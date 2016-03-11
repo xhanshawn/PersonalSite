@@ -1,45 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
+  <h4 class="page-header"><%= @user.name %></h4>
 
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @user.type %>
-</p>
-
-<% if @user.name == "xhan" %>
-  <p>
-    <strong>Developer Code:</strong>
-    <%= get_developer_code %>
-  </p>
-<% end %>
-
-<% if @user.is_dev? %>
-  <% developer = @user %>
-  <p>
-  	<strong>Introduction:</strong>
-  	<%= developer.introduction %>
-  </p>
-  <p>
-  	<strong>Contact Info:</strong>
-  	<%= developer.contact_info %>
-  </p>
-  <a href='/developers/<%= @user.name  %>/client_info'><p><strong>Client visiting records</strong></p></a>
-  <% developer.page_contents.each do |page| %>
+  <% if @user.name == "xhan" %>
     <p>
-      <strong>Page Content Name:</strong>
-      <%= page.page_name %>
+      <strong>Developer Code:</strong>
+      <%= get_developer_code %>
     </p>
-
-    
-
   <% end %>
-<% end %>
+
+  <% if @user.is_dev? %>
+    <p>
+      <strong>Type:</strong>
+      <%= @user.type %>
+    </p>
+    <% developer = @user %>
+    <p>
+      <strong>Introduction:</strong>
+      <%= developer.introduction %>
+    </p>
+    <p>
+      <strong>Contact Info:</strong>
+      <%= developer.contact_info %>
+    </p>
+    <a href='/developers/<%= @user.name  %>/client_info'><p><strong>Client visiting records</strong></p></a>
+    
+  <% end %>
 
 
-<%= link_to 'Edit', edit_user_path(@user.name) %> |
-<%= link_to 'Back', users_path %>
+  <%= link_to 'Edit', edit_user_path(@user.name), class: "btn btn-info" %>
+
+</div>
+

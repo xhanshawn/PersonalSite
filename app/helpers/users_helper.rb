@@ -16,5 +16,8 @@ module UsersHelper
   	end
   end
 
+  def user_path(user)
+    "/users/#{user.name}" if user
+  end
   
 end

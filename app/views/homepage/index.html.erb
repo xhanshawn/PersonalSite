@@ -1,17 +1,21 @@
-<h1><%= brand_name %></h1>
+<div class="container">
+  <div class="row">
+    <h1><%= brand_name %></h1>
 
-<p>The site has been developing by <%= link_to "xhan", "/developers/xhan" %>.</p>
-<p><%= link_to "Post feature have been added", posts_url %>.</p>
-<p>Current developers who have profile homepages:
-  <br>
-  <table>
-  	<% @developers = User.joins(:page_contents).where("page_contents.page_name = 'index'") %>
-  	<% @developers.each do |developer| %>
-  	  <tr>
-  	  	<td class="col-sm-1"><%= "Developer: " + developer.name %></td>
-  	  	<td class="col-sm-1">Homepage: <%= link_to developer_homepage_path(developer), developer_homepage_path(developer) %></td>
-	  </tr>
-	<% end %>
+    <p>The site has been developing by <%= link_to "xhan", "/developers/xhan" %>.</p>
+    <p><%= link_to "Post feature have been added", posts_url %>.</p>
+    <p>Current developers who have profile homepages:
+      <br>
+      <table>
+      	<% @developers = User.joins(:page_contents).where("page_contents.page_name = 'index'") %>
+      	<% @developers.each do |developer| %>
+      	  <tr>
+      	  	<td class="col-sm-1"><%= "Developer: " + developer.name %></td>
+      	  	<td class="col-sm-1">Homepage: <%= link_to developer_homepage_path(developer), developer_homepage_path(developer) %></td>
+    	  </tr>
+    	<% end %>
 
-  </table>
-</p>
+      </table>
+    </p>
+  </div>
+</div>

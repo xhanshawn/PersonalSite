@@ -52,8 +52,7 @@
               <ul class="dropdown-menu">
                 <li><%= link_to 'Profile', user_profile_path(current_user) %></li>
                 <% if current_user and current_user.is_dev? %>
-                  <li><%= link_to 'Page Contents', :controller => 'page_contents', :action => 'index', :pages_belong_to_developer => true %></li>
-                  <li><%= link_to 'My Homepage', developer_homepage_path(current_user) %></li>
+                  <li><%= link_to 'My pages', :controller => 'page_contents', :action => 'index', :pages_belong_to_developer => true %></li>
                   <li><%= link_to 'Client Records', developer_client_record_path(current_user) %></li>
                 <% end %>
 
@@ -67,21 +66,26 @@
     </nav>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <%= yield %>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-    </div>
+
+  <% flash.each do |name, msg| %>
+    <% case name %>
+    <% when "notice" %>
+      <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
     
-  </div>
+  <% end %>
+
+
+
+
+
+  <%= yield %>
+
   
-
-
-<footer class="footer">
-</footer>
+  
+  <br><br><br>
+  <footer class="footer">
+  </footer>
 
 
 </body>

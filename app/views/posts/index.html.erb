@@ -1,49 +1,60 @@
-<style>
-  .row{
-    margin-left: 5px;
-  }
-</style>
-<p id="notice"><%= notice %></p>
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">  
+      <h3 class="page-header">Posts</h3>
+    </div>
+  </div>
+</div>
 
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h1 class="">Posts</h1>
-    
+    <div class="col-md-9" id="posts-panel">  
       <% @posts.each do |post| %>
         <div class="row">
 
-          <div class="">
-            
+          <div class="col-md-12">
             <h4><%= link_to post.title, post, method: :get %></h4>
-            <p class="text-muted">
-              <cite>
-                <% if post.user.is_dev? %>
-                  <%= link_to post.user.name.to_s, developer_homepage_path(post.user), class: "text-muted" %>
-                <% else %>
-                  <%= post.user.name.to_s %>
-                <% end %>
-              </cite>
-            </p>
+            
+
+            <div class="col-md-8">
+                <!-- reserved for tags -->
+            </div>
+
+
+            <div class="col-md-4">
+              <p class="text-muted pull-right">
+                <cite>
+                  <% if post.user.is_dev? %>
+                    <%= link_to post.user.name.to_s, developer_homepage_path(post.user), class: "text-muted" %>
+                  <% else %>
+                    <%= post.user.name.to_s %>
+                  <% end %>
+                </cite>
+              </p>
+            </div>
           </div>
 
         </div>
       
-        <blockquote>
-          <div class="row">
-            
-            <div class="col-md-10">
-              <%= get_intro(post.body).html_safe %>
-            </div>
-            
+        
+        <div class="row">
+          <div class="col-md-12">
+            <%= get_intro(post.body).html_safe %>
           </div>
-        </blockquote>
+        </div>
+        
         <hr>
       <% end %>
     </div>
+    <div class="col-md-2">
+
+      <%= link_to "Create a new post", new_post_path, method: :get, class: "btn btn-info"%>
+      <br><br>
+      <ul class="list-group">
+        <!-- <li class="list-group-item"></li> -->
+      </ul>
+    </div>
   </div>
-  <%= link_to "Create a new post", new_post_path, method: :get, class: "btn btn-info"%>
 </div>
 
