@@ -1,6 +1,9 @@
 class PageContentsController < ApplicationController
   before_action :set_page_content, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize, only: [:show_index_by_name, :show_by_name]
+  skip_before_action :authorize_developer, only: [:show_index_by_name, :show_by_name]
+
+  
   # GET /page_contents
   # GET /page_contents.json
   def index
@@ -16,12 +19,12 @@ class PageContentsController < ApplicationController
   end
 
   def show_by_name
-    developer = Developer.find_by(:name => params[:name])
+    developer = User.find_by(:name => params[:name])
 
     if developer 
        page_content = developer.page_contents.find_by(:page_name => params[:page_name])
       if(params[:page_name] == 'client_info')
-        if(current_user.id == developer.id)
+        if(current_user and current_user.id == developer.id)
           render('client_info')
         else
           render :text => "Client record is private.", :layout => true
@@ -42,7 +45,7 @@ class PageContentsController < ApplicationController
   #  end
   
   def show_index_by_name
-    developer = Developer.find_by(:name => params[:name])
+    developer = User.find_by(:name => params[:name])
     if developer 
       page_content = developer.page_contents.find_by(:page_name => "index")
       if page_content 

@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   patch 'users/:name/record_visitors' => 'users#record_visitors_for_user'
 
 
-  resources :developers, controller: 'users', type: 'Developer', param: :name, except: [:show]
+  resources :developers, controller: 'users', param: :name, except: [:show]
 
 
   get 'developers/:name/:page_name' => 'page_contents#show_by_name'

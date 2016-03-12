@@ -9,11 +9,8 @@
     </p>
   <% end %>
 
-  <% if @user.is_dev? %>
-    <p>
-      <strong>Type:</strong>
-      <%= @user.type %>
-    </p>
+  <% if @user.is_developer? %>
+    <p>you are a developer of Archare</p>
     <% developer = @user %>
     <p>
       <strong>Introduction:</strong>

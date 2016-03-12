@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
 
     def authorize_developer
-      unless Developer.find_by(id: session[:user_id])
+      unless User.find_by(id: session[:user_id]).is_developer
         render :text => "you are not a developer", :layout => true
       end
     end

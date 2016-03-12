@@ -47,32 +47,37 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    logger.info params[:user][:type].to_s
 
-    if params[:user][:type].to_s == "Developer"
+    @user = User.new(user_params)
 
+    if @user.is_developer
       if not user_params[:developer_code].to_s == get_developer_code and user_params[:name].to_s != "xhan"
-        @user = User.new
         flash[:notice] = "your developer_code is incorrect"
         render "new_developer"
         return
       end
-
-      @user = User.new(user_params)
-      if @user.save 
-        @user.update_attribute(:type, "Developer")
-      end
-    else
-      if not user_params[:type].to_s == ""
-        render :text => "not a valid type. If you have the developer code, please enter \"Developer\" in type field. If not, just leave it blank", :layout => true
-        return
-      end 
-      @user = User.new(user_params)
     end
+
+    # if params[:user][:is_developer].to_s == "1"
+
+    #   if not user_params[:developer_code].to_s == get_developer_code and user_params[:name].to_s != "xhan"
+    #     @user = User.new
+    #     flash[:notice] = "your developer_code is incorrect"
+    #     render "new_developer"
+    #     return
+    #   end
+
+    #   @user = User.new(user_params)
+    #   if @user.save 
+    #     @user.update_attribute(:type, "Developer")
+    #   end
+    # else
+    #   @user = User.new(user_params)
+    # end
 
     
     respond_to do |format|
-      if @user.type == "Developer" or @user.save
+      if @user.save
         flash[:alert] = "User #{@user.name} was successfully created."
         format.html { redirect_to login_url, notice: "User #{@user.name} was successfully created." }
         format.json { render :show, status: :created, location: @user }
@@ -150,8 +155,8 @@ class UsersController < ApplicationController
     end
 
     def set_users_by_type
-      if params[:type]
-        @users = User.where(type: params[:type]).order(:name)
+      if params[:is_developer] == "1"
+        @users = User.where(is_developer: true).order(:name)
       else
         @users = User.order(:name)
       end
@@ -171,7 +176,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation, :introduction, :contact_info, :developer_code)
+      params.require(:user).permit(:name, :password, :password_confirmation, :introduction, :contact_info, :developer_code, :is_developer)
     end
 
 

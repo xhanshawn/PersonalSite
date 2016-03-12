@@ -10,35 +10,18 @@
       </tr>
     </thead>
     <tbody>
-  <!--     <tr>
-        <td>John</td>
-        <td>Doe</td>
-        
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-       
-      </tr> -->
-       
-      <!--  <%# ClientInfo.find_each do |client_info| %> 
-          <td><%# client_info.ip %></td>
-          <td><%# client_info.date %></td>
-        </tr>
-       <%# end %> -->
       <% user = User.find_by(:name => params[:name]) %>
-      <% info_list = user.page_contents.find_by(:page_name => "client_info_page").html_content.split("\n") %>
-      <% info_list.each do |client_info| %>
-      <% list = client_info.split(" ")  %>
-        <tr>
-          <td><%= list[0] %></td>
-          <td><%= list[2].to_s + " " + list[3].to_s + list[4].to_s %></td>
-        </tr>
+      <% client_info = user.page_contents.find_by(:page_name => "client_info_page") %>
+      <% if(client_info) %>
+      
+        <% info_list = client_info.html_content.split("\n") %>
+        <% info_list.each do |client_info| %>
+          <% list = client_info.split(" ")  %>
+          <tr>
+            <td><%= list[0] %></td>
+            <td><%= list[2].to_s + " " + list[3].to_s + list[4].to_s %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
