@@ -25,6 +25,7 @@
   </div>
 
 
+  <%= f.hidden_field :is_developer, value: false %>
 
   <p><%= link_to "sign up as a developer for Archare.", { controller: "users", action: "new", is_developer: "1"}, class: "text-muted" %></p>
   <div class="actions">
