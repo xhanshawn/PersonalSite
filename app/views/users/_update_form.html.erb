@@ -1,0 +1,36 @@
+<%= form_for(@user, :url => user_path(@user) , :html => {:class => "form-group col-sm-5"}) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <h5>User name</h5>
+    <%= f.text_field :name, placeholder: "user name for login", class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <h5>Old Password</h5>
+    <%= password_field_tag :old_password, params[:old_password], placeholder: "your current password", class: "form-control" %>
+  </div>
+
+
+  <div class="field">
+    <h5>New Password</h5>
+    <%= f.password_field :password, placeholder: "new password", class: "form-control" %>
+  </div>
+  <div class="field">
+    <h5>Password Confirmation</h5>
+    <%= f.password_field :password_confirmation, placeholder: "confirm you password", class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update", :class => "btn btn-info" %>
+  </div>
+<% end %>

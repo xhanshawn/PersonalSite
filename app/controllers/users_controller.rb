@@ -91,9 +91,18 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+
+    if @user and not @user.authenticate(params[:old_password])
+
+      redirect_to :back, notice: "old password is incorrect"
+      return 
+    end
+
+
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to users_url, notice: "User #{@user.name} was successfully updated." }
+        flash[:notice] = "User #{@user.name} was successfully updated."
+        format.html { render :show, notice: "User #{@user.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -163,7 +172,7 @@ class UsersController < ApplicationController
     end
 
     def authorize_user
-      unless session[:user_id] == @user.id
+      unless @user and session[:user_id] == @user.id
         redirect_to "/", notice: "you don't have authorization"
       end
     end
