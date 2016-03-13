@@ -10,7 +10,7 @@
       <br>
       <ul>
 
-        <% @developers = User.joins(:page_contents).where("page_contents.page_name = 'index'") %>
+        <% @developers = User.where(is_developer: true) %>
         <% @developers.each do |developer| %>
 
           <li><h4><%= link_to developer.name, developer_homepage_path(developer) %></h4></li>

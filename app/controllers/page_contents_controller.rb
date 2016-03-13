@@ -32,7 +32,7 @@ class PageContentsController < ApplicationController
       elsif page_content
         render :inline => page_content.html_content, :layout => "head_only"
       else
-        render :text => "This page not found in this user's pages"
+        redirect_to :back,  notice: "This developer doesn't have this page"
       end
     else
       render :text => "User not found"
@@ -50,34 +50,16 @@ class PageContentsController < ApplicationController
       page_content = developer.page_contents.find_by(:page_name => "index")
       if page_content 
         record_client_info developer
-        render :text => page_content.html_content, :layout => "head_only"
+        render :inline => page_content.html_content, :layout => "head_only"
       else
-        render :text => "Index page not found in this user's pages"
+        redirect_to :back,  notice: "This developer doesn't have profile homepage"
       end
     else
-      render :text => "User not found"
-    end
-    
+      redirect_to :back,  notice: "We cannot find this developer."
+    end 
   end
 
 
-  # POST /page_contents/1/preview
-
-  # def preview_html
-
-  #   developer = PageContent.find(params[:id])
-  #   if developer.developer_id == current_user.id
-
-  #     # temp_preview_page = developer.page_contents.find_by(:page_name => 'temp_preview_page')
-  #     # if temp_preview_page
-  #     #   temp_preview_page.update_attribute(:html_content => )
-
-  #     render :nothing => true
-  #     # render :inline => params[:preview_content], :layout => "head_only"
-  #   else
-  #     redner :text => "not the user"
-  #   end
-  # end
 
   # GET /page_contents/new
   def new
