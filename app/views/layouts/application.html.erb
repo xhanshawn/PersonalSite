@@ -7,64 +7,62 @@
     "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <style>
-
-  </style>
+  
 </head>
 <!-- END:head -->
 <body class="<%= controller.controller_name %>">
 
-  <div id="top-nav">
-    <nav class="navbar navbar-default navbar-static-top" id="index-nav">
-      <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+  
+  <nav class="navbar navbar-default navbar-static-top" >
+    <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-          <%= link_to brand_name, root_url, :class => "navbar-brand" %>
-        </div>
+        <%= link_to brand_name, root_url, :class => "navbar-brand" %>
+      </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Graph", '' %></li>
-            <li><%= link_to "Posts", posts_url %></li>
-            <li><%= link_to "About", '' %></li>
-          </ul>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Graph", '' %></li>
+          <li><%= link_to "Posts", posts_url %></li>
+          <li><%= link_to "About", '' %></li>
+        </ul>
 
 
 
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
 
-              <% if session[:user_id] %>
-                <% account_name = session[:user_name].to_s + '<span class="caret"></span>' %>
-                <%= link_to account_name.html_safe, '', :'class' =>"dropdown-toggle", :'data-toggle' => "dropdown", :'role' => "button", :'aria-haspopup' => "true", :'aria-expanded' => "false" %>
-              <% else %>
-                <%= link_to 'Login', login_url %>
+            <% if session[:user_id] %>
+              <% account_name = session[:user_name].to_s + '<span class="caret"></span>' %>
+              <%= link_to account_name.html_safe, '', :'class' =>"dropdown-toggle", :'data-toggle' => "dropdown", :'role' => "button", :'aria-haspopup' => "true", :'aria-expanded' => "false" %>
+            <% else %>
+              <%= link_to 'Login', login_url %>
+            <% end %>
+
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Profile', user_profile_path(current_user) %></li>
+              <% if current_user and current_user.is_developer %>
+                <li><%= link_to 'My pages', :controller => 'page_contents', :action => 'index', :pages_belong_to_developer => true %></li>
+                <li><%= link_to 'Client Records', developer_client_record_path(current_user) %></li>
               <% end %>
 
-              <ul class="dropdown-menu">
-                <li><%= link_to 'Profile', user_profile_path(current_user) %></li>
-                <% if current_user and current_user.is_developer %>
-                  <li><%= link_to 'My pages', :controller => 'page_contents', :action => 'index', :pages_belong_to_developer => true %></li>
-                  <li><%= link_to 'Client Records', developer_client_record_path(current_user) %></li>
-                <% end %>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 
-                <li role="separator" class="divider"></li>
-                <li><%= link_to 'Logout', logout_path, method: :delete %></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-  </div>
 
 
   <% flash.each do |name, msg| %>
@@ -74,8 +72,6 @@
     <% end %>
     
   <% end %>
-
-
 
 
 

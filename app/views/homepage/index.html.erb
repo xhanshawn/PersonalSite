@@ -1,21 +1,24 @@
-<div class="container">
-  <div class="row">
-    <h1><%= brand_name %></h1>
-
-    <p>The site has been developing by <%= link_to "xhan", "/developers/xhan" %>.</p>
-    <p><%= link_to "Post feature have been added", posts_url %>.</p>
-    <p>Current developers who have profile homepages:
-      <br>
-      <table>
-      	<% @developers = User.joins(:page_contents).where("page_contents.page_name = 'index'") %>
-      	<% @developers.each do |developer| %>
-      	  <tr>
-      	  	<td class="col-sm-1"><%= "Developer: " + developer.name %></td>
-      	  	<td class="col-sm-1">Homepage: <%= link_to developer_homepage_path(developer), developer_homepage_path(developer) %></td>
-    	  </tr>
-    	<% end %>
-
-      </table>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome!</h1>
+    <p><strong>Archare</strong> is a blog site founded by <%= link_to "xhan", "/developers/xhan" %></p>
+    <p>
+      Posts and comments features have been added
+      <%= link_to "Learn more", posts_url, class: "btn btn-info btn-sm" %>  
     </p>
+    <p>Current developers:
+      <br>
+      <ul>
+
+        <% @developers = User.joins(:page_contents).where("page_contents.page_name = 'index'") %>
+        <% @developers.each do |developer| %>
+
+          <li><h4><%= link_to developer.name, developer_homepage_path(developer) %></h4></li>
+        <% end %>
+        
+      </ul>
+      
+    </p>
+    <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p> -->
   </div>
 </div>
