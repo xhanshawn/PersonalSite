@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  get 'homepage/index'
+  get 'index' => 'homepage/index'
   root 'homepage#index'
 
   resources :page_contents

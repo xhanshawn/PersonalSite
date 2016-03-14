@@ -7,7 +7,14 @@
     "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  
+
+  <style type="text/css">
+
+    #content{
+      min-height: 100vh;
+      
+    }
+  </style>
 </head>
 <!-- END:head -->
 <body class="<%= controller.controller_name %>">
@@ -30,9 +37,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><%= link_to "Graph", '' %></li>
+          <li><%= link_to "Graph", '#' %></li>
           <li><%= link_to "Posts", posts_url %></li>
-          <li><%= link_to "About", '' %></li>
+          <li><%= link_to "About", '#' %></li>
         </ul>
 
 
@@ -74,13 +81,38 @@
   <% end %>
 
 
-
-  <%= yield %>
-
+  <div id="content">
+    <%= yield %>
+  </div>
   
-  
-  <br><br><br>
-  <footer class="footer">
+
+  <footer class="footer-distributed">
+
+    <div class="footer-right">
+
+      <!-- <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa fa-github"></i></a> -->
+
+    </div>
+
+    <div class="footer-left">
+
+      <p class="footer-links">
+        <%= link_to "Home", "/" %>
+        ·
+        <%= link_to "Blog", posts_url %>
+        ·
+        <a href="#">About</a>
+        ·
+        <a href="#">Contact</a>
+      </p>
+
+      <p>Archare &copy; 2016 </p>
+      <p><%= link_to "xhan", "/developers/xhan" %> </p>
+    </div>
+
   </footer>
 
 
