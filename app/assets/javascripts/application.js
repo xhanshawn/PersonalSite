@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require summernote
+//= require application_layout
 //= require turbolinks
 //= require_tree .

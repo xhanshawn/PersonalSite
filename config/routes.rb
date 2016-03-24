@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'about/index'
+
   resources :comments
 
   resources :posts
@@ -7,11 +9,14 @@ Rails.application.routes.draw do
   get 'index' => 'homepage/index'
   root 'homepage#index'
 
+  get 'about' => 'about#index', as: :about
+
   resources :page_contents
 
   
 
   get 'users/:name/admin' => 'admin#index', as: :admin
+
 
   controller :sessions do
 
