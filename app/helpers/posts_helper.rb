@@ -16,21 +16,13 @@ module PostsHelper
   	  end
   	end
   	
-    last_is_space = true
-
     i = 0
-    n = 0
-
-    while(i < t.length and n < 180)
-      
-      n += 1 if(t[i] != ' ' and last_is_space) 
-
-      last_is_space = (t[i] == ' ')
-      i += 1
-    end
-
-    return t[0..i - 1] + "..."
+   
+    i = t[i + 1..-1].index('</p>')
+    
+    return t[0..i + 4] if i else t
   end
 
 
 end
+
