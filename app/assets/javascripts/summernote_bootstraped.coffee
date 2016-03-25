@@ -3,5 +3,4 @@ $ ->
     $(this).summernote
       height: null,
       minHeight: 200,
-      maxHeight: null,
-      focus: true          
+      maxHeight: null,         
