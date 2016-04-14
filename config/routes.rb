@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :tags
+
   get 'about/index'
 
   resources :comments

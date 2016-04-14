@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
 
+  has_and_belongs_to_many :tags
+
   validates :title, :body, presence: true
 
   validates :title, uniqueness: { scope: :user_id,
