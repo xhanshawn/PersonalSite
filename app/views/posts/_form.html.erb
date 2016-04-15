@@ -14,12 +14,38 @@
           </div>
         <% end %>
 
-        <div class="field">
+        <div class="field row">
           <%= f.label :title %><br>
           <%= f.text_field :title, :class => "form-control" %>
           <span id="helpBlock" class="help-block">Input the title of your post.</span>
         </div>
-        <div class="field">
+
+        <div class="field row">
+          
+          <%= f.label "Tags" %><br>
+          <div id="tags">
+            <% @post.tags.each do |tag| %>
+                
+              <%= link_to "#", class: "btn btn-info btn-xs tag-button" do %>
+                <%= tag.name %>
+                <span class="glyphicon glyphicon-remove-sign tag-remove-sign"></span>
+              <% end %>
+              
+            <% end %>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3">
+              <input class="form-control" id="new-tag-input"></input>
+            </div>
+
+            <div class="col-md-1">
+              <%= link_to "add", "#", class: "btn btn-info btn-sm", id: "add-tag-button" %>
+            </div>
+          </div>
+          <span id="helpBlock" class="help-block">Add or remove tags</span>
+        </div>
+        <div class="field row">
           <%= f.label :body %><br>
           <%= f.text_area :body, :class => "form-control", data:{ provider: :summernote } %>
           <span id="helpBlock" class="help-block">Share some cool stories with us.</span>
