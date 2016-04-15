@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
   before_action :authorize, except: [:index, :show]
-  
+
   # GET /tags
   # GET /tags.json
   def index
@@ -15,6 +15,10 @@ class TagsController < ApplicationController
 
   # GET /tags/new
   def new
+    
+    redirect_to '/tags', notice: "Currently Tags can only be created in the Post edit action"
+    return
+
     @tag = Tag.new
   end
 
