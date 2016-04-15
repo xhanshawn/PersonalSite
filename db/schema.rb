@@ -18,9 +18,6 @@ ActiveRecord::Schema.define(version: 20160413144352) do
     t.integer "tag_id",  null: false
   end
 
-  add_index "Posts_Tags", ["post_id", "tag_id"], name: "index_Posts_Tags_on_post_id_and_tag_id"
-  add_index "Posts_Tags", ["tag_id", "post_id"], name: "index_Posts_Tags_on_tag_id_and_post_id"
-
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
