@@ -26,10 +26,11 @@
           <div id="tags">
             <% @post.tags.each do |tag| %>
                 
-              <%= link_to "#", class: "btn btn-info btn-xs tag-button" do %>
+              <span class="btn btn-info btn-xs tag-button">
                 <%= tag.name %>
+                <%= hidden_field_tag "tags[]", tag.name %>
                 <span class="glyphicon glyphicon-remove-sign tag-remove-sign"></span>
-              <% end %>
+              </span>
               
             <% end %>
           </div>
@@ -43,7 +44,7 @@
               <%= link_to "add", "#", class: "btn btn-info btn-sm", id: "add-tag-button" %>
             </div>
           </div>
-          <span id="helpBlock" class="help-block">Add or remove tags</span>
+          <span id="tag-notice" class="help-block">Add or remove tags</span>
         </div>
         <div class="field row">
           <%= f.label :body %><br>
@@ -51,7 +52,7 @@
           <span id="helpBlock" class="help-block">Share some cool stories with us.</span>
         </div>
         <div class="actions">
-          <%= f.submit "create", :class => "btn btn-info" %>
+          <%= f.submit "submit", :class => "btn btn-info" %>
         </div>
       <% end %>
     </div>
