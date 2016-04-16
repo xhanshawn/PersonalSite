@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  if(!$('.tags')) return;
+
   var diameter = 600,
       format = d3.format(",d"),
       color = d3.scale.category20c();
