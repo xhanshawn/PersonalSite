@@ -50,13 +50,17 @@
 
       <%= link_to "Create a new post", new_post_path, method: :get, class: "btn btn-info"%>
       <br><br>
+      
+      <%= link_to "A bubble chart for tags is available", tags_url, class: "text-muted" %>
+      <br><br>
 
       
       <ul class="list-group">
         <%= link_to tags_url, :class => "list-group-item list-group-item-info", :method => :get do %>
           <span><b> Tags </b></span>
         <% end %>
-        <% Tag.all.each do |tag| %>
+        <% tags = Tag.all.sort_by{|tag| tag.posts.length * -1} %>
+        <% tags.each do |tag| %>
           <% unless tag.posts.length == 0 %>
             <%= link_to (tag), :class => "list-group-item", :method => :get do %>
               <%= tag.name %>

@@ -1,4 +1,5 @@
-json.array!(@tags) do |tag|
-  json.extract! tag, :id, :post_id, :name
-  json.url tag_url(tag, format: :json)
+json.name "root"
+json.children @tags do |tag|
+  json.extract! tag, :name, :id
+  json.size tag.posts.length + 1
 end

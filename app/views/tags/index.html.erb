@@ -2,26 +2,14 @@
 <div class="container">
   <div class="row">
     <div class="page-header">
-      <h3>Tags</h3>
+      <h3>Tags bubble chart</h3>
     </div>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @tags.each do |tag| %>
-        <tr>
-          <td><%= tag.name %></td>
-          <td><%= link_to 'Show', tag %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-10">
+      <div id="tags-chart"></div>      
+    </div>
+  </div>
   <br>
 </div>
 

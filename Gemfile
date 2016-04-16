@@ -39,6 +39,9 @@ gem 'bootstrap-sass', '3.3.6'
 
 gem 'summernote-rails', '~> 0.8.1.1'
 
+# d3 for rails
+gem 'd3-rails'
+
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0'
 

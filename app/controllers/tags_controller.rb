@@ -6,6 +6,12 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     @tags = Tag.all
+  
+    respond_to do |format|
+      format.html
+      # format.html { render :file => 'public/tags/tags.html', :layout => true}
+      format.json 
+    end
   end
 
   # GET /tags/1
