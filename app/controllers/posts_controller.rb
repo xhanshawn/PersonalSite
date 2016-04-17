@@ -29,6 +29,8 @@ class PostsController < ApplicationController
 
     @post = user.posts.build(post_params)
 
+    add_tags
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -44,14 +46,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     
-    tags = Array.new
-    params[:tags].each do |tag_name|
-      tag = Tag.find_by(name: tag_name)
-      tag = Tag.new(name: tag_name) unless tag
-      tags << tag
-    end
-    @post.tags.clear
-    @post.tags << tags
+    add_tags
 
     respond_to do |format|
       if @post.update(post_params)
@@ -89,5 +84,16 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:user_id, :title, :body)
+    end
+
+    def add_tags
+      tags = Array.new
+      params[:tags].each do |tag_name|
+        tag = Tag.find_by(name: tag_name)
+        tag = Tag.new(name: tag_name) unless tag
+        tags << tag
+      end
+      @post.tags.clear
+      @post.tags << tags
     end
 end

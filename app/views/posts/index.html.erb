@@ -62,7 +62,7 @@
         <% tags = Tag.all.sort_by{|tag| tag.posts.length * -1} %>
         <% tags.each do |tag| %>
           <% unless tag.posts.length == 0 %>
-            <%= link_to (tag), :class => "list-group-item", :method => :get do %>
+            <%= link_to (tag), :class => "list-group-item small", :method => :get do %>
               <%= tag.name %>
               <span class="badge"><%= tag.posts.length %></span>
             <% end %>
