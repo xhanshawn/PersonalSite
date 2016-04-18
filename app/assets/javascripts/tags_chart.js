@@ -43,14 +43,13 @@ $(document).ready(function() {
         .attr("r", function(d) { return d.r; })
         .style("fill", function(d) { return color(d.className); });
 
-    // node.append("a")
-    //     .attr("href", function(d) {return "/tags/" + d.id; });
 
     node.select('a')
         .append("text")
+        .text(function(d) { return d.className.substring(0, d.r / 3); })
+        .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 10) + "px"; })
         .attr("dy", ".3em")
-        .style("text-anchor", "middle")
-        .text(function(d) { return d.className.substring(0, d.r / 3); });
+        .style("text-anchor", "middle");
         
 
   });
