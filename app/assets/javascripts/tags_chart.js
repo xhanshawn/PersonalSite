@@ -14,7 +14,7 @@ $(document).ready(function() {
   var bubble = d3.layout.pack()
       .sort(tag_comp)
       .size([diameter, diameter])
-      .padding(10);
+      .padding(3);
 
 
   var svg = d3.select("#tags-chart").append("svg")
