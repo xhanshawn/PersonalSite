@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize, except: [:index, :show]
+  before_action :authorize, except: [:index, :show, :ref_posts]
   before_action :authorize_user, only: [:edit, :update, :destroy]
 
   # GET /posts
