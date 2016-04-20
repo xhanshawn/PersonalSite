@@ -1,40 +1,66 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9">  
+
       <h3 class="page-header">Posts</h3>
+      <p><%= link_to "A bubble chart for all the tags is available.", tags_url, method: :get, class: "text-muted" %></p>
+
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-9">
+      <ul class="nav nav-tabs">
+        <% if(action_name == "index") %>
+          <li role="presentation" class="active"><a href="">Original</a></li>
+          <li role="presentation"><a href="/reference_posts">Referenced</a></li>
+        <% else %>
+          <li role="presentation"><a href="/posts">Original</a></li>
+          <li role="presentation" class="active"><a href="#">Referenced</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  
+  
 </div>
 
 
 <div class="container">
+  <br>
+  <br>
   <div class="row">
     <div class="col-md-9" id="posts-panel">  
       <% @posts.each do |post| %>
+
         <div class="row">
           <div class="col-md-12">
             <h4><%= link_to post.title, post, method: :get %></h4>
-            
+          </div>
+        </div>
 
-            <div class="col-md-8">
-                <!-- reserved for tags -->
-            </div>
-
-
-            <div class="col-md-4">
-              <p class="text-muted pull-right">
-                <cite>
-                  <% if post.user.is_developer? %>
-                    <%= link_to post.user.name.to_s, developer_homepage_path(post.user), method: :get, class: "text-muted" %>
-                  <% else %>
-                    <%= post.user.name.to_s %>
-                  <% end %>
-                </cite>
-              </p>
-            </div>
+        <div class="row">
+          <div class="col-md-8">
+            <% post.tags.each do |tag| %>
+              <%= link_to tag.name, tag, class: "btn btn-info btn-xs" %>
+            <% end %>
           </div>
 
+
+          <div class="col-md-4">
+
+            <p class="text-muted pull-right">
+              <span class="glyphicon glyphicon-user"></span>
+              <cite>
+                <% if post.user.is_developer? %>
+                  <%= link_to post.user.name.to_s, developer_homepage_path(post.user), method: :get, class: "text-muted" %>
+                <% else %>
+                  <%= post.user.name.to_s %>
+                <% end %>
+              </cite>
+            </p>
+          </div>
         </div>
+
       
         
         <div class="row">
@@ -49,10 +75,10 @@
     <div class="col-md-2 col-sm-offset-1">
 
       <%= link_to "Create a new post", new_post_path, method: :get, class: "btn btn-info"%>
-      <br><br>
-      
-      <%= link_to "A bubble chart for tags is available", tags_url, method: :get, class: "text-muted" %>
-      <br><br>
+      <span id="helpBlock" class="help-block">Write your new post</span>
+
+      <%= link_to "Add a reference article", '/reference_posts/new', method: :get, class: "btn btn-info"%>
+      <span id="helpBlock" class="help-block">Recommend an article you like</span>
 
       
       <ul class="list-group">

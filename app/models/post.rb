@@ -10,4 +10,7 @@ class Post < ActiveRecord::Base
   validates :title, uniqueness: { scope: :user_id,
     message: "you already have an exact same post" }
 
+	def is_reference
+		self.ref_link != nil
+	end
 end

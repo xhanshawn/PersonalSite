@@ -1,5 +1,9 @@
 <div class="container">
 	<h3 class="page-header">Edit Post</h3>
 
-	<%= render 'form' %>
+	<% unless (@post.is_reference) %>
+		<%= render 'form' %>
+	<% else %>
+		<%= render 'ref_post_form' %>
+	<% end %>
 </div>

@@ -2,21 +2,18 @@ Rails.application.routes.draw do
 
   resources :tags
 
-  get 'about/index'
-
   resources :comments
 
-  resources :posts
-
   get 'index' => 'homepage/index'
+
   root 'homepage#index'
 
   get 'about' => 'about#index', as: :about
 
+
   resources :page_contents
 
   
-
   get 'users/:name/admin' => 'admin#index', as: :admin
 
 
@@ -32,6 +29,14 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
 
+  #posts
+  resources :posts 
+
+  get 'reference_posts' => 'posts#ref_posts'
+
+  get 'reference_posts/new' => 'posts#new_ref_post'
+
+  # users
   resources :users, param: :name
 
   get 'users/:name/profile' => 'users#show'
@@ -47,11 +52,8 @@ Rails.application.routes.draw do
   get 'developers/:name/:page_name' => 'page_contents#show_by_name'
 
   get 'developers/:name' => 'page_contents#show_index_by_name'
-  # get '/client_info' => redirect('client_info.html')
-  # get 'developers/:name/client_info'  => 'page_contents#showClient'
-  # get 'developers/:name/:client_info_page' => 'page_contents#show_client'
-  # get 'developers/:name/education' => 'developers#show_edupage' 
-  # delete 'developers/:name' => 'developers#destroy'
+
+
 
 
   

@@ -11,8 +11,13 @@
 			    	
 			    		<%= link_to tag.name, tag, class: "btn btn-info btn-xs" %>
 			    	<% end %>
+			    	<% if(@post.is_reference) %>
+			    		<br><h5>reference link: </h5>
+			    		<%= link_to @post.ref_link, @post.ref_link, :target => '_blank' %>
+				    <% end %>
 			    </div>
 		    </div>
+		    
 		    <div class="row">
 		    	<%= @post.body.html_safe %>
 		    </div>

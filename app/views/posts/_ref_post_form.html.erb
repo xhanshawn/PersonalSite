@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-11">      
+      <%= form_for(@post) do |f| %>
+        <% if @post.errors.any? %>
+          <div class="alert alert-warning" id="error_explanation">
+            
+
+            <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field row">
+          <%= f.label :title %><br>
+          <%= f.text_field :title, :class => "form-control" %>
+          <span id="helpBlock" class="help-block">Input the title of your post.</span>
+        </div>
+
+        <div class="field row">
+          
+          <%= f.label "Tags" %><br>
+          <div id="tags">
+            <% @post.tags.each do |tag| %>
+                
+              <span class="btn btn-info btn-xs tag-button">
+                <%= tag.name %>
+                <%= hidden_field_tag "tags[]", tag.name %>
+                <span class="glyphicon glyphicon-remove-sign tag-remove-sign"></span>
+              </span>
+              
+            <% end %>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3">
+              <input class="form-control" id="new-tag-input"></input>
+            </div>
+
+            <div class="col-md-1">
+              <%= link_to "add", "#", class: "btn btn-info btn-sm", id: "add-tag-button" %>
+            </div>
+          </div>
+          <span id="tag-notice" class="help-block">Add or remove tags</span>
+        </div>
+        <div class="field row">
+          <%= f.label :reference_link %>
+          <%= f.text_field :ref_link, :class => "form-control" %>
+          <span id="helpBlock" class="help-block">Paste the reference link here.</span>
+        </div>
+        <div class="field row">
+          <%= f.label :body %><br>
+          <%= f.text_area :body, :class => "form-control", data:{ provider: :summernote } %>
+          <span id="helpBlock" class="help-block">Share some cool stories with us.</span>
+        </div>
+        <div class="actions">
+          <%= f.submit "submit", :class => "btn btn-info" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
