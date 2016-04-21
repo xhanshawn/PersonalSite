@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   if(!$('.tags')) return;
 
   var diameter = 600,

@@ -1,3 +1,5 @@
+if(!$('.posts')) 
+		return
 # hash set for no duplicate tags
 tags_set = {}
 

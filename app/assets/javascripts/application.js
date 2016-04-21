@@ -11,7 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+//= require jquery.turbolinks
+//= temp_remove_require jquery_ujs
 //= require bootstrap
 //= require summernote
 //= require d3
