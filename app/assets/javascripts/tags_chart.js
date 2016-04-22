@@ -1,7 +1,9 @@
 $(document).ready(function() {
   if(!$('.tags')) return;
 
-  var diameter = 600,
+  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+  var diameter = width * 0.6,
       format = d3.format(",d"),
       color = d3.scale.category20c();
 
@@ -16,10 +18,13 @@ $(document).ready(function() {
       .padding(3);
 
 
-  var svg = d3.select("#tags-chart").append("svg")
+  var svg = d3.select("#tags-chart")
+      .append("svg")
       .attr("width", diameter)
       .attr("height", diameter)
       .attr("class", "tags-bubble-chart");
+
+
 
   d3.json("/tags.json", function(error, root) {
     if (error) throw error;
