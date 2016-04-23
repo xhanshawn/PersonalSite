@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
-  var diameter = width * 0.6,
+  var diameter = width * 0.5,
       format = d3.format(",d"),
       color = d3.scale.category20c();
 

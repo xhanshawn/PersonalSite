@@ -1,13 +1,30 @@
 
 <div class="container">
   <div class="row">
-    <div class="page-header">
+    <div class="page-header col-md-12">
       <h3>Tags bubble chart</h3>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-offset-2 col-md-10">
-      <div id="tags-chart"></div>      
+    <div class="col-md-9">
+      <div class="col-md-offset-1 col-md-8" id="tags-chart"></div>      
+    </div>
+    <div class="col-md-2">
+      <ul class="list-group">
+        <%= link_to tags_url, :class => "list-group-item list-group-item-info", :method => :get do %>
+          <span><b> Tags </b></span>
+        <% end %>
+        <% tags = Tag.all.sort_by{|tag| tag.posts.length * -1} %>
+        <% tags.each do |tag| %>
+          <% unless tag.posts.length == 0 %>
+            <%= link_to (tag), :class => "list-group-item small", :method => :get do %>
+              <%= tag.name %>
+              <span class="badge"><%= tag.posts.length %></span>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+        
     </div>
   </div>
   <br>
