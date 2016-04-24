@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419214723) do
+ActiveRecord::Schema.define(version: 20160423014524) do
 
   create_table "Posts_Tags", id: false, force: :cascade do |t|
     t.integer "post_id", null: false
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20160419214723) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "edges", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.string   "edge_type"
+    t.integer  "target_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "edges", ["tag_id"], name: "index_edges_on_tag_id"
 
   create_table "page_contents", force: :cascade do |t|
     t.integer  "user_id"

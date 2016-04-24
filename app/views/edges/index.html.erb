@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="page-header col-md-12">
+      <h3>Listing Edges</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <% @edges.each do |edge| %>
+        <div class="row">
+          <p>from: <%= edge.tag.name %></p>
+          <p>to: <%= edge.target_tag.name %></p>
+          <p>type: <%= edge.edge_type %></p>
+          <p>
+            <%= link_to 'Show', edge %>,
+            <%= link_to 'Edit', edit_edge_path(edge) %>,
+            <%= link_to 'Destroy', edge, method: :delete, data: { confirm: 'Are you sure?' } %>.
+          </p>
+        </div>
+      <% end %>
+      <hr>
+      <%= link_to 'New Edge', new_edge_path %>
+      <div id="force"></div>
+    </div>
+  </div>
+</div>

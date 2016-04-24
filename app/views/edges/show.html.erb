@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @edge.tag %>
+</p>
+
+<p>
+  <strong>Edge type:</strong>
+  <%= @edge.edge_type %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @edge.target_id %>
+</p>
+
+<%= link_to 'Edit', edit_edge_path(@edge) %> |
+<%= link_to 'Back', edges_path %>

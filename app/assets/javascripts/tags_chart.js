@@ -1,5 +1,6 @@
-$(document).ready(function() {
-  if(!$('.tags')) return;
+function build_bubble_chart() {
+
+  // if($('#bubble-chart svg').length) return;
 
   var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
@@ -18,7 +19,7 @@ $(document).ready(function() {
       .padding(3);
 
 
-  var svg = d3.select("#tags-chart")
+  var svg = d3.select("#bubble-chart")
       .append("svg")
       .attr("width", diameter)
       .attr("height", diameter)
@@ -74,4 +75,4 @@ $(document).ready(function() {
 
   d3.select(self.frameElement).style("height", diameter + "px");
 
-});
+}

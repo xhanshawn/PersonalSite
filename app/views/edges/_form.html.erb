@@ -1,0 +1,27 @@
+<%= form_for(@edge) do |f| %>
+  <% if @edge.errors.any? %>
+    <div class="alert alert-warning" id="error_explanation">
+      <ul>
+      <% @edge.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tag_id %><br>
+    <%= f.text_field :tag_id %>
+  </div>
+  <div class="field">
+    <%= f.label :edge_type %><br>
+    <%= f.text_field :edge_type %>
+  </div>
+  <div class="field">
+    <%= f.label :target_id %><br>
+    <%= f.number_field :target_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

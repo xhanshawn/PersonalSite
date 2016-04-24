@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require summernote
 //= require d3
+//= require force_directed_graph
 //= require summernote_setting
 //= require tags_chart
 //= require application_layout
