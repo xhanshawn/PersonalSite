@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= temp_remove_require jquery_ujs
+//= require jquery_ujs
 //= require bootstrap
 //= require summernote
 //= require d3

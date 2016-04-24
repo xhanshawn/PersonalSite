@@ -1,5 +1,7 @@
 class EdgesController < ApplicationController
   before_action :set_edge, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: [:index, :show]
+  before_action :authorize_developer, only: [:edit, :update, :destroy]
 
   # GET /edges
   # GET /edges.json
