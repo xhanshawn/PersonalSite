@@ -38,5 +38,5 @@ json.links @edges do |edge|
 	
   json.source edge.tag_id - 1
   json.target edge.target_id - 1
-  json.value 1
+  #json.value 1
 end

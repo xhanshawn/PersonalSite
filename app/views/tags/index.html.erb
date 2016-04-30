@@ -2,14 +2,15 @@
 <div class="container">
   <div class="row">
     <div class="page-header col-md-12">
-      <h3>Tags bubble chart</h3>
+      <h3>Tags visualization</h3>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8">
-      <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
-        <button type="button" class="btn btn-default graph-btn active" id="bubble-chart-btn">Bubble</button>
-        <button type="button" class="btn btn-default graph-btn" id="force-directed-graph-btn">Force directed</button>
+      <div class="btn-group btn-group-sm graph-btns pull-right" role="group" aria-label="...">
+        <% graph_types = ['force-directed-graph'] %>
+        <button type="button" class="btn btn-default graph-btn <%= 'active' unless graph_types.include? params[:graph_type] %>" id="bubble-chart-btn">Bubble</button>
+        <button type="button" class="btn btn-default graph-btn <%= 'active' if(params[:graph_type] == 'force-directed-graph') %>" id="force-directed-graph-btn">Force directed</button>
       </div>
     </div>
     
