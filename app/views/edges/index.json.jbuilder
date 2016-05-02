@@ -38,5 +38,12 @@ json.links @edges do |edge|
 	
   json.source edge.tag_id - 1
   json.target edge.target_id - 1
+  json.edge_type edge.edge_type
   #json.value 1
 end
+
+json.edge_types Edge.uniq.pluck(:edge_type) do |edge_type|
+	json.name edge_type
+	json.num Edge.where(edge_type: edge_type).length
+end
+

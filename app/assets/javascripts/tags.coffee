@@ -19,7 +19,7 @@ $ ->
 
 	
 	click_button = (btn) ->
-		console.log btn
+
 		$(btn).addClass('active').siblings().removeClass('active')
 		if(current_btn != btn)
 			current_btn = btn

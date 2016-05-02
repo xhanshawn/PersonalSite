@@ -1,0 +1,16 @@
+
+.link .highlighted{
+	stroke: black;
+	stroke-width: 2px;
+}
+
+.legend .highlighted{
+	stroke: #5bc0de;
+	fill: #5bc0de;
+	stroke-width: 1px;
+	fill-opacity: 0.05;
+}
+
+#nametooltip rect{
+	fill: white;
+}

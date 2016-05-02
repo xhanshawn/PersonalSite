@@ -1,3 +1,41 @@
+var helpers = {
+  tooltip: function(text) {
+
+    return function(selection){
+      selection.on('mouseover.tooltip', mouseover)
+      .on('mousemove.tooltip', mousemove)
+      .on('mouseout.tooltip', mouseout);
+    }
+
+    function mouseover(d){
+      var svg = d3.select("#force-directed-graph svg");
+      var mouse = d3.mouse(svg.node());
+      var tool = svg.append('g')
+                    .attr({'id': 'nametooltip', transform: 'translate(' + (mouse[0] + 5) + ',' + (mouse[1] + 10) + ')'});
+      var textNode = tool.append('text').text(text(d.name)).node();
+      tool.append('rect')
+          .attr({ height: textNode.getBBox().height,
+                  width: textNode.getBBox().width,
+                  transform: 'translate(0, -16)'});
+      tool.select('text')
+          .remove();
+      tool.append('text')
+          .text(d.name);
+    }
+
+
+    function mousemove(d){
+
+    }
+
+    function mouseout(d){
+      var node = d3.select(this);
+      $('#nametooltip').remove();
+    }
+
+  }
+};
+
 
 // function to build a bubble chart
 function build_bubble_chart() {
@@ -117,13 +155,53 @@ function build_force_directed_graph() {
 
 
 
-  var source_node, target_node, drag_line, drawing;
+  var source_node, target_node, drag_line, drawing, edge_type;
 
   var link = svg.append('svg:g').attr('class', 'link-panel').selectAll(".link"),
-      node = svg.append('svg:g').selectAll(".node");
+      node = svg.append('svg:g').attr('class', 'node-panel').selectAll(".node");
 
+
+  var link_color = d3.scale.category10();
   // var link = svg.append('svg:g').attr('class', 'link-panel').selectAll(".link"),
   //     node = svg.selectAll(".node");
+
+  var legend = svg.append("g")
+                  // .attr("transform","translate(50,30)")
+                  .attr("fill","black")
+                  .style("font-size","12px")
+                  .selectAll('.legend');
+
+
+  var defs = svg.append("svg:defs");
+
+  defs.append("svg:marker")    // This section adds in the arrows
+      .attr({
+        "id":"arrow",
+        "viewBox":"0 -5 10 10",
+        "refX":20,
+        "refY":0,
+        "markerWidth":6,
+        "markerHeight":6,
+        "orient":"auto"
+      })
+      .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+  defs.append("svg:marker")
+      .attr({
+        "id":"drag_line_arrow",
+        "viewBox":"0 -5 10 10",
+        "refX":5,
+        "refY":0,
+        "markerWidth":6,
+        "markerHeight":6,
+        "orient":"auto"
+      })
+      .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+
+
 
   var graph_data;
 
@@ -131,10 +209,16 @@ function build_force_directed_graph() {
 
     if (error) throw error;
 
+    // cache existing graph data
     graph_data = graph;
+    graph_data.edge_types.push({name:"child_of", num:0});
 
+    edge_type = graph_data.edge_types[0];
+
+    // boolean to enable editing mode
     drawing = false;
 
+    // function to draw or update the graph
     draw_graph(graph);
 
     force.on("tick", function() {
@@ -149,35 +233,55 @@ function build_force_directed_graph() {
 
   });
 
+  
+
 
   function draw_graph(graph){
     
-    drag_line = d3.select('.link-panel').append("svg:path")
-                       .attr('d', 'M0,0L0,0');   
+    
+    
 
+    // update links
+    
     link = link.data(graph.links);
     link.enter().append("svg:line")
-        .attr("class", "link")
-        .style("stroke-width", function(d) { return Math.sqrt(d.value); })
-        .style("stroke", "#999");
+        .attr("class", "link highlighted")
+        .style("stroke-width", function(d) { return 1.5; })
+        // .style("stroke", "#999");
+        .style("stroke", function(d) { 
+          return link_color(d.edge_type);})
+        .attr("marker-end", "url(#arrow)")
+        .append("title")
+        .text(function(d) {
+          return d.edge_type; 
+        });
 
     link.exit().remove();
 
+    // update node
     node = node.data(graph.nodes);
     node.enter().append("svg:circle")
         .attr("class", "node")
+        .attr("id", function(d){ return "tag" + d.id; })
         .attr("r", 10)
         .style("fill", function(d) { return color(d.group); })
-        .call(force.drag);
-
-    node.append("title")
+        .call(helpers.tooltip(function (d) {return d.name;}))
+        .call(force.drag)
+        .append("title")
         .text(function(d) { return d.name; });
+
+    // node;
+    
     
     node.exit().remove();
+
+
+    // restart the graph
     force.nodes(graph.nodes)
          .links(graph.links)
          .start();
 
+    // update selected nodes
     node.on("mousedown", function(d){
 
 
@@ -200,73 +304,143 @@ function build_force_directed_graph() {
       }      
     });
 
+
+    // line for drawing new line
+    drag_line = d3.select('.link-panel').append("svg:path")
+                      .attr('d', 'M0,0L0,0');   
+
+    var legend_rectsize = 18;
+    var legend_spacing = 4;
+
+    legend = legend.data(graph_data.edge_types);
+
+    legend.enter().append('svg:g')
+          .attr('transform', function(d, i){
+            return 'translate(5, ' + i *(legend_rectsize + legend_spacing) + ')';
+          })
+          .attr('class', 'legend');
+
+    legend.html('');
+    
+    var legend_text_node = legend.append('text')
+          .attr('x', legend_rectsize + legend_spacing * 2)
+          .attr('y', legend_rectsize - legend_spacing)
+          .text(function(d) { return d.name + ' ' + d.num; }).node();
+
+    legend.append('rect')
+          .attr('width', legend_rectsize)
+          .attr('height', 5)
+          .attr('x', legend_spacing)
+          .attr('y', legend_spacing)
+          .style('fill', function(d){return link_color(d.name);});
+
+    legend.append('rect')
+          .attr('class', function(d) { 
+            if(d === edge_type) return 'highlighted';
+            else return '' 
+          })
+          .attr('width', legend_rectsize + legend_spacing * 3 +legend_text_node.getBBox().width)
+          .attr('height', legend_text_node.getBBox().height + legend_spacing * 2)
+          .attr('rx', 3)
+          .attr('ry', 3)
+          .attr('fill-opacity', '0.0');
+    
+
+    legend.selectAll('rect').on('mousedown', function(e){
+      d3.selectAll('.legend rect').classed('highlighted', false);
+      d3.select(this).classed('highlighted', true);
+      edge_type = d3.select(this).datum();
+    });
   }
-
-
 
   
 
+  
+
+  
+  // update line
   svg.on("mousemove", function(e){
 
-    console.log(drawing);
     if(!source_node || !drawing) return;
     var coordinates = [0, 0];
     coordinates = d3.mouse(this);
     var x = coordinates[0];
     var y = coordinates[1];
     drag_line
-        .style("stroke", "#000").style("stroke-width", 4)
-        .attr('d', 'M' + source_node.attr('cx') + ',' + source_node.attr('cy') + 'L' + x +',' + y);     
+        .style("stroke", "#000").style("stroke-width", 2)
+        .attr('d', 'M' + source_node.attr('cx') + ',' + source_node.attr('cy') + 'L' + x +',' + y)
+        .attr("marker-end", "url(#drag_line_arrow)");     
   });
 
+  // add new links or redo nodes selection
   svg.on("mouseup", function(e){
+
     if(!drawing) return;
 
-    drag_line
-      .style("stroke", "#000").style("stroke-width", 4)
-      .attr('d', 'M0,0L0,0'); 
+    
     if(target_node) {
-
+      drag_line.remove();
       var obj = {
         'source': graph_data.nodes[source_node.datum().index],
-        'target': graph_data.nodes[target_node.datum().index]
-      };
+        'target': graph_data.nodes[target_node.datum().index],
+        'edge_type': edge_type.name
+      }; 
+
+      edge_type.num += 1;
 
       graph_data.links.push(obj);
+
       console.log(obj);
 
       console.log(graph_data);
 
+      console.log(edge_type);
+
       draw_graph(graph_data);
+
+      link_nodes[source_node.attr('id')] = true;
+      link_nodes[target_node.attr('id')] = true;
 
       source_node = null;
       target_node = null;
 
+    } else {
+      drag_line = d3.select('.link-panel').append("svg:path")
+                      .attr('d', 'M0,0L0,0'); 
     }
         
   });
 
+  // div row for editing the graph
   var control_panel = $('<div>', {class:'row', id:'control-panel'});
   $('#tags-panel').append(control_panel);
 
+  // place to update hints
   var hint = $('<p>', {class:'col-md-8 help-block', id:'hint'});
   control_panel.append(hint);
 
+  // hints
   var default_hint = "click edit button to enter edit mode.",
   edit_hint = "You can edit the graph by click a source node and then click a target node. (press 'esc' to cancel current edge).",
   update_hint = "currently edges cannot be updated.";
 
   $('#hint').text(default_hint);
 
+  // button for start editing and update
   var operate_btn = $('<a>', {class:"btn btn-sm btn-info pull-right", id:"operate-btn", text:"edit"});
   control_panel.append(operate_btn);
 
+
+  var link_nodes = {};
+
+  // handling click for operate btn
   operate_btn.on('click', function(e){
     if($(this).text() === 'edit'){
       drawing = true;
       force.start();
       $('#hint').text(edit_hint);
       $(this).text('update');
+
     } else if($(this).text() === 'update'){
 
       drawing = false;
@@ -282,12 +456,25 @@ function build_force_directed_graph() {
         reset_node(target_node);
         target_node = null;
       }
+      
+      for(var e in link_nodes){
+        if(link_nodes[e]){
+
+          link_nodes[e] = false;
+          reset_node(d3.select('#' + e));
+        }
+      };
+
       $('#hint').text(update_hint);
       $(this).text('edit');
+
     }
   });
 
 
+
+  // listening key up. 
+  // esc to cancel current link and nodes
   $(window).on('keyup', function(e) {
 
     if(e.keyCode === 27) {
@@ -307,13 +494,16 @@ function build_force_directed_graph() {
     }
   });
 
+  // function to highlight node
   function highlight_node(circle){
     circle.style("stroke", "#000")
         .style("stroke-width", 3);
+
   };
 
-
+  // funtion to reset highlight node
   function reset_node(circle){
+    if(link_nodes[circle]) return;
     circle.style("stroke", "#FFF")
         .style("stroke-width", 0);
   };  
