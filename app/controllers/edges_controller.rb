@@ -37,6 +37,7 @@ class EdgesController < ApplicationController
       if @edge.save
         format.html { redirect_to @edge, notice: 'Edge was successfully created.' }
         format.json { render :show, status: :created, location: @edge }
+        format.js #create.js.erb
       else
         format.html { render :new }
         format.json { render json: @edge.errors, status: :unprocessable_entity }
@@ -51,6 +52,7 @@ class EdgesController < ApplicationController
       if @edge.update(edge_params)
         format.html { redirect_to @edge, notice: 'Edge was successfully updated.' }
         format.json { render :show, status: :ok, location: @edge }
+        format.js #update.js.erb
       else
         format.html { render :edit }
         format.json { render json: @edge.errors, status: :unprocessable_entity }

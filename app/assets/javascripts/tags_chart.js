@@ -144,7 +144,7 @@ function build_force_directed_graph() {
       .charge(-120)           // repulsion, attraction
       .chargeDistance(1000)    
       .linkDistance(30)
-      .linkStrength(0.01)     // compact or sparse
+      .linkStrength(0.2)     // compact or sparse
       .friction(0.85)         // liveness, activity
       .gravity(0.08)          // gravity
       .size([width, height]); 
@@ -211,7 +211,6 @@ function build_force_directed_graph() {
 
     // cache existing graph data
     graph_data = graph;
-    graph_data.edge_types.push({name:"child_of", num:0});
 
     edge_type = graph_data.edge_types[0];
 
@@ -238,16 +237,12 @@ function build_force_directed_graph() {
 
   function draw_graph(graph){
     
-    
-    
-
     // update links
     
     link = link.data(graph.links);
     link.enter().append("svg:line")
-        .attr("class", "link highlighted")
+        .attr("class", "link")
         .style("stroke-width", function(d) { return 1.5; })
-        // .style("stroke", "#999");
         .style("stroke", function(d) { 
           return link_color(d.edge_type);})
         .attr("marker-end", "url(#arrow)")
@@ -292,13 +287,10 @@ function build_force_directed_graph() {
         source_node = d3.select(this);
         highlight_node(source_node); 
 
-      } else if(source_node === d3.select(this)){
-
-        
+      } else if(source_node.attr('id') === d3.select(this).attr('id')){
         reset_node(source_node);
         source_node = null;
       } else {
-
         target_node = d3.select(this);
         highlight_node(target_node);
       }      
@@ -377,9 +369,9 @@ function build_force_directed_graph() {
 
     if(!drawing) return;
 
-    
+    d3.selectAll('.link-panel path').remove();
     if(target_node) {
-      drag_line.remove();
+
       var obj = {
         'source': graph_data.nodes[source_node.datum().index],
         'target': graph_data.nodes[target_node.datum().index],
@@ -405,6 +397,7 @@ function build_force_directed_graph() {
       target_node = null;
 
     } else {
+      
       drag_line = d3.select('.link-panel').append("svg:path")
                       .attr('d', 'M0,0L0,0'); 
     }
@@ -468,6 +461,7 @@ function build_force_directed_graph() {
       $('#hint').text(update_hint);
       $(this).text('edit');
 
+      update_graph(graph_data);
     }
   });
 
@@ -479,9 +473,7 @@ function build_force_directed_graph() {
 
     if(e.keyCode === 27) {
 
-      drag_line
-      .style("stroke", "#000").style("stroke-width", 4)
-      .attr('d', 'M0,0L0,0');   
+      drag_line.remove(); 
 
       if(source_node) {
         reset_node(source_node);
@@ -496,6 +488,8 @@ function build_force_directed_graph() {
 
   // function to highlight node
   function highlight_node(circle){
+    circle.classed('highlighted', true);
+    return;
     circle.style("stroke", "#000")
         .style("stroke-width", 3);
 
