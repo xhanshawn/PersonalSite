@@ -270,6 +270,8 @@ function build_force_directed_graph() {
     // force.links(current_links).start();
   }
 
+
+
   function draw_graph(graph){
     
     // update links
@@ -452,7 +454,7 @@ function build_force_directed_graph() {
   // hints
   var default_hint = "click edit button to enter edit mode.",
   edit_hint = "You can edit the graph by click a source node and then click a target node. (press 'esc' to cancel current edge).",
-  update_hint = "currently edges cannot be updated.";
+  update_hint = "currently only developers can update edges.";
 
   $('#hint').text(default_hint);
 
@@ -497,6 +499,8 @@ function build_force_directed_graph() {
 
       $('#hint').text(update_hint);
       $(this).text('edit');
+
+      $('.link').show();
 
       update_graph(graph_data);
     }
