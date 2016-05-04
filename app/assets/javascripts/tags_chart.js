@@ -339,49 +339,55 @@ function build_force_directed_graph() {
     drag_line = d3.select('.link-panel').append("svg:path")
                       .attr('d', 'M0,0L0,0');   
 
-    var legend_rectsize = 18;
-    var legend_spacing = 4;
 
-    legend = legend.data(graph_data.edge_types);
+    if(graph_data.edge_types) {
+      
+      var legend_rectsize = 18;
+      var legend_spacing = 4;
 
-    legend.enter().append('svg:g')
-          .attr('transform', function(d, i){
-            return 'translate(5, ' + i *(legend_rectsize + legend_spacing) + ')';
-          })
-          .attr('class', 'legend');
+      legend = legend.data(graph_data.edge_types);
 
-    legend.html('');
+      legend.enter().append('svg:g')
+            .attr('transform', function(d, i){
+              return 'translate(5, ' + i *(legend_rectsize + legend_spacing) + ')';
+            })
+            .attr('class', 'legend');
+
+      legend.html('');
+      
+      var legend_text_node = legend.append('text')
+            .attr('x', legend_rectsize + legend_spacing * 2)
+            .attr('y', legend_rectsize - legend_spacing)
+            .text(function(d) { return d.name + ' ' + d.num; }).node();
+
+      legend.append('rect')
+            .attr('width', legend_rectsize)
+            .attr('height', 5)
+            .attr('x', legend_spacing)
+            .attr('y', legend_spacing)
+            .style('fill', function(d){return link_color(d.name);});
+
+      legend.append('rect')
+            .attr('class', function(d) { 
+              if(d === edge_type) return 'highlighted';
+              else return '' 
+            })
+            .attr('width', legend_rectsize + legend_spacing * 3 +legend_text_node.getBBox().width)
+            .attr('height', legend_text_node.getBBox().height + legend_spacing * 2)
+            .attr('rx', 3)
+            .attr('ry', 3)
+            .attr('fill-opacity', '0.0');
+      
+
+      legend.selectAll('rect').on('mousedown', function(e){
+        d3.selectAll('.legend rect').classed('highlighted', false);
+        d3.select(this).classed('highlighted', true);
+        edge_type = d3.select(this).datum();
+        hide_links();
+      });
+    }
+
     
-    var legend_text_node = legend.append('text')
-          .attr('x', legend_rectsize + legend_spacing * 2)
-          .attr('y', legend_rectsize - legend_spacing)
-          .text(function(d) { return d.name + ' ' + d.num; }).node();
-
-    legend.append('rect')
-          .attr('width', legend_rectsize)
-          .attr('height', 5)
-          .attr('x', legend_spacing)
-          .attr('y', legend_spacing)
-          .style('fill', function(d){return link_color(d.name);});
-
-    legend.append('rect')
-          .attr('class', function(d) { 
-            if(d === edge_type) return 'highlighted';
-            else return '' 
-          })
-          .attr('width', legend_rectsize + legend_spacing * 3 +legend_text_node.getBBox().width)
-          .attr('height', legend_text_node.getBBox().height + legend_spacing * 2)
-          .attr('rx', 3)
-          .attr('ry', 3)
-          .attr('fill-opacity', '0.0');
-    
-
-    legend.selectAll('rect').on('mousedown', function(e){
-      d3.selectAll('.legend rect').classed('highlighted', false);
-      d3.select(this).classed('highlighted', true);
-      edge_type = d3.select(this).datum();
-      hide_links();
-    });
   }
 
   
