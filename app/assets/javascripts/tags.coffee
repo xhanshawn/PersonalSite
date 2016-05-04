@@ -64,6 +64,7 @@ update_edge = (edge) ->
 		data: edge: params_of edge
 		error: (jqXHR, textStatus, errorThrown) ->
 			console.log 'error:' + errorThrown
+			$('#hint').text('update failed. please note that currently only developers can update the edges on the graph.');
 		success: (data, textStatus, jqXHR) ->
 
 create_edge = (edge) ->

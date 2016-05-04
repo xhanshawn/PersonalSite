@@ -133,10 +133,14 @@ function build_force_directed_graph() {
   // if($('#force-directed-graph svg').length) return;
 
   var device_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-  // var width = 960,
-  //  height = 500;
-  var width = device_width * 0.5,
-    height = device_width * 0.4;
+
+  var width = 800,
+   height = 500;
+
+  if(device_width < width) {
+    width = device_width,
+    height = device_width * 500 / 960;
+  }
 
   var color = d3.scale.category20();
 
@@ -220,6 +224,8 @@ function build_force_directed_graph() {
     // function to draw or update the graph
     draw_graph(graph);
 
+    // hide_links();
+
     force.on("tick", function() {
       link.attr("x1", function(d) { return d.source.x; })
           .attr("y1", function(d) { return d.source.y; })
@@ -233,7 +239,36 @@ function build_force_directed_graph() {
   });
 
   
+  function hide_links(){
 
+    $('.link').hide();
+    $('.link.' + edge_type.name).show();
+    
+
+    // var current_links = [];
+
+    // graph_data.links.forEach(function(d){
+    //   if(d.edge_type === edge_type.name) current_links.push(d);
+    // });
+
+
+    // console.log(current_links);
+    // link = link.data(current_links);
+    // link.enter().append("svg:line")
+    //     .attr("class", function(d) { console.log(d);return 'link ' + d.edge_type; })
+    //     .style("stroke-width", function(d) { return 1.5; })
+    //     .style("stroke", function(d) { 
+    //       return link_color(d.edge_type);})
+    //     .attr("marker-end", "url(#arrow)")
+    //     .append("title")
+    //     .text(function(d) {
+    //       return d.edge_type; 
+    //     });
+
+    // link.exit().remove();
+
+    // force.links(current_links).start();
+  }
 
   function draw_graph(graph){
     
@@ -241,7 +276,7 @@ function build_force_directed_graph() {
     
     link = link.data(graph.links);
     link.enter().append("svg:line")
-        .attr("class", "link")
+        .attr("class", function(d) {return 'link ' + d.edge_type; })
         .style("stroke-width", function(d) { return 1.5; })
         .style("stroke", function(d) { 
           return link_color(d.edge_type);})
@@ -298,6 +333,7 @@ function build_force_directed_graph() {
 
 
     // line for drawing new line
+    d3.selectAll('.link-panel path').remove();
     drag_line = d3.select('.link-panel').append("svg:path")
                       .attr('d', 'M0,0L0,0');   
 
@@ -342,6 +378,7 @@ function build_force_directed_graph() {
       d3.selectAll('.legend rect').classed('highlighted', false);
       d3.select(this).classed('highlighted', true);
       edge_type = d3.select(this).datum();
+      hide_links();
     });
   }
 

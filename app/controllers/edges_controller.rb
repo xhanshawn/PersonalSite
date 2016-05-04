@@ -1,7 +1,7 @@
 class EdgesController < ApplicationController
   before_action :set_edge, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize, only: [:index, :show]
-  before_action :authorize_developer, only: [:edit, :update, :destroy]
+  before_action :authorize_developer, only: [:create, :edit, :update, :destroy]
 
   # GET /edges
   # GET /edges.json
@@ -41,6 +41,7 @@ class EdgesController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @edge.errors, status: :unprocessable_entity }
+        format.js {render json: @edge.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -56,6 +57,7 @@ class EdgesController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @edge.errors, status: :unprocessable_entity }
+        format.js {render json: @edge.errors, status: :unprocessable_entity}
       end
     end
   end
