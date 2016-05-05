@@ -41,7 +41,7 @@ class EdgesController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @edge.errors, status: :unprocessable_entity }
-        format.js {render json: @edge.errors, status: :unprocessable_entity}
+        format.js {render json: nil, status: :unprocessable_entity}
       end
     end
   end
