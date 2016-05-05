@@ -340,8 +340,8 @@ function build_force_directed_graph() {
                       .attr('d', 'M0,0L0,0');   
 
 
-    if(graph_data.edge_types) {
-      
+    if(graph_data.edge_types.length > 0) {
+
       var legend_rectsize = 18;
       var legend_spacing = 4;
 
