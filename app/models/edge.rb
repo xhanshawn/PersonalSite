@@ -9,7 +9,7 @@ class Edge < ActiveRecord::Base
 
   validates :edge_type, inclusion: { in: self.valid_edge_types, message: "edge type is invalid"}
 
-  validates :target_id, uniqueness: { scope: [:tag_id, :edge_type]}
+  validates :target_id, uniqueness: { scope: [:tag_id, :edge_type], message: "duplicate"}
   
   def target_tag
   	tag = Tag.find(self.target_id)
