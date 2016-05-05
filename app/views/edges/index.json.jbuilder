@@ -44,7 +44,7 @@ json.links @edges do |edge|
   json.id edge.id
   #json.value 1
 end
-edge_types = ['parent_of', 'child_of']
+edge_types = Edge.valid_edge_types
 # json.edge_types Edge.uniq.pluck(:edge_type) do |edge_type|
 json.edge_types edge_types.each do |edge_type|
 	json.name edge_type
