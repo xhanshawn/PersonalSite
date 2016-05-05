@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
   	  session[:user_id] = user.id
       session[:user_name] = user.name
 
-  	  redirect_to admin_url(user)
+      session[:last_url] = root_url unless session[:last_url]
+  	  redirect_to session[:last_url], notice: "Logged in"
   	else
   	  redirect_to login_url, alert: "Invalid user/password combination"
   	end

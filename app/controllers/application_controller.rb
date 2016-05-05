@@ -4,30 +4,18 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
 
-  skip_before_action :authorize, only: [:dummy_index]
-
-  def dummy_index
-#     render :inline => 'The site is still being developing. Some other functionalities are pending.
-# <br>
-# Contact xhanbbuing@gmail.com if you want to give us some advices. <br>
-# My page <a href="/developers/xhan">
-# /developers/xhan</a>', :layout => true
-    render file: 'public/index', :layout => true
-  end
-
   protected
 
   	def authorize
-      puts session[:user_id]
   	  unless User.find_by(id: session[:user_id])
   	  	redirect_to login_url, notice: "Please log in"
   	  end
   	end
 
-    # def authorize_user user_id
-
-      
-    # end
+    def store_last_url
+      session[:last_url] = request.url unless [login_url, root_url].include? request.url or request.format != :html
+      puts session[:last_url]
+    end
 
 
     def authorize_developer
@@ -41,4 +29,5 @@ class ApplicationController < ActionController::Base
     end
 
   protect_from_forgery with: :exception
+  before_filter :store_last_url
 end

@@ -53,6 +53,8 @@ root.update_graph = (graph_data)->
 		else
 			create_edge edge
 
+	build_force_directed_graph()
+
 
 
 update_node = (node) ->

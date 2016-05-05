@@ -153,6 +153,7 @@ function build_force_directed_graph() {
       .gravity(0.08)          // gravity
       .size([width, height]); 
 
+  $('#force-directed-graph').html('');
   var svg = d3.select("#force-directed-graph").append("svg")
       .attr("width", width)
       .attr("height", height);
@@ -209,34 +210,42 @@ function build_force_directed_graph() {
 
   var graph_data;
 
-  d3.json("edges.json", function(error, graph) {
 
-    if (error) throw error;
+  update_graph_data();
 
-    // cache existing graph data
-    graph_data = graph;
+  function update_graph_data() {
+    d3.json("edges.json", function(error, graph) {
 
-    edge_type = graph_data.edge_types[0];
+      if (error) throw error;
 
-    // boolean to enable editing mode
-    drawing = false;
+      // cache existing graph data
+      graph_data = graph;
 
-    // function to draw or update the graph
-    draw_graph(graph);
+      edge_type = graph_data.edge_types[0];
 
-    // hide_links();
+      // boolean to enable editing mode
+      drawing = false;
 
-    force.on("tick", function() {
-      link.attr("x1", function(d) { return d.source.x; })
-          .attr("y1", function(d) { return d.source.y; })
-          .attr("x2", function(d) { return d.target.x; })
-          .attr("y2", function(d) { return d.target.y; });
+      // function to draw or update the graph
+      draw_graph(graph);
 
-      node.attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; });
+      // hide_links();
+
+      force.on("tick", function() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        node.attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+      });
+
     });
 
-  });
+  }
+
+  
 
   
   function hide_links(){
@@ -449,6 +458,7 @@ function build_force_directed_graph() {
         
   });
 
+  $('#control-panel').remove();
   // div row for editing the graph
   var control_panel = $('<div>', {class:'row', id:'control-panel'});
   $('#tags-panel').append(control_panel);
@@ -509,6 +519,7 @@ function build_force_directed_graph() {
       $('.link').show();
 
       update_graph(graph_data);
+
     }
   });
 
