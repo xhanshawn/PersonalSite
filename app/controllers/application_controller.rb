@@ -13,9 +13,19 @@ class ApplicationController < ActionController::Base
   	end
 
     def store_last_url
-      session[:last_url] = request.url unless [login_url, root_url].include? request.url or request.format != :html
+      session[:last_url] = request.url unless [login_url, root_url].include? request.url or request.format != :html or request.method != 'GET' or !path_exists?(request.url)
       puts session[:last_url]
     end
+
+    def path_exists?(path)
+      begin
+        Rails.application.routes.recognize_path(path)
+      rescue
+        return false
+    end
+
+  true
+end
 
 
     def authorize_developer

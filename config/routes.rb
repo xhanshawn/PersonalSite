@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
   resources :page_contents
 
-  
-  get 'users/:name/admin' => 'admin#index', as: :admin
+  get '/new_index' => 'admin#index', as: :admin
+  # get 'users/:name/admin' => 'admin#index', as: :admin
 
 
   controller :sessions do

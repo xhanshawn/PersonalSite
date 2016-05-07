@@ -1,28 +1,23 @@
 <div class="jumbotron">
   <div class="container">
-    <h1>Welcome!</h1>
-    <p><strong>Archare</strong> is a blog site founded by <%= link_to "xhan", "/developers/xhan" %></p>
-    <p>
-      Posts and comments features have been added
-      <%= link_to "Learn more", posts_url, method: :get, class: "btn btn-info btn-xs" %>  
-    </p>
-    <p>
-      Tags and a bubble chart for displaying tags have been added
-      <%= link_to "Tags bubble chart", tags_url, method: :get, class: "" %>  
-    </p>
-    <p>Current developers:
-      <br>
-      <ul>
 
-        <% @developers = User.where(is_developer: true) %>
-        <% @developers.each do |developer| %>
-
-          <li><h4><%= link_to developer.name, developer_homepage_path(developer) %></h4></li>
-        <% end %>
+    <h2 class="archare-brand">Archare</h2>
+    <p> a blog site founded by <%= link_to "xhan", "/developers/xhan" %></p>
+    <p>
+      <%= link_to "Posts", posts_url, method: :get, class: "" %>
+       about algorithms and web application development can be found here.
         
-      </ul>
-      
     </p>
-    <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p> -->
+    <p>
+      You can also find some data visualization works.
+      <ul>
+        <li>
+          <%= link_to "bubble chart", tags_url(graph_type: "bubble-chart"), method: :get, class: "" %> 
+        </li>
+        <li> 
+          <%= link_to "force directed graph", tags_url(graph_type: "force-directed-graph"), method: :get, class: "" %>   
+        </li>
+      </ul>  
+    </p>
   </div>
 </div>

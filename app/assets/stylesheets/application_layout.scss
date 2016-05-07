@@ -1,16 +1,39 @@
-#archare-nav{
+#archare-topbar{
 	padding: 10px 0px 0px 0px;
-	
+	background: white;
 }
 
-.navbar .navbar-header .navbar-brand{
+#archare-topbar li a{
+	font-family: 'Varela Round', sans-serif;
 	color: black;
 }
 
+.navbar .navbar-header .navbar-brand{
+
+	font-family: 'Muli', sans-serif;
+	color: #6BAED6;
+}
+
+.archare-brand{
+
+	font-family: 'Muli', sans-serif;
+	color: #6BAED6;
+}
+
+.archare-cat-header{
+
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+}
+
+
 #content{
 
-    min-height: 100vh;
-  
+  min-height: 100vh;
+}
+
+#content a{
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .btn:focus {

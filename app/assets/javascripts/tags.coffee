@@ -30,7 +30,6 @@ $ ->
 				draw('bubble-chart')
 				build_bubble_chart()
 			else if(btn.id == 'force-directed-graph-btn')
-				# window.history.pushState('force-directed-graph', 'graph_type', '/tags');
 				draw('force-directed-graph')
 				build_force_directed_graph()
 

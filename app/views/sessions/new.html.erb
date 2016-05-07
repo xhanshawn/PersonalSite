@@ -1,28 +1,5 @@
 <div class="container">
-  <% if flash[:alert] %>
-    <p id="notice"><%= flash[:alert] %></p>
-  <% end %>
-  <%= form_tag "/login", :class => "form-group col-sm-6"  do %>
-    <fieldset>
-      <legend>Please Log In</legend>
-      <div>
-        <h5>User name</h5>
-        <%= text_field_tag :name, params[:name], class: "form-control" %>
-      </div>
-      <div>
-        <h5>Password</h5>
-        <%= password_field_tag :password, params[:password], class: "form-control" %>
-      </div>
-
-      <div class="row">
-        <div class="col-md-5">
-          <br>
-          <%= submit_tag "Login", :class => "btn btn-info" %>
-          <%= link_to "Sign up", new_user_path, :class => "btn btn-info col-xs-offset-1" %>
-        </div>
-      </div>
-      
-    </fieldset>
-  <% end %>
+  <legend>Please Log In</legend>
+  <%= render 'login_form' %>
   
 </div>
