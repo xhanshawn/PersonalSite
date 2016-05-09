@@ -25,13 +25,16 @@ $ ->
 		$(btn).addClass('active').siblings().removeClass('active')
 		if(current_btn != btn)
 			current_btn = btn
-			window.history.pushState("", "", "/tags?graph_type=" + btn.id.split('-btn')[0])
+
+			graph_type = btn.id.split('-btn')[0]
+			draw(graph_type)
+			window.history.pushState("", "", "/tags?graph_type=" + graph_type)
 			if(btn.id == 'bubble-chart-btn')
-				draw('bubble-chart')
 				build_bubble_chart()
 			else if(btn.id == 'force-directed-graph-btn')
-				draw('force-directed-graph')
 				build_force_directed_graph()
+			else if(btn.id == 'tags-tree-btn')
+				build_tags_tree()
 
 				
 

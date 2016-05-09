@@ -10,7 +10,12 @@ class TagsController < ApplicationController
     respond_to do |format|
       format.html
       # format.html { render :file => 'public/tags/tags.html', :layout => true}
-      format.json 
+      format.json do
+        case(params[:struct_type])
+        when 'tree' then render :tree
+        else render :index
+        end
+      end
     end
   end
 

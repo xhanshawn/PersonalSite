@@ -14,3 +14,24 @@
 #nametooltip rect{
 	fill: white;
 }
+
+#nametooltip text{
+	fill: black;
+}
+
+
+#tags-tree .node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+#tags-tree .node {
+  font: 10px sans-serif;
+}
+
+#tags-tree .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
