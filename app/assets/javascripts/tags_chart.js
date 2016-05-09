@@ -566,9 +566,15 @@ function build_force_directed_graph() {
 
 function build_tags_tree(){
 
+  var device_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
   var width = 800,
-    height = 800;
+   height = 800;
+
+  if(device_width < width) {
+    width = device_width,
+    height = device_width;
+  }
 
   var cluster = d3.layout.tree()
       .size([height, width - 160]);
