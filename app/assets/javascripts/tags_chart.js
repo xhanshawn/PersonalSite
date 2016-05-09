@@ -570,7 +570,7 @@ function build_tags_tree(){
   var width = 800,
     height = 800;
 
-  var cluster = d3.layout.cluster()
+  var cluster = d3.layout.tree()
       .size([height, width - 160]);
 
   var diagonal = d3.svg.diagonal()
