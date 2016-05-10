@@ -550,7 +550,6 @@ function build_force_directed_graph() {
   });
 
 
-
   // listening key up. 
   // esc to cancel current link and nodes
   $(window).on('keyup', function(e) {
@@ -586,6 +585,12 @@ function build_force_directed_graph() {
         .style("stroke-width", 0);
   };  
 }
+
+
+
+
+
+
 
 
 function build_tags_tree(){
@@ -628,12 +633,13 @@ function build_tags_tree(){
         .data(nodes)
       .enter().append("g")
         .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
     node.append("circle")
         .attr("r", 4.5);
 
-    node.append("text")
+    node.append("svg:a").attr("xlink:href", function(d){ return "/tags/" + d.id })
+        .append("text")
         .attr("dx", function(d) { return d.children ? -8 : 8; })
         .attr("dy", 3)
         .style("text-anchor", function(d) { return d.children ? "end" : "start"; })

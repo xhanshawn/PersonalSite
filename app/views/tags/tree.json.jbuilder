@@ -4,6 +4,7 @@ def build_tree(json, tag)
 	return if(@visited.include? tag.id)
 	@visited << tag.id
 	json.name tag.name
+	json.id tag.id
 	json.size tag.posts.length + 1
 	edges = Edge.where(tag_id: tag.id).to_a
 	unless edges.empty?
