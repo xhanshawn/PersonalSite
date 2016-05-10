@@ -11,7 +11,7 @@ var helpers = {
       var svg = d3.select("#force-directed-graph svg");
       var mouse = d3.mouse(svg.node());
       var tool = svg.append('g')
-                    .attr({'id': 'nametooltip', transform: 'translate(' + (mouse[0] + 5) + ',' + (mouse[1] + 10) + ')'});
+                    .attr({'id': 'nametooltip', transform: 'translate(' + (mouse[0] + 5) + ',' + (mouse[1] - 10) + ')'});
       var textNode = tool.append('text').text(d.name).node();
 
       tool.append('rect')
@@ -44,23 +44,36 @@ function build_bubble_chart() {
 
   // if($('#bubble-chart svg').length) return;
 
-  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+  // detect if the device is mobile, then set the full width of the device as the width
+  var device_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
-  var diameter = width * 0.5,
+  var width = 600;
+
+  if(device_width < width) width = device_width*0.9;
+  
+  var diameter = width,
       format = d3.format(",d"),
       color = d3.scale.category20c();
 
+  // sort by value descending
   var tag_comp = function(tag1, tag2){
     return -(tag1.value - tag2.value);
   }
 
+  // sort by group
+  var tag_comp2 = function(tag1, tag2){
+    return tag1.group.localeCompare(tag2.group);
+  }
 
+
+  // bubble layout for bubble chart
   var bubble = d3.layout.pack()
-      .sort(tag_comp)
+      .sort(null)
       .size([diameter, diameter])
       .padding(3);
 
 
+  // the svg element for the chart
   var svg = d3.select("#bubble-chart")
       .append("svg")
       .attr("width", diameter)
@@ -69,51 +82,56 @@ function build_bubble_chart() {
 
 
 
-  d3.json("/tags.json", function(error, root) {
+  d3.json("/tags.json?struct_type=flattened_tags", function(error, root) {
+
     if (error) throw error;
 
-    var nodes = bubble.nodes(classes(root))
-        .filter(function(d) { return !d.children; });
+    var nodes = bubble.nodes(root)                     
+        .filter(function(d) { return !d.children; });  // filter non-leaf nodes
 
     
+    // each node consists of a circle, link, title and text, which are in a svg:g
     var node = svg.selectAll(".node")
         .data(nodes)
-      .enter().append("g")
-        .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        .enter()
+          .append("g")
+          .attr("class", function(d) { return 'node group-' + d.group;})
+          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
+    // title which is the tooltip
     node.append("title")
-        .text(function(d) { return d.className + ": " + format(d.value); });
+        .text(function(d) { return d.name + ": " + format(d.value - 1) + ' posts exists.'; });
 
+    // hyperlink and the circle 
     node.append("svg:a").attr("xlink:href", function(d){ return "/tags/" + d.id })
         .append("circle")
         .attr("r", function(d) { return d.r; })
-        .style("fill", function(d) { return color(d.className); });
+        .style("fill", function(d) { return color(d.group); });
 
-
+    // add the text for showing the content
     node.select('a')
         .append("text")
-        .text(function(d) { return d.className.substring(0, d.r / 3); })
-        .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 10) + "px"; })
+        .text(function(d) { return d.name; })
+        .style("font-size", function(d) { return Math.min(20, (2 * d.r - 8) / this.getComputedTextLength() * 11) + "px"; })
         .attr("dy", ".3em")
         .style("text-anchor", "middle");
-        
+    
+    // lowlight other group bubbles when mouse over a node
+    node.on('mouseover', function(e){
+
+      var group_name = d3.select(this).datum().group;
+      d3.selectAll('.node')
+      .filter(function(d){ return d.group !== group_name; })
+      .select('circle').classed("lowlighted", true);
+
+    });
+
+    // reset the node opacity for all nodes when mouse out a node
+    node.on('mouseout', function(e){
+      d3.selectAll('.node').select('circle').classed('lowlighted', false);
+    });
 
   });
-
-  // Returns a flattened hierarchy containing all leaf nodes under the root.
-  function classes(root) {
-    var classes = [];
-
-    function recurse(name, node) {
-      if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-      else classes.push({packageName: name, className: node.name, value: node.size, id: node.id});
-    }
-
-    recurse(null, root);
-
-    return {children: classes};
-  }
 
   d3.select(self.frameElement).style("height", diameter + "px");
 
@@ -164,8 +182,14 @@ function build_force_directed_graph() {
 
   var source_node, target_node, drag_line, drawing, edge_type;
 
-  var link = svg.append('svg:g').attr('class', 'link-panel').selectAll(".link"),
-      node = svg.append('svg:g').attr('class', 'node-panel').selectAll(".node");
+  var link = svg.append('svg:g')
+                .attr('class', 'link-panel')
+                .attr("transform", "translate(-80,0)")
+                .selectAll(".link"),
+      node = svg.append('svg:g')
+                .attr('class', 'node-panel')
+                .attr("transform", "translate(-80,0)")
+                .selectAll(".node");
 
 
   var link_color = d3.scale.category10();

@@ -13,6 +13,7 @@ class TagsController < ApplicationController
       format.json do
         case(params[:struct_type])
         when 'tree' then render :tree
+        when 'flattened_tags' then render :flattened_tags
         else render :index
         end
       end

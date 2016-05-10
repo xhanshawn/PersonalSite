@@ -20,6 +20,10 @@
 }
 
 
+#bubble-chart .node .lowlighted{
+	fill-opacity: 0.1;
+}
+
 #tags-tree .node circle {
   fill: #fff;
   stroke: steelblue;
