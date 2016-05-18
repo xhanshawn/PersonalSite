@@ -80,11 +80,13 @@
   margin: 0;
   padding: 0;
   list-style: none;
+
+  text-align: center; 
 }
 
 .sidebar-nav li {
-  text-indent: 20px;
-  line-height: 40px;
+  // text-indent: 20px;
+  // line-height: 40px;
 }
 
 .sidebar-nav li a {
