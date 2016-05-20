@@ -10,19 +10,45 @@
         </a>
       </li>
       <li>
-        <a href="#div-skills-tree"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+        <a href="#div-skills-tree" class="ah-sidebar-item">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </a>
       </li>
-      <span class="verticalLine"></span>
+      <span class="vertical-line"></span>
       <li>
-        <a href="#div-projects"><i class="fa fa-diamond" aria-hidden="true"></i></a>
+        <a href="#div-projects" class="ah-sidebar-item">
+          <i class="fa fa-diamond" aria-hidden="true"></i>
+        </a>
       </li>
-      <span class="verticalLine"></span>
+      <span class="vertical-line"></span>
       <li>
-        <a href="#carousel-tju"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>  
+        <div class="ah-sidebar-list">
+          
+        
+          <a href="#" class="ah-sidebar-rlist-btn ah-sidebar-item">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+          </a>  
+          <div class="ah-sidebar-rlist">
+            <span class="horizontal-line"></span>
+            <span class="horizontal-line"></span>
+            <span class="horizontal-line"></span>
+            <a href="#carousel-wpi" class="ah-sidebar-item">
+              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
+              WPI
+            </a>
+            <span class="horizontal-line"></span>
+            <a href="#carousel-tju" class="ah-sidebar-item">
+              TJU
+              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
+            </a>
+          </div>
+        </div>
       </li>
-      <span class="verticalLine"></span>
+      <span class="vertical-line"></span>
       <li>
-        <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+        <a href="#" class="ah-sidebar-item">
+          <i class="fa fa-facebook-official" aria-hidden="true"></i>
+        </a>
       </li>
     </ul>
   </div>
@@ -241,9 +267,12 @@
   }
 
 
-  .verticalLine {
+  .vertical-line {
     display: block;
-    background-color: #AAA;
+    /*background-color: #f2f2f2;*/
+    background-color: #ff3333;
+    background-color: #6666ff;
+
     width: 2px;
     height: 20px;
     margin: 0 auto;
@@ -251,22 +280,27 @@
   }
 
 
-  .sidebar-nav li:not(.sidebar-brand){
-    border-radius: 5px;
-    border-style: solid;
-    border-color: #AAA;
-    border-width: 2px;
+  .horizontal-line {
+
+    /*position: relative;*/
+    display: inline-block;
+
+    /*background-color: #f2f2f2;*/
+    background-color: #ff3333;
+    background-color: #6666ff;
+
+    width: 20px;
+    height: 2px;
+
     margin: 0 auto;
-    /*padding: 10px;*/
-    display: table;
 
-    text-align: center;
-
-    padding-top: 15px;
-
-    width: 50px;
-    height: 50px;
+    position: relative;
+    /*top: -10%;*/
+    top: -6px;
   }
+
+
+  
 
 </style>
 <script type="text/javascript">
@@ -315,6 +349,28 @@
     $('body, html').animate({scrollTop: pos}, { duration: diff, easing: 'easeInOutCubic'});
  
   });
+
+
+  $('.ah-ah-sidebar-item').on('mouseenter', function(e){
+    console.log(this);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   $(document).ready(function(){
 
