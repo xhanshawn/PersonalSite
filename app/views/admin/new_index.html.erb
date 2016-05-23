@@ -2,51 +2,66 @@
 <div id="wrapper" class="xh-index collapsed">
 
   <!-- Sidebar -->
-  <div id="sidebar-wrapper">
+  <div id="sidebar-wrapper" class="collapsed">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
         <a href="#">
-          Shawn Han
+          Xu Han
         </a>
       </li>
       <li>
-        <a href="#div-skills-tree" class="ah-sidebar-item">
+        <a href="#div-skills-tree" class="ah-nav-cube ah-blue-cube">
           <i class="fa fa-share-alt" aria-hidden="true"></i>
         </a>
       </li>
-      <span class="vertical-line"></span>
+      <span class="ah-ver-line"></span>
       <li>
-        <a href="#div-projects" class="ah-sidebar-item">
-          <i class="fa fa-diamond" aria-hidden="true"></i>
-        </a>
-      </li>
-      <span class="vertical-line"></span>
-      <li>
-        <div class="ah-sidebar-list">
-          
-        
-          <a href="#" class="ah-sidebar-rlist-btn ah-sidebar-item">
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          </a>  
-          <div class="ah-sidebar-rlist">
-            <span class="horizontal-line"></span>
-            <span class="horizontal-line"></span>
-            <span class="horizontal-line"></span>
-            <a href="#carousel-wpi" class="ah-sidebar-item">
+        <div class="ah-sidebar-cubelist">
+          <a href="#div-projects" class="ah-cubelist-btn ah-nav-cube ah-blue-cube">
+            <i class="fa fa-diamond" aria-hidden="true"></i>
+          </a>
+          <div class="ah-hor-cubelist-right">
+            <span class="ah-hor-line"></span>
+            <span class="ah-hor-line"></span>
+            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">
               <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
               WPI
             </a>
-            <span class="horizontal-line"></span>
-            <a href="#carousel-tju" class="ah-sidebar-item">
+            <span class="ah-hor-line"></span>
+            <a href="#carousel-tju" class="ah-nav-cube ah-blue-cube">
               TJU
               <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
             </a>
           </div>
         </div>
       </li>
-      <span class="vertical-line"></span>
+      <span class="ah-ver-line"></span>
       <li>
-        <a href="#" class="ah-sidebar-item">
+        <div class="ah-sidebar-cubelist">
+          
+        
+          <a href="#" class="ah-cubelist-btn ah-nav-cube ah-blue-cube">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+          </a>  
+          <div class="ah-hor-cubelist-right">
+            <span class="ah-hor-line"></span>
+            <span class="ah-hor-line"></span>
+            <span class="ah-hor-line"></span>
+            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">
+              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
+              WPI
+            </a>
+            <span class="ah-hor-line"></span>
+            <a href="#carousel-tju" class="ah-nav-cube ah-blue-cube">
+              TJU
+              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
+            </a>
+          </div>
+        </div>
+      </li>
+      <span class="ah-ver-line"></span>
+      <li>
+        <a href="#" class="ah-nav-cube ah-blue-cube">
           <i class="fa fa-facebook-official" aria-hidden="true"></i>
         </a>
       </li>
@@ -55,17 +70,18 @@
   <!-- /#sidebar-wrapper -->
   <!-- Page Content -->
 
+  <div class="container-fluid" id="top-nav">
+    <div class="row">
+      <div class="col-lg-12">
+        <nav class="navbar navbar-fixed-top ah-fixed-top-nav">
+          <a href="#menu-toggle" class="" id="menu-toggle"><span class="glyphicon glyphicon-th-list"></span></a>
+        </nav>
+      </div>
+    </div> 
+  </div>
 
   <div id="page-content-wrapper">
-    <div class="container-fluid" id="top-nav">
-      <div class="row">
-        <div class="col-lg-12">
-          <nav class="navbar navbar-fixed-top navbar-fixed-with-siderbar">
-            <a href="#menu-toggle" class="" id="menu-toggle"><span class="glyphicon glyphicon-th-list"></span></a>
-          </nav>
-        </div>
-      </div> 
-    </div>
+    
 
     <div class="jumbotron fixed-topbar-bot">
       <div class="container">
@@ -195,14 +211,14 @@
         </div>
 
         <!-- Controls -->
-        <!-- <a class="left carousel-control" href="#carousel-tju" role="button" data-slide="prev">
+        <a class="left carousel-control" href="#carousel-tju" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
         <a class="right carousel-control" href="#carousel-tju" role="button" data-slide="next">
           <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
-        </a> -->
+        </a>
       </div>
       <div class="row">
         <div class="jumbotron">
@@ -267,39 +283,6 @@
   }
 
 
-  .vertical-line {
-    display: block;
-    /*background-color: #f2f2f2;*/
-    background-color: #ff3333;
-    background-color: #6666ff;
-
-    width: 2px;
-    height: 20px;
-    margin: 0 auto;
-    /*margin-left: 22px;*/
-  }
-
-
-  .horizontal-line {
-
-    /*position: relative;*/
-    display: inline-block;
-
-    /*background-color: #f2f2f2;*/
-    background-color: #ff3333;
-    background-color: #6666ff;
-
-    width: 20px;
-    height: 2px;
-
-    margin: 0 auto;
-
-    position: relative;
-    /*top: -10%;*/
-    top: -6px;
-  }
-
-
   
 
 </style>
@@ -316,6 +299,7 @@
 
 	$('#menu-toggle').on('click', function(e){
 		$('#wrapper').toggleClass('collapsed');
+    // $('#sidebar-wrapper').toggleClass('collapsed');
 	})
 
   // $(window).scroll(function(e){
@@ -351,9 +335,6 @@
   });
 
 
-  $('.ah-ah-sidebar-item').on('mouseenter', function(e){
-    console.log(this);
-  });
 
 
 

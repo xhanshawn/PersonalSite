@@ -1,64 +1,78 @@
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
 
 
+@mixin collapse-animation($attribute, $duration){
 
-#wrapper .navbar-fixed-with-siderbar{
-  margin-left: 160px;
+  @if not $attribute{
+    $attribute: all;
+  }
+
+  // transition animation
+  -webkit-transition: $attribute $duration ease;   
+     -moz-transition: $attribute $duration ease;
+       -o-transition: $attribute $duration ease;
+          transition: $attribute $duration ease;
+
+}
+
+
+$sidebar-width: 120px;
+$sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
+
+.ah-fixed-top-nav{
+
+  margin-left: $sidebar-width;
   padding: 20px;
   background: white;
   height: 60px;
 
-  // transition animation
-  -webkit-transition: all 0.5s ease;   
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  @include collapse-animation(all, 0.5s);
 }
-#wrapper.collapsed .navbar-fixed-with-siderbar{
-  margin-left: 0px;
-  padding: 20px;
+
+#wrapper.collapsed {
+  // wrapper is in sidebar-collapsed mode
+
+  padding-left: 0px;
+
+  .ah-fixed-top-nav{
+
+    margin-left: 0px;
+    padding: 20px;
+  }
+
+
+  #sidebar-wrapper {
+    width: 0px;
+  }
 }
 
 
 /* Toggle Styles */
-
 #wrapper {
 
-  padding-left: 160px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  // padding-left: $sidebar-width;
+
+  @include collapse-animation(all, 0.5s);
 }
 
-#wrapper.collapsed {
 
-  padding-left: 0px;
-}
+
 
 #sidebar-wrapper {
 
-  // z-index: 0;
-
   position: fixed;
-  left: 250px;
-  width: 160px;
-  height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: lighten(#000, 20%);; // gray dark of bootstrap
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
 
-#wrapper.collapsed #sidebar-wrapper {
-  width: 0px;
+
+  width: $sidebar-width;
+
+  left: 250px;
+  margin-left: -250px;
+
+  height: 100%;
+
+  overflow-y: auto;
+  background: $sidebar-bg-color;
+
+  @include collapse-animation(all, 0.5s);
 }
 
 #page-content-wrapper {
@@ -70,21 +84,30 @@
 }
 
 #wrapper.collapsed #page-content-wrapper {
+
+
   position: absolute;
   margin-right: -250px;
-  // z-index: 0;
 }
 
-#menu-toggle:hover{
-  // z-index: 100;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Sidebar Styles */
-
 .sidebar-nav {
   position: absolute;
   top: 0;
-  width: 160px;
+  width: $sidebar-width;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -92,7 +115,7 @@
   text-align: center; 
 }
 
-.sidebar-nav .ah-sidebar-item  {
+.sidebar-nav .ah-nav-cube  {
 
   display: inline-block;
   text-decoration: none;
@@ -103,7 +126,7 @@
 }
 
 
-.sidebar-nav .ah-sidebar-item{
+.sidebar-nav .ah-nav-cube{
   border-radius: 5px;
   border-style: solid;
   // border-color: #f2f2f2;
@@ -124,21 +147,32 @@
   height: 50px;
 }
 
-.sidebar-nav .ah-sidebar-item:hover {
+.sidebar-nav .ah-nav-cube:hover {
 
   text-decoration: none;
   // color: #fff;
   // background: rgba(255,255,255,0.2);
-  background-color: #b30000;
-  background-color: #6666ff;
+  // background-color: #b30000;
+  // background-color: #6666ff;
   transition: background-color 1s ease 0s;
 }
 
-.sidebar-nav .ah-sidebar-item:active,
-.sidebar-nav .ah-sidebar-item:focus {
+.sidebar-nav .ah-nav-cube:active,
+.sidebar-nav .ah-nav-cube:focus {
 
   text-decoration: none;
 }
+
+.ah-nav-cube.ah-blue-cube{
+  // color: #6666ff;
+
+}
+
+.ah-nav-cube.ah-blue-cube:hover{
+  color: white;
+  background-color: #6666ff;
+}
+
 
 .sidebar-nav > .sidebar-brand {
 
@@ -170,11 +204,13 @@
 }
 
 
-.ah-sidebar-list{
+.ah-sidebar-cubelist{
   display: inline;
   z-index: 100;
 }
-.ah-sidebar-rlist .ah-sidebar-item{
+
+
+.ah-hor-cubelist-right .ah-nav-cube{
   // position: fixed;
   margin: 0 auto;
   display: inline-block;
@@ -187,7 +223,7 @@
 }
 
 
-.ah-sidebar-rlist{
+.ah-hor-cubelist-right{
   // display: none;
   position: fixed;
   display: inline-block;
@@ -208,9 +244,9 @@
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
-.ah-sidebar-rlist:hover,
-.ah-sidebar-rlist-btn:hover + .ah-sidebar-rlist,
-.ah-sidebar-rlist-btn:active + .ah-sidebar-rlist{
+.ah-hor-cubelist-right:hover,
+.ah-cubelist-btn:hover + .ah-hor-cubelist-right,
+.ah-cubelist-btn:active + .ah-hor-cubelist-right{
 
   visibility: visible;
   opacity: 1;
@@ -221,21 +257,17 @@
   // transition: all 1s;
 }
 
-.ah-sidebar-rlist .ah-sidebar-item:hover{
+.ah-hor-cubelist-right .ah-nav-cube:hover{
   color: #fff;
 }
 
 
 #page-content-wrapper > div:not(#top-nav){
-  z-index: -1;
+  // z-index: -1;
 }
 
 #page-content-wrapper{
-  z-index: -1;
-}
-
-.carousel{
-  z-index: 0;
+  z-index: 1;
 }
 
 #sidebar-wrapper{
@@ -245,16 +277,13 @@
 
 
 
-// #top-nav{
-//   z-index: 1;
-// }
-
 
 // browser has a min-width:768px
 // typically a browser for a PC
 @media(min-width:768px) {
+
   #wrapper {
-    padding-left: 160px;
+    padding-left: $sidebar-width;
   }
 
   #wrapper.collapsed {
@@ -262,7 +291,7 @@
   }
 
   #sidebar-wrapper {
-    width: 160px;
+    width: $sidebar-width;
   }
 
   #wrapper.collapsed #sidebar-wrapper {
@@ -281,3 +310,48 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
+// archare veritical line for connecting the cubes
+.ah-ver-line {
+  display: block;
+  /*background-color: #f2f2f2;*/
+  background-color: #ff3333;
+  background-color: #6666ff;
+
+  width: 2px;
+  height: 20px;
+  margin: 0 auto;
+  /*margin-left: 22px;*/
+}
+
+
+
+// archare horizontal line for connecting the cubes
+.ah-hor-line {
+
+  /*position: relative;*/
+  display: inline-block;
+
+  /*background-color: #f2f2f2;*/
+  background-color: #ff3333;
+  background-color: #6666ff;
+
+  width: 20px;
+  height: 2px;
+
+  margin: 0 auto;
+
+  // center vertical line
+  position: relative;
+  /*top: -10%;*/
+  top: -6px;
+}
