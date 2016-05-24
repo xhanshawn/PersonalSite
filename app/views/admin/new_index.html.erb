@@ -1,10 +1,10 @@
 
-<div id="wrapper" class="xh-index collapsed">
+<div class="xh-index ah-wrapper sb-collapsed">
 
   <!-- Sidebar -->
-  <div id="sidebar-wrapper" class="collapsed">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
+  <div class="ah-sidebar-wrapper">
+    <ul class="ah-sidebar">
+      <li class="ah-sidebar-brand">
         <a href="#">
           Xu Han
         </a>
@@ -16,45 +16,37 @@
       </li>
       <span class="ah-ver-line"></span>
       <li>
-        <div class="ah-sidebar-cubelist">
-          <a href="#div-projects" class="ah-cubelist-btn ah-nav-cube ah-blue-cube">
-            <i class="fa fa-diamond" aria-hidden="true"></i>
-          </a>
-          <div class="ah-hor-cubelist-right">
+        <a href="#div-projects" class="ah-cubelist-btn ah-nav-cube ah-blue-cube">
+          <i class="fa fa-diamond" aria-hidden="true"></i>
+        </a>
+        <div class="">
+          <div class="ah-hor-div">
+
+            <span class="ah-ver-line"></span>
             <span class="ah-hor-line"></span>
-            <span class="ah-hor-line"></span>
-            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">
-              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
+            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">             
               WPI
-            </a>
-            <span class="ah-hor-line"></span>
-            <a href="#carousel-tju" class="ah-nav-cube ah-blue-cube">
-              TJU
-              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
             </a>
           </div>
         </div>
       </li>
-      <span class="ah-ver-line"></span>
+      
       <li>
-        <div class="ah-sidebar-cubelist">
+        <div class="">
           
         
           <a href="#" class="ah-cubelist-btn ah-nav-cube ah-blue-cube">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
           </a>  
-          <div class="ah-hor-cubelist-right">
+          <div class="ah-hor-cubelist">
             <span class="ah-hor-line"></span>
             <span class="ah-hor-line"></span>
-            <span class="ah-hor-line"></span>
-            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">
-              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
+            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">             
               WPI
             </a>
             <span class="ah-hor-line"></span>
             <a href="#carousel-tju" class="ah-nav-cube ah-blue-cube">
               TJU
-              <!-- <i class="fa fa-graduation-cap" aria-hidden="true"></i> -->
             </a>
           </div>
         </div>
@@ -80,7 +72,7 @@
     </div> 
   </div>
 
-  <div id="page-content-wrapper">
+  <div class="ah-page-content">
     
 
     <div class="jumbotron fixed-topbar-bot">
@@ -298,7 +290,7 @@
  //  });
 
 	$('#menu-toggle').on('click', function(e){
-		$('#wrapper').toggleClass('collapsed');
+		$('.ah-wrapper').toggleClass('sb-collapsed');
     // $('#sidebar-wrapper').toggleClass('collapsed');
 	})
 

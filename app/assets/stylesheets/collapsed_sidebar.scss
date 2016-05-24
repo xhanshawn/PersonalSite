@@ -1,6 +1,6 @@
 
 
-@mixin collapse-animation($attribute, $duration){
+@mixin ah-animation($attribute, $duration){
 
   @if not $attribute{
     $attribute: all;
@@ -15,20 +15,27 @@
 }
 
 
-$sidebar-width: 120px;
-$sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
+@mixin cube-hover-animation(){
 
-.ah-fixed-top-nav{
-
-  margin-left: $sidebar-width;
-  padding: 20px;
-  background: white;
-  height: 60px;
-
-  @include collapse-animation(all, 0.5s);
+  -webkit-transition: background-color 1s ease 0s;
+     -moz-transition: background-color 1s ease 0s;
+       -o-transition: background-color 1s ease 0s;
+          transition: background-color 1s ease 0s;
 }
 
-#wrapper.collapsed {
+
+$sidebar-width: 100px;
+$sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
+// $sidebar-bg-color: transparent; // gray dark of bootstrap;
+
+$cube-width: 50px;
+
+$cube-blue: #6666ff;
+$cube-red: #ff3333;
+$cube-green: #66ff66;
+
+
+.ah-wrapper.sb-collapsed {
   // wrapper is in sidebar-collapsed mode
 
   padding-left: 0px;
@@ -40,54 +47,117 @@ $sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
   }
 
 
-  #sidebar-wrapper {
+  .ah-sidebar-wrapper {
     width: 0px;
+  }
+
+  .ah-page-content {
+
+    position: absolute;
+    margin-right: -250px;
+
   }
 }
 
 
-/* Toggle Styles */
-#wrapper {
+// normal, non-collapsed mode
+.ah-wrapper {
 
-  // padding-left: $sidebar-width;
+  padding-left: $sidebar-width;
+  @include ah-animation(all, 0.5s);
+}
 
-  @include collapse-animation(all, 0.5s);
+.ah-fixed-top-nav{
+
+  margin-left: $sidebar-width;
+  padding: 20px;
+  background: white;
+  height: 60px;
+
+  @include ah-animation(all, 0.5s);
 }
 
 
-
-
-#sidebar-wrapper {
+.ah-sidebar-wrapper {
 
   position: fixed;
 
 
   width: $sidebar-width;
 
-  left: 250px;
-  margin-left: -250px;
+  left: $sidebar-width;
+  margin-left: -$sidebar-width;
 
   height: 100%;
 
   overflow-y: auto;
   background: $sidebar-bg-color;
 
-  @include collapse-animation(all, 0.5s);
+  @include ah-animation(all, 0.5s);
 }
 
-#page-content-wrapper {
+.ah-page-content {
 
   width: 100%;
   position: absolute;
   padding: 15px;
+
   // z-index: -1;
 }
 
-#wrapper.collapsed #page-content-wrapper {
+
+.ah-page-content > div:not(#top-nav){
+  z-index: -1;
+}
+
+.ah-page-content{
+  z-index: -1;
+}
+
+.carousel-control{
+  z-index: 1;
+}
+.ah-sidebar-wrapper{
+  z-index: 10;
+}
 
 
-  position: absolute;
-  margin-right: -250px;
+
+
+// browser has a min-width:768px
+// typically a browser for a PC
+@media(min-width:768px) {
+
+  .ah-wrapper {
+    padding-left: $sidebar-width;
+  }
+
+ 
+
+  .ah-sidebar-wrapper {
+    width: $sidebar-width;
+  }
+
+  .ah-page-content {
+    padding: 0px;
+    position: relative;
+  }
+
+
+
+  .ah-wrapper.sb-collapsed {
+
+    padding-left: 0;
+
+    .ah-sidebar-wrapper {
+      width: 0;
+    }
+
+    .ah-page-content {
+      position: relative;
+      margin-right: 0;
+    }
+  }
 }
 
 
@@ -98,13 +168,9 @@ $sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
 
 
 
+// sidebar
+.ah-sidebar {
 
-
-
-
-
-/* Sidebar Styles */
-.sidebar-nav {
   position: absolute;
   top: 0;
   width: $sidebar-width;
@@ -115,66 +181,75 @@ $sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
   text-align: center; 
 }
 
-.sidebar-nav .ah-nav-cube  {
+
+// default cube style
+.ah-nav-cube  {
 
   display: inline-block;
+
   text-decoration: none;
   color: #fff;
+
   margin: 0 auto;
 
-  transition: background-color 1s ease 0s;
-}
 
-
-.sidebar-nav .ah-nav-cube{
   border-radius: 5px;
   border-style: solid;
-  // border-color: #f2f2f2;
-  // border-color: #ff3333;
-  border-color: #6666ff;
-
   border-width: 2px;
-  margin: 0 auto;
+  border-color: black;
+
   z-index: 10;
-  /*padding: 10px;*/
-  /*display: table;*/
 
   text-align: center;
 
   padding-top: 15px;
 
-  width: 50px;
-  height: 50px;
+  width: $cube-width;
+  height: $cube-width;
+
+  @include cube-hover-animation();
+
+  
 }
 
-.sidebar-nav .ah-nav-cube:hover {
+
+
+.ah-nav-cube:hover {
 
   text-decoration: none;
-  // color: #fff;
-  // background: rgba(255,255,255,0.2);
-  // background-color: #b30000;
-  // background-color: #6666ff;
-  transition: background-color 1s ease 0s;
+  @include cube-hover-animation();
+
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  transition-duration: 1s;
+  transition-property: transform;
 }
 
-.sidebar-nav .ah-nav-cube:active,
-.sidebar-nav .ah-nav-cube:focus {
+.ah-nav-cube:active,
+.ah-nav-cube:focus {
 
+  
   text-decoration: none;
 }
 
+
+
+// ah blue cube
 .ah-nav-cube.ah-blue-cube{
-  // color: #6666ff;
-
+  color: white;
+  border-color: $cube-blue;
 }
 
 .ah-nav-cube.ah-blue-cube:hover{
+
   color: white;
-  background-color: #6666ff;
+  background-color: $cube-blue;
 }
 
 
-.sidebar-nav > .sidebar-brand {
+
+// ah sidebar brand
+.ah-sidebar-brand {
 
   height: 65px;
   font-size: 20px;
@@ -184,133 +259,124 @@ $sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
 }
 
 
-.sidebar-nav li {
+.ah-sidebar li {
 
   font-family: 'Varela Round', sans-serif;
 }
 
-.sidebar-nav li{
+.ah-sidebar li{
   left-padding: 0;
 }
 
-.sidebar-nav > .sidebar-brand a {
+.ah-sidebar > .ah-sidebar-brand a {
+  text-decoration: none;
   color: #999999;
 }
 
-.sidebar-nav > .sidebar-brand a:hover {
+.ah-sidebar > .ah-sidebar-brand a:hover {
   text-decoration: none;
   color: #fff;
   background: none;
 }
 
 
-.ah-sidebar-cubelist{
-  display: inline;
-  z-index: 100;
-}
 
+// horizontal cubelist
+.ah-hor-cubelist {
 
-.ah-hor-cubelist-right .ah-nav-cube{
-  // position: fixed;
-  margin: 0 auto;
-  display: inline-block;
-  font-size: 15px; 
-  color: #6666ff;
-  z-index: 100;
-  // background-color: #ff3333;
-  // background-color: #6666ff;
-  // background: lighten(#000, 20%);
-}
-
-
-.ah-hor-cubelist-right{
-  // display: none;
   position: fixed;
   display: inline-block;
 
-  // display: table-cell;
-  // right: 0;
-  opacity: 0;
+
   font-size: 0;  //remove space between inline blocks
 
-  // background-color: red;
   height: 50px;
-  vertical-align: middle;
-  text-align: center;
 
+
+  opacity: 0;
   visibility: hidden;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
+  
+  @include ah-animation(all, 0.3);
+
+
+  .ah-nav-cube{
+    // position: fixed;
+    margin: 0 auto;
+    // display: inline-block;
+    font-size: 15px; 
+    color: $cube-blue;
+    z-index: 100;
+  }
+
+
+  > *{
+
+    vertical-align: middle;
+  }
+ 
 }
-.ah-hor-cubelist-right:hover,
-.ah-cubelist-btn:hover + .ah-hor-cubelist-right,
-.ah-cubelist-btn:active + .ah-hor-cubelist-right{
+
+
+.ah-hor-cubelist:hover,
+.ah-cubelist-btn:hover + .ah-hor-cubelist,
+.ah-cubelist-btn:active + .ah-hor-cubelist{
 
   visibility: visible;
   opacity: 1;
-
-  // -webkit-transition: all 1s;
-  // -moz-transition: all 1s;
-  // -o-transition: all 1s;
-  // transition: all 1s;
 }
 
-.ah-hor-cubelist-right .ah-nav-cube:hover{
+.ah-hor-cubelist .ah-nav-cube:hover{
   color: #fff;
 }
 
 
-#page-content-wrapper > div:not(#top-nav){
-  // z-index: -1;
-}
-
-#page-content-wrapper{
-  z-index: 1;
-}
-
-#sidebar-wrapper{
-  z-index: 10;
-}
 
 
 
+// vertical cubelist 
+.ah-ver-cubelist {
+
+  position: fixed;
+  display: block;
 
 
-// browser has a min-width:768px
-// typically a browser for a PC
-@media(min-width:768px) {
 
-  #wrapper {
-    padding-left: $sidebar-width;
+  font-size: 0;  //remove space between inline blocks
+
+  width: 50px;
+
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  
+  @include ah-animation(all, 0.3);
+
+  .ah-nav-cube{
+    // position: fixed;
+    margin: 0 auto;
+    display: block;
+    font-size: 15px; 
+    color: $cube-blue;
+    z-index: 100;
   }
 
-  #wrapper.collapsed {
-    padding-left: 0;
-  }
-
-  #sidebar-wrapper {
-    width: $sidebar-width;
-  }
-
-  #wrapper.collapsed #sidebar-wrapper {
-    width: 0;
-  }
-
-  #page-content-wrapper {
-    padding: 0px;
-    position: relative;
-  }
-
-  #wrapper.collapsed #page-content-wrapper {
-    position: relative;
-    margin-right: 0;
-  }
 }
 
 
 
+.ah-ver-cubelist:hover,
+.ah-cubelist-btn:hover + .ah-ver-cubelist,
+.ah-cubelist-btn:active + .ah-ver-cubelist{
+
+  visibility: visible;
+  opacity: 1;
+}
+
+.ah-ver-cubelist .ah-nav-cube:hover{
+  color: #fff;
+}
 
 
 
@@ -318,40 +384,93 @@ $sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
 
 
 
+
+
+
+
+
+$line-width: 2px;
 
 
 // archare veritical line for connecting the cubes
 .ah-ver-line {
-  display: block;
-  /*background-color: #f2f2f2;*/
-  background-color: #ff3333;
-  background-color: #6666ff;
+
+  display: inline-block;
+  background-color: $cube-blue;
 
   width: 2px;
   height: 20px;
   margin: 0 auto;
-  /*margin-left: 22px;*/
 }
 
+.ah-ver-line.ah-blue-line{
+
+  background-color: $cube-blue;
+}
 
 
 // archare horizontal line for connecting the cubes
 .ah-hor-line {
 
-  /*position: relative;*/
   display: inline-block;
 
-  /*background-color: #f2f2f2;*/
-  background-color: #ff3333;
-  background-color: #6666ff;
+  background-color: $cube-blue;
 
-  width: 20px;
-  height: 2px;
+  width: $cube-width/2;
 
-  margin: 0 auto;
+  margin-top: ($cube-width - $line-width)/2;
 
-  // center vertical line
-  position: relative;
-  /*top: -10%;*/
-  top: -6px;
+  height: $line-width;
+  margin-bottom: $cube-width - ($cube-width - $line-width)/2;
 }
+
+
+.ah-hor-line{
+  &.ah-blue-line{
+
+    background-color: $cube-blue;
+  }
+}
+
+
+
+
+.ah-branch-line{
+  display: inline-block;
+
+  background-color: $cube-blue;
+
+  width: $cube-width/2;
+
+  margin-top: ($cube-width - $line-width)/2;
+
+  height: $line-width;
+  margin-bottom: $cube-width - ($cube-width - $line-width)/2;
+
+}
+
+
+.ah-hor-div{
+  display: inline-block;
+  height: $cube-width;
+  font-size: 0; 
+  padding-left: 20px + $cube-width/2;
+  // position: fixed;
+
+  .ah-nav-cube{
+    // position: fixed;
+    margin: 0 auto;
+    display: inline-block;
+    font-size: 15px; 
+    color: $cube-blue;
+    z-index: 100;
+  }
+
+  > *{
+
+    vertical-align: middle;
+  }
+}
+
+
+
