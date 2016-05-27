@@ -15,18 +15,10 @@
 }
 
 
-@mixin cube-hover-animation(){
-
-  -webkit-transition: background-color 1s ease 0s;
-     -moz-transition: background-color 1s ease 0s;
-       -o-transition: background-color 1s ease 0s;
-          transition: background-color 1s ease 0s;
-}
 
 
-$sidebar-width: 100px;
+$sidebar-width: 80px;
 $sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
-// $sidebar-bg-color: transparent; // gray dark of bootstrap;
 
 $cube-width: 50px;
 
@@ -101,32 +93,32 @@ $cube-green: #66ff66;
   width: 100%;
   position: absolute;
   padding: 15px;
-
-  // z-index: -1;
 }
 
 
-.ah-page-content > div:not(#top-nav){
-  z-index: -1;
-}
+// sidebar
+.ah-sidebar {
 
-.ah-page-content{
-  z-index: -1;
-}
+  position: absolute;
 
-.carousel-control{
-  z-index: 1;
-}
-.ah-sidebar-wrapper{
-  z-index: 10;
-}
+  top: 0;
+  width: $sidebar-width;
 
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+  text-align: center; 
+  @include ah-animation(all, 0.5s);
+}
 
 
 
 // browser has a min-width:768px
 // typically a browser for a PC
 @media(min-width:768px) {
+
+  $sidebar-width: 100px;
 
   .ah-wrapper {
     padding-left: $sidebar-width;
@@ -143,7 +135,15 @@ $cube-green: #66ff66;
     position: relative;
   }
 
+  .ah-fixed-top-nav{
 
+    margin-left: $sidebar-width;
+    padding: 20px;
+  }
+
+  .ah-sidebar {
+    width: $sidebar-width;
+  }
 
   .ah-wrapper.sb-collapsed {
 
@@ -168,83 +168,9 @@ $cube-green: #66ff66;
 
 
 
-// sidebar
-.ah-sidebar {
-
-  position: absolute;
-  top: 0;
-  width: $sidebar-width;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  text-align: center; 
-}
-
-
-// default cube style
-.ah-nav-cube  {
-
-  display: inline-block;
-
-  text-decoration: none;
-  color: #fff;
-
-  margin: 0 auto;
-
-
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
-
-  z-index: 10;
-
-  text-align: center;
-
-  padding-top: 15px;
-
-  width: $cube-width;
-  height: $cube-width;
-
-  @include cube-hover-animation();
-
-  
-}
 
 
 
-.ah-nav-cube:hover {
-
-  text-decoration: none;
-  @include cube-hover-animation();
-
-  transform: rotate(360deg);
-  -webkit-transform: rotate(360deg);
-  transition-duration: 1s;
-  transition-property: transform;
-}
-
-.ah-nav-cube:active,
-.ah-nav-cube:focus {
-
-  
-  text-decoration: none;
-}
-
-
-
-// ah blue cube
-.ah-nav-cube.ah-blue-cube{
-  color: white;
-  border-color: $cube-blue;
-}
-
-.ah-nav-cube.ah-blue-cube:hover{
-
-  color: white;
-  background-color: $cube-blue;
-}
 
 
 
@@ -279,6 +205,200 @@ $cube-green: #66ff66;
   background: none;
 }
 
+
+
+
+
+// cube styles
+
+
+$cube-font-size: 15px;
+$cube-border-width: 2px;
+
+// default cube style
+.ah-nav-cube  {
+
+  display: inline-block;
+
+  // text and fonts
+  text-decoration: none;
+  color: white;
+  font-size: $cube-font-size;
+
+  text-align: center;
+
+
+  // round rect border
+  border-radius: 5px;
+  border-style: solid;
+  border-width: $cube-border-width;
+  border-color: white;
+
+
+  z-index: 10;
+
+
+  // margin and padding
+  margin: 0 auto;
+  padding-top: ($cube-width - $cube-font-size)/2 - 2 * $cube-border-width;  // a little bit less padding top
+
+  width: $cube-width;
+  height: $cube-width;
+
+  @include ah-animation(background-color, 1s);
+}
+
+
+
+.ah-nav-cube{
+
+
+
+  // different states for cube
+  &:hover {
+
+    text-decoration: none;
+
+
+    // rotate
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transition-duration: 1s;
+    transition-property: transform;
+  }
+
+
+  &:active, &:focus {
+
+    text-decoration: none;
+  }
+
+
+  // styles ah blue cube
+  &.ah-blue-cube{
+
+    color: white;
+    border-color: $cube-blue;
+
+    &:hover{
+
+      color: white;
+      background-color: $cube-blue;
+    }
+  }
+
+  
+}
+
+
+
+
+
+.ah-sb-sublist{
+
+  text-align: center;
+  // display: none;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+
+  @include ah-animation(opacity, 1s);
+
+
+  &:hover{
+
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+  }
+}
+
+.ah-sb-sublist-btn{
+
+  &:hover, 
+  &:active, 
+  &:focus{
+    & ~ .ah-sb-sublist{
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+    }
+  }
+}
+
+
+
+
+
+
+$line-width: 2px;
+
+
+// archare veritical line for connecting the cubes
+.ah-ver-line {
+
+  display: block;
+  background-color: $cube-blue;
+
+  width: 2px;
+  height: 20px;
+  margin: 0 auto;
+
+
+  &.ah-blue-line{
+
+    background-color: $cube-blue;
+  }
+}
+
+
+// archare horizontal line for connecting the cubes
+.ah-hor-line {
+
+  display: inline-block;
+
+  background-color: $cube-blue;
+
+  width: $cube-width/2;
+
+  margin-top: ($cube-width - $line-width)/2;
+
+  height: $line-width;
+  margin-bottom: $cube-width - ($cube-width - $line-width)/2;
+
+
+
+  &.ah-blue-line{
+
+    background-color: $cube-blue;
+  }
+}
+
+
+
+
+
+.ah-nav-cube.ah-blue-cube + .tooltip {
+
+  z-index: 100;
+  
+  & > .tooltip-inner { 
+    background-color: $cube-blue; 
+    opacity: 0.8;
+  }
+  & > .tooltip-arrow { 
+    border-top-color: $cube-blue; 
+    opacity: 0.8;
+  }
+}
+
+
+
+
+// old ideas for horizontal cube list and vertical cubelist
+/*
 
 
 // horizontal cubelist
@@ -351,7 +471,7 @@ $cube-green: #66ff66;
   visibility: hidden;
 
   
-  @include ah-animation(all, 0.3);
+  @include ah-animation(all, 0.3s);
 
   .ah-nav-cube{
     // position: fixed;
@@ -381,96 +501,10 @@ $cube-green: #66ff66;
 
 
 
+*/
 
 
 
-
-
-
-
-
-$line-width: 2px;
-
-
-// archare veritical line for connecting the cubes
-.ah-ver-line {
-
-  display: inline-block;
-  background-color: $cube-blue;
-
-  width: 2px;
-  height: 20px;
-  margin: 0 auto;
-}
-
-.ah-ver-line.ah-blue-line{
-
-  background-color: $cube-blue;
-}
-
-
-// archare horizontal line for connecting the cubes
-.ah-hor-line {
-
-  display: inline-block;
-
-  background-color: $cube-blue;
-
-  width: $cube-width/2;
-
-  margin-top: ($cube-width - $line-width)/2;
-
-  height: $line-width;
-  margin-bottom: $cube-width - ($cube-width - $line-width)/2;
-}
-
-
-.ah-hor-line{
-  &.ah-blue-line{
-
-    background-color: $cube-blue;
-  }
-}
-
-
-
-
-.ah-branch-line{
-  display: inline-block;
-
-  background-color: $cube-blue;
-
-  width: $cube-width/2;
-
-  margin-top: ($cube-width - $line-width)/2;
-
-  height: $line-width;
-  margin-bottom: $cube-width - ($cube-width - $line-width)/2;
-
-}
-
-
-.ah-hor-div{
-  display: inline-block;
-  height: $cube-width;
-  font-size: 0; 
-  padding-left: 20px + $cube-width/2;
-  // position: fixed;
-
-  .ah-nav-cube{
-    // position: fixed;
-    margin: 0 auto;
-    display: inline-block;
-    font-size: 15px; 
-    color: $cube-blue;
-    z-index: 100;
-  }
-
-  > *{
-
-    vertical-align: middle;
-  }
-}
 
 
 

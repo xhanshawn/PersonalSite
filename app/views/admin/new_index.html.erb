@@ -10,50 +10,36 @@
         </a>
       </li>
       <li>
-        <a href="#div-skills-tree" class="ah-nav-cube ah-blue-cube">
+        <a href="#div-skills-tree" class="ah-nav-cube ah-blue-cube" title="Skills tree">
           <i class="fa fa-share-alt" aria-hidden="true"></i>
         </a>
-      </li>
-      <span class="ah-ver-line"></span>
-      <li>
-        <a href="#div-projects" class="ah-cubelist-btn ah-nav-cube ah-blue-cube">
-          <i class="fa fa-diamond" aria-hidden="true"></i>
-        </a>
-        <div class="">
-          <div class="ah-hor-div">
-
-            <span class="ah-ver-line"></span>
-            <span class="ah-hor-line"></span>
-            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">             
-              WPI
-            </a>
-          </div>
-        </div>
+        <span class="ah-ver-line"></span>
       </li>
       
       <li>
-        <div class="">
-          
-        
-          <a href="#" class="ah-cubelist-btn ah-nav-cube ah-blue-cube">
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          </a>  
-          <div class="ah-hor-cubelist">
-            <span class="ah-hor-line"></span>
-            <span class="ah-hor-line"></span>
-            <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube">             
-              WPI
-            </a>
-            <span class="ah-hor-line"></span>
-            <a href="#carousel-tju" class="ah-nav-cube ah-blue-cube">
-              TJU
-            </a>
-          </div>
+        <a href="#div-projects" class="ah-nav-cube ah-blue-cube" title="Projects">
+          <i class="fa fa-diamond" aria-hidden="true"></i>
+        </a>
+      </li>
+      <span class="ah-ver-line"></span>
+      <li>
+        <a href="#" class="ah-sb-sublist-btn ah-nav-cube ah-blue-cube" title="Education">
+          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+        </a>  
+        <div class="ah-sb-sublist">
+          <span class="ah-ver-line"></span>
+          <a href="#carousel-wpi" class="ah-nav-cube ah-blue-cube" title="MS">             
+            WPI
+          </a>
+          <span class="ah-ver-line"></span>
+          <a href="#carousel-tju" class="ah-nav-cube ah-blue-cube" title="BEng">
+            TJU
+          </a>
         </div>
       </li>
       <span class="ah-ver-line"></span>
       <li>
-        <a href="#" class="ah-nav-cube ah-blue-cube">
+        <a href="#" class="ah-nav-cube ah-blue-cube" title="Be my friend! Be my friend! Be my friend! ">
           <i class="fa fa-facebook-official" aria-hidden="true"></i>
         </a>
       </li>
@@ -98,9 +84,17 @@
 
     
     <div class="container-fluid" id="div-projects">
-      
-      p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>
-      p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>p<br>
+      <div class="row">
+        <div class="col-md-4 bg-info">
+          di1
+        </div>
+        <div class="col-md-4">
+          div2
+        </div>
+        <div class="col-md-4">
+          div3
+        </div>
+      </div>
     </div>
 
 
@@ -279,24 +273,23 @@
 
 </style>
 <script type="text/javascript">
- //  var setTimeoutConst;
-	// $('#menu-toggle').hover(function(e){
-
-	// 	setTimeoutConst = setTimeout(function(){
- //      $('#wrapper').toggleClass('collapsed');
- //    }, 100);		
-	// }, function(e){
- //    clearTimeout(setTimeoutConst);
- //  });
 
 	$('#menu-toggle').on('click', function(e){
 		$('.ah-wrapper').toggleClass('sb-collapsed');
-    // $('#sidebar-wrapper').toggleClass('collapsed');
-	})
+	});
 
-  // $(window).scroll(function(e){
-  //   console.log(e);
-  // });
+  $(document).ready(function(){
+
+    $('.ah-nav-cube').attr({
+      'data-toggle': 'tooltip',
+      'data-delay' : '{"show":"1200", "hide":"0"}'
+    });
+
+
+    $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+  });
+  
+
 
   $(document).on('click', 'a[href^="#"]', function(e) {
     // target element id
