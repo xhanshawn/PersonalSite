@@ -36,6 +36,7 @@ $cube-green: #66ff66;
 
     margin-left: 0px;
     padding: 20px;
+    background-color: transparent;
   }
 
 
@@ -63,7 +64,7 @@ $cube-green: #66ff66;
 
   margin-left: $sidebar-width;
   padding: 20px;
-  background: white;
+  // background: white;
   height: 60px;
 
   @include ah-animation(all, 0.5s);
@@ -377,13 +378,18 @@ $line-width: 2px;
 }
 
 
-
+.ah-nav-cube:active,
+.ah-nav-cube:focus{
+  & + .tooltip{
+    opacity: 0;
+  }
+}
 
 
 .ah-nav-cube.ah-blue-cube + .tooltip {
 
   z-index: 100;
-  
+
   & > .tooltip-inner { 
     background-color: $cube-blue; 
     opacity: 0.8;

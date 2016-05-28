@@ -10,20 +10,21 @@
         </a>
       </li>
       <li>
-        <a href="#div-skills-tree" class="ah-nav-cube ah-blue-cube" title="Skills tree">
+        <a href="#xh-skills-tree" class="ah-nav-cube ah-blue-cube" title="Skills tree">
           <i class="fa fa-share-alt" aria-hidden="true"></i>
         </a>
         <span class="ah-ver-line"></span>
       </li>
       
       <li>
-        <a href="#div-projects" class="ah-nav-cube ah-blue-cube" title="Projects">
+        <a href="#xh-projects" class="ah-nav-cube ah-blue-cube" title="Projects">
           <i class="fa fa-diamond" aria-hidden="true"></i>
         </a>
       </li>
       <span class="ah-ver-line"></span>
       <li>
-        <a href="#" class="ah-sb-sublist-btn ah-nav-cube ah-blue-cube" title="Education">
+        <a href="#xh-edu
+        " class="ah-sb-sublist-btn ah-nav-cube ah-blue-cube" title="Education">
           <i class="fa fa-graduation-cap" aria-hidden="true"></i>
         </a>  
         <div class="ah-sb-sublist">
@@ -61,44 +62,71 @@
   <div class="ah-page-content">
     
 
-    <div class="jumbotron fixed-topbar-bot">
+    <div class="jumbotron fixed-topbar-bot xh-jubotron">
       <div class="container">
         <div class="text-center">
           <h1>Hello, world!</h1>
+
           <p>
-            I am Xu, a new grad. 
+            I am Xu
+          </p>
+          <p>
+            a new grad
           </p> 
+          <p>
+            a programmer
+          </p>
         </div>
       </div>
     </div>
 
-    <div class="container-fluid" id="div-skills-tree">
-      <div class="row">
-        <div class="jumbotron text-center">
-          <h2>Skills tree</h2>
-        </div>
-      </div>
+    <div class="container-fluid" id="xh-skills-tree">
+<!--  -->
+      <h2 class="text-center">Skills tree</h2>
       <div id="xh-skills-tree"></div>
       
     </div>
 
     
-    <div class="container-fluid" id="div-projects">
+    <div class="container-fluid" id="xh-projects">
       <div class="row">
-        <div class="col-md-4 bg-info">
-          di1
+        <div class="col-md-4 xh-project-block">
+          <h3 class="text-center">ASSISTments-iOS</h3>
+          <p>
+            ASSISTments is an online-learning infrastructure for students to learn math and science subjects. It also provides data for researchers to do analysis and tests. I joined a team to develop the new version of iOS APP for ASSISTments. 
+          </p>
+          <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/bzsN3cVDnAI?rel=0" frameborder="0" allowfullscreen=""></iframe>
+          </div>
         </div>
-        <div class="col-md-4">
-          div2
+
+        <div class="col-md-4 xh-project-block">
+          <a href="http://archare.elasticbeanstalk.com"><h3 class="archare-brand">Archare</h3></a>
+
+          <p>
+            Archare is my personal website with posts about software development, including algorithms, data structures web developmen, etc. I have also built some data visualiztions for the tags of posts.
+          </p>
+
+          <a href="/">
+            <img src="images/ah-thumbnail.jpg" alt="..." class="img-thumbnail">
+          </a>
         </div>
-        <div class="col-md-4">
-          div3
+        
+        <div class="col-md-4 xh-project-block">
+          <h3 class="text-center">Flight searching system</h3>
+          <p>
+            In the course CS 509 design of software systems, I joined a team to develop a flight searching systems. It could build and render complext flight plans for users based on their specific flight plan requirements. 
+          </p>
+
+          <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/muTFqaLaqWI?rel=0" frameborder="0" allowfullscreen=""></iframe>
+          </div>
         </div>
       </div>
     </div>
 
 
-    <div class="container-fluid" id="div-edu">
+    <div class="container-fluid" id="xh-edu">
       
       
       <div id="carousel-wpi" class="carousel slide" data-ride="carousel">
@@ -241,10 +269,14 @@
     font-family: 'Varela Round', sans-serif;
   }
 
-  #div-edu img.full-width-img{
+  .xh-jubotron{
+    padding-top: 150px;
+    height: 100vh;
+  }
+  #xh-edu img.full-width-img{
     display: block;
     width: 100%;
-    height: auto;
+    max-height: 90vh;
 
     opacity: 0.8;
     filter: alpha(opacity=80); /* For IE8 and earlier */
@@ -268,8 +300,28 @@
     stroke-width: 1.5px;
   }
 
+  .xh-project-block{
+    padding: 30px;
+    min-height: 100vh;
+  }
 
+  .xh-project-block:not(p){
+    text-align: center;
+  }
   
+  #xh-projects{
+    padding-top: 30px;
+    padding-bottom: 39px;
+  }
+
+  .xh-project-block iframe{
+    padding: 30px;
+  }
+
+  .xh-index a{
+
+    text-decoration: none;
+  }
 
 </style>
 <script type="text/javascript">
