@@ -23,8 +23,7 @@
       </li>
       <span class="ah-ver-line"></span>
       <li>
-        <a href="#xh-edu
-        " class="ah-sb-sublist-btn ah-nav-cube ah-blue-cube" title="Education">
+        <a href="#xh-edu" class="ah-sb-sublist-btn ah-nav-cube ah-blue-cube" title="Education">
           <i class="fa fa-graduation-cap" aria-hidden="true"></i>
         </a>  
         <div class="ah-sb-sublist">
@@ -40,7 +39,7 @@
       </li>
       <span class="ah-ver-line"></span>
       <li>
-        <a href="#" class="ah-nav-cube ah-blue-cube" title="Be my friend! Be my friend! Be my friend! ">
+        <a href="#xh-sns" class="ah-nav-cube ah-blue-cube" title="Be my friend!">
           <i class="fa fa-facebook-official" aria-hidden="true"></i>
         </a>
       </li>
@@ -53,7 +52,7 @@
     <div class="row">
       <div class="col-lg-12">
         <nav class="navbar navbar-fixed-top ah-fixed-top-nav">
-          <a href="#menu-toggle" class="" id="menu-toggle"><span class="glyphicon glyphicon-th-list"></span></a>
+          <a href="#menu-toggle" class="ah-menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-th-list"></span></a>
         </nav>
       </div>
     </div> 
@@ -62,7 +61,7 @@
   <div class="ah-page-content">
     
 
-    <div class="jumbotron fixed-topbar-bot xh-jubotron">
+    <div class="jumbotron" id="xh-greeting">
       <div class="container">
         <div class="text-center">
           <h1>Hello, world!</h1>
@@ -246,6 +245,81 @@
 
 
     </div>
+
+
+    <div class="container-fluid" id="xh-sns">
+      <h1 class="text-center">Be my friends!</h1>
+      <div class="row">
+        <div class="col-md-2 xh-sns-block">
+          <h3>
+            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+            <a target="_blank" href="https://www.linkedin.com/in/xhanshawn">LinkedIn</a>
+          </h3>
+
+          <p>
+            You can find my professional experiences and profiles.
+          </p>
+
+        </div>
+        <div class="col-md-2 xh-sns-block">
+          <h3>
+            
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <a target="_blank" href="https://github.com/xhanshawn">Github</a>
+          </h3>
+
+          <p>
+            Most of my projects are open on Github.
+          </p>
+        </div>
+        <div class="col-md-2 xh-sns-block">
+          <h3>
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+            <a target="_blank" href="https://www.facebook.com/profile.php?id=100006425761916">Facebook</a>
+          </h3>
+
+          <p>
+            Although I don't often post my stories, I am glad to add friends on Facebook.
+          </p>
+
+        </div>
+        <div class="col-md-2 xh-sns-block">
+          <h3>
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+            <a target="_blank" href="https://www.instagram.com/buingbuing_xh/">Instagram</a>
+          </h3>
+
+          <p>
+            In fact, I like instagram more than Facebook. 
+          </p>
+
+        </div>
+
+        <div class="col-md-2 xh-sns-block">
+          <h3>
+            <i class="fa fa-weibo" aria-hidden="true"></i>
+            Weibo
+          </h3>
+
+          <p>
+            Where I like sharing and reposting funny stories.
+          </p>
+          <img src="images/weibo_qr.jpg" alt="..." class="img-thumbnail">
+        </div>
+
+        <div class="col-md-2 xh-sns-block">
+          <h3>
+            <i class="fa fa-weixin" aria-hidden="true"></i>
+            Wechat
+          </h3>
+
+          <p>
+            Chat with me on wechat and I often post photos. 
+          </p>
+          <img src="images/weixin_qr.jpg" alt="..." class="img-thumbnail">
+        </div>
+      </div>
+    </div>
   </div>
   <!-- /#page-content-wrapper -->
 </div>
@@ -258,9 +332,7 @@
     color: #777;
   }
 
-  .xh-index .fixed-topbar-bot{
-    margin-top: 60px;
-  }
+  
 
   .xh-index .jumbotron{
     background-color: transparent;
@@ -269,21 +341,26 @@
     font-family: 'Varela Round', sans-serif;
   }
 
-  .xh-jubotron{
+  .xh-index h3{
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  /*greeting parts*/
+
+  .xh-index #xh-greeting{
+    margin-top: 60px;
     padding-top: 150px;
     height: 100vh;
   }
-  #xh-edu img.full-width-img{
-    display: block;
-    width: 100%;
-    max-height: 90vh;
 
-    opacity: 0.8;
-    filter: alpha(opacity=80); /* For IE8 and earlier */
-  }
+  
 
+
+
+  /*skills tree part */
 
   #xh-skills-tree .node circle {
+
     fill: #fff;
     stroke: steelblue;
     stroke-width: 1.5px;
@@ -299,6 +376,10 @@
     stroke: #ccc;
     stroke-width: 1.5px;
   }
+
+
+
+  /*projects part and blocks*/
 
   .xh-project-block{
     padding: 30px;
@@ -323,10 +404,69 @@
     text-decoration: none;
   }
 
+
+
+
+  /* education */
+
+  #xh-edu img.full-width-img{
+
+    /*display: inline-block;*/
+    width: 100%;
+    /*max-height: 90vh;*/
+    height: auto;
+
+    /*vertical-align: middle;*/
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+  }
+
+  .xh-index .carousel.slide, 
+  .xh-index .carousel.slide .carousel-inner
+  {
+    overflow: hidden;
+    height: 100vh;
+
+  }
+
+  .xh-index .carousel.slide .item > img{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+    
+  .xh-index .carousel-caption{
+
+    top: 70vh;
+  }
+
+
+
+
+  .xh-index .xh-sns-block{
+    text-align: center;
+  }
+
+  #xh-sns{
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  #xh-sns p{
+    padding: 20px;
+  }
+
+
+
 </style>
 <script type="text/javascript">
 
-	$('#menu-toggle').on('click', function(e){
+	$('.ah-menu-toggle').on('click', function(e){
 		$('.ah-wrapper').toggleClass('sb-collapsed');
 	});
 

@@ -48,7 +48,7 @@ gem 'bootstrap-sass', '3.3.6'
 gem 'summernote-rails', '~> 0.8.1.1'
 
 # font awesome
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 4.6.2'
 
 # d3 for rails
 gem 'd3-rails'
