@@ -17,10 +17,10 @@
 
 
 
-$sidebar-width: 80px;
+$sidebar-width: 60px;
 $sidebar-bg-color: lighten(#000, 20%); // gray dark of bootstrap;
 
-$cube-width: 50px;
+$cube-width: 40px;
 
 $cube-blue: #6666ff;
 $cube-red: #ff3333;
@@ -120,6 +120,8 @@ $cube-green: #66ff66;
 @media(min-width:768px) {
 
   $sidebar-width: 100px;
+  $cube-width: 50px;
+  $sb-brand-font-size: 20px;
 
   .ah-wrapper {
     padding-left: $sidebar-width;
@@ -171,7 +173,7 @@ $cube-green: #66ff66;
 
 
 
-
+$sb-brand-font-size: 15px;
 
 
 
@@ -179,7 +181,7 @@ $cube-green: #66ff66;
 .ah-sidebar-brand {
 
   height: 65px;
-  font-size: 20px;
+  font-size: $sb-brand-font-size;
   font-weight: 600; //semi bold
   font-family: 'Open Sans', sans-serif;
   line-height: 60px;

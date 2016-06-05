@@ -82,8 +82,141 @@
     <div class="container-fluid" id="xh-skills-tree">
 <!--  -->
       <h2 class="text-center">Skills tree</h2>
-      <div id="xh-skills-tree"></div>
-      
+      <div id="skills-tree"></div>
+
+
+      <script>
+        var skills = {
+          name: "Xu Han (Shawn)",
+          children: [
+            { name: "programming language",
+              children: [
+                { name: "java" },
+                { name: "python" },
+                { name: "ruby" },
+                { name: "c++"}
+              ]
+            },
+            { name: "web application development",
+              children: [
+
+                { name: "rails" },
+                { name: "bootstrap" },
+                { name: "jQuery" },
+                { name: "d3.js" },
+                { name: "HTML 5" },
+                { name: "CSS 3" },
+                { name: "javascript"}
+              ]
+            },
+            { name: "mobile application development",
+              children: [
+                { name: "iOS"},
+                { name: "Android"}
+              ]
+            }
+
+          ]
+        };
+
+
+
+
+
+
+
+
+
+
+
+        $(document).ready(function(){
+
+          build_tags_tree();
+        });
+
+        $(window).resize(function(){
+
+          build_tags_tree();
+        });
+
+
+        function build_tags_tree(){
+
+
+          var device_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+          var device_height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+
+          var width = device_width,
+            height = 700;
+
+
+          var vertical = true;
+          var cluster_width = width - 200,
+              cluster_height = height - 200;
+
+          if(device_width < device_height) {
+
+            vertical = false;
+
+            cluster_width = height - 50;
+            cluster_height = width - 180;
+          }
+
+
+
+          var cluster = d3.layout.tree()
+              .size([cluster_width, cluster_height]);
+
+          var diagonal = d3.svg.diagonal()
+              .projection(function(d) { return (vertical)? [d.x, d.y] : [d.y, d.x]; });
+
+          $('#skills-tree').text('');
+          var svg = d3.select("#skills-tree").append("svg")
+              .attr("width", width)
+              .attr("height", height)
+            .append("g")
+              .attr("transform", "translate(50,50)");
+
+       
+          var nodes = cluster.nodes(skills),
+              links = cluster.links(nodes);
+
+          var link = svg.selectAll(".link")
+              .data(links)
+            .enter().append("path")
+              .attr("class", "link")
+              .attr("d", diagonal);
+
+          var node = svg.selectAll(".node")
+              .data(nodes)
+            .enter().append("g")
+              .attr("class", "node")
+              .attr("transform", function(d) { 
+                if(vertical) return "translate(" + d.x + "," + d.y + ")"; 
+                else return "translate(" + d.y + "," + d.x + ")"; 
+              });
+
+          node.append("circle")
+              .attr("r", 4.5);
+
+          node.append("text")
+              .attr("dx", function(d) { 
+                if(vertical) return d.children ? -8 : -12; 
+                else return d.children ? 50 : -8; 
+              })
+              .attr("dy", function(d) { 
+                if(vertical) return d.children ? 3 : 20;
+                else return 20; 
+              })
+              .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+              .text(function(d) { return d.name; });
+
+          d3.select(self.frameElement).style("height", height + "px");
+
+
+          
+        }
+      </script>
     </div>
 
     
@@ -350,7 +483,7 @@
   .xh-index #xh-greeting{
     margin-top: 60px;
     padding-top: 150px;
-    height: 100vh;
+    /*height: 100vh;*/
   }
 
   
@@ -359,19 +492,23 @@
 
   /*skills tree part */
 
-  #xh-skills-tree .node circle {
+  #skills-tree{
+    text-align: center;
+  }
+
+  #skills-tree .node circle {
 
     fill: #fff;
     stroke: steelblue;
     stroke-width: 1.5px;
   }
 
-  #xh-skills-tree .node {
+  #skills-tree .node {
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
   }
 
-  #xh-skills-tree .link {
+  #skills-tree .link {
     fill: none;
     stroke: #ccc;
     stroke-width: 1.5px;
@@ -383,7 +520,14 @@
 
   .xh-project-block{
     padding: 30px;
-    min-height: 100vh;
+    
+  }
+
+  @media(min-width:768px) {
+
+    .xh-project-block{
+      min-height: 100vh;
+    }
   }
 
   .xh-project-block:not(p){
@@ -417,33 +561,54 @@
     height: auto;
 
     /*vertical-align: middle;*/
-    position: absolute;
+    /*position: absolute;
 
     top: 0;
-    bottom: 0;
+    bottom: 0;*/
     opacity: 0.8;
     filter: alpha(opacity=80); /* For IE8 and earlier */
   }
 
-  .xh-index .carousel.slide, 
-  .xh-index .carousel.slide .carousel-inner
-  {
-    overflow: hidden;
-    height: 100vh;
+  @media(min-width:768px) {
+
+    .xh-index #xh-greeting{
+
+      padding-top: 20vh;
+      height: 90vh;
+
+    }
+
+    #xh-edu img.full-width-img{
+
+      /*min-height: 100vh;*/
+
+    }
+
+
+    .xh-index .carousel.slide, 
+    .xh-index .carousel.slide .carousel-inner
+    {
+      overflow: hidden;
+      height: auto;
+      max-height: 100vh;
+
+    }
+
+    .xh-index .carousel.slide .item > img{
+      /*position: absolute;*/
+      /*top: 0;
+      bottom: 0;*/
+    }
+
+      
+    .xh-index .carousel-caption{
+
+      top: 60%;
+    }
 
   }
 
-  .xh-index .carousel.slide .item > img{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-  }
-
-    
-  .xh-index .carousel-caption{
-
-    top: 70vh;
-  }
+  
 
 
 
@@ -518,109 +683,7 @@
 
 
 
-  var skills = {
-    name: "Xu Han (Shawn)",
-    children: [
-      { name: "programming language",
-        children: [
-          { name: "java" },
-          { name: "python" },
-          { name: "ruby" },
-          { name: "c++"}
-        ]
-      },
-      { name: "web application development",
-        children: [
-
-          { name: "rails" },
-          { name: "bootstrap" },
-          { name: "jQuery" },
-          { name: "d3.js" },
-          { name: "HTML 5" },
-          { name: "CSS 3" },
-          { name: "javascript"}
-        ]
-      },
-      { name: "mobile application development",
-        children: [
-          { name: "iOS"},
-          { name: "Android"}
-        ]
-      }
-
-    ]
-  };
-
-
-
-
-
-
-
-
-
-
-
-  $(document).ready(function(){
-
-    build_tags_tree();
-  });
-
-
-  function build_tags_tree(){
-
-    var device_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-    var width = device_width,
-      height = 700;
-
-    if(device_width < width) {
-      width = device_width,
-      height = device_width;
-    }
-
-    var cluster = d3.layout.tree()
-        .size([width - 200, height - 200]);
-
-    var diagonal = d3.svg.diagonal()
-        .projection(function(d) { return [d.x, d.y]; });
-
-    var svg = d3.select("#xh-skills-tree").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-      .append("g")
-        .attr("transform", "translate(50,20)");
-
- 
-    var nodes = cluster.nodes(skills),
-        links = cluster.links(nodes);
-
-    var link = svg.selectAll(".link")
-        .data(links)
-      .enter().append("path")
-        .attr("class", "link")
-        .attr("d", diagonal);
-
-    var node = svg.selectAll(".node")
-        .data(nodes)
-      .enter().append("g")
-        .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-
-    node.append("circle")
-        .attr("r", 4.5);
-
-    node.append("text")
-        .attr("dx", function(d) { return d.children ? -8 : 0; })
-        .attr("dy", function(d) { return d.children ? 3 : 20; })
-        .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
-        .text(function(d) { return d.name; });
-
-    d3.select(self.frameElement).style("height", height + "px");
-
-
-    
-  }
+  
 
 
 
