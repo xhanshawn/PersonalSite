@@ -74,7 +74,7 @@ $cube-width: 50px;
 
   .ah-page-content {
 
-    position: absolute;
+    position: relative;
     margin-right: -250px;
 
     @include mobile{
@@ -89,7 +89,7 @@ $cube-width: 50px;
 // normal, non-collapsed mode
 .ah-wrapper {
 
-  
+
   margin-left: $sidebar-width;
 
   @include mobile{
@@ -147,8 +147,8 @@ $cube-width: 50px;
 
   
   width: 100%;
-  position: absolute;
-  padding: 10px;
+  position: relative;
+  // padding: 10px;
 
   @include mobile {
     padding: 0px;
