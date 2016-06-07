@@ -184,11 +184,11 @@ function build_force_directed_graph() {
 
   var link = svg.append('svg:g')
                 .attr('class', 'link-panel')
-                .attr("transform", "translate(-80,0)")
+                .attr("transform", "translate(-0,0)")
                 .selectAll(".link"),
       node = svg.append('svg:g')
                 .attr('class', 'node-panel')
-                .attr("transform", "translate(-80,0)")
+                .attr("transform", "translate(-0,0)")
                 .selectAll(".node");
 
 
@@ -438,6 +438,7 @@ function build_force_directed_graph() {
     coordinates = d3.mouse(this);
     var x = coordinates[0];
     var y = coordinates[1];
+    console.log(x+ ", " + y);
     drag_line
         .style("stroke", "#000").style("stroke-width", 2)
         .attr('d', 'M' + source_node.attr('cx') + ',' + source_node.attr('cy') + 'L' + x +',' + y)
