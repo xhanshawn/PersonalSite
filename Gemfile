@@ -37,6 +37,11 @@ gem 'bootstrap-sass', '3.3.6'
 
 # gem 'bootstrap', '~> 4.0.0.alpha3'
 
+#archare ui
+gem 'archare_ui', '~> 0.2.1'
+# gem 'archare_ui', '0.2.1', path: '/Users/hanxu/documents/workspace/ruby/archare_ui'
+
+
 # gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # Use Unicorn as the app server

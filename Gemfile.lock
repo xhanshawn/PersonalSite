@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    archare_ui (0.2.1)
+      bootstrap-sass (~> 3.3.6)
     arel (6.0.3)
     autoprefixer-rails (6.3.3.1)
       execjs
@@ -166,6 +168,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  archare_ui (~> 0.2.1)
   bcrypt (~> 3.1.7)
   bootstrap-sass (= 3.3.6)
   byebug

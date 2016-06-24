@@ -17,6 +17,7 @@
 //= require bootstrap
 //= require summernote
 //= require d3
+//= require archare_ui
 //= require summernote_setting
 //= require tags_chart
 //= require application_layout
