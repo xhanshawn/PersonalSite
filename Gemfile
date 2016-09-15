@@ -62,9 +62,9 @@ gem 'web-console', '~> 2.0'
 
 if use_local_gem
 
-  gem 'archare_ui', path: '~/workspace/archare_ui'
+  gem 'archare_ui', path: '../archare_ui'
 
-  gem 'archare', path: '~/workspace/archare'
+  gem 'archare', path: '../archare'
 else
 
   gem 'archare_ui', '0.2.1'
