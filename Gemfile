@@ -37,10 +37,7 @@ gem 'bootstrap-sass', '3.3.6'
 
 # gem 'bootstrap', '~> 4.0.0.alpha3'
 
-#archare ui
-gem 'archare_ui', '~> 0.2.1'
-# gem 'archare_ui', '0.2.1', path: '/Users/hanxu/documents/workspace/ruby/archare_ui'
-
+gem 'curb'
 
 # gem 'sprockets-rails', :require => 'sprockets/railtie'
 
@@ -61,6 +58,17 @@ gem 'd3-rails'
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0'
 
+if ENV['USE_LOCAL']
+
+  gem 'archare_ui', path: '~/workspace/archare_ui'
+
+  gem 'archare', path: '~/workspace/archare'
+else
+  
+  gem 'archare_ui'
+
+  gem 'archare'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -69,10 +77,9 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
 
-  
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
 end
 
 
@@ -85,4 +92,3 @@ group :production do
 
   # gem 'web-console', '~> 2.0'
 end
-
