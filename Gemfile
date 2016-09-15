@@ -1,3 +1,5 @@
+use_local_gem = (ENV['USE_LOCAL'] || '') != ''
+
 source 'https://rubygems.org'
 
 gem 'puma'
@@ -58,16 +60,16 @@ gem 'd3-rails'
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0'
 
-if ENV['USE_LOCAL']
+if use_local_gem
 
   gem 'archare_ui', path: '~/workspace/archare_ui'
 
   gem 'archare', path: '~/workspace/archare'
 else
-  
-  gem 'archare_ui'
 
-  gem 'archare'
+  gem 'archare_ui', '0.2.1'
+
+  gem 'archare', '0.1.0'
 end
 
 group :development, :test do
