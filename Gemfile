@@ -64,12 +64,12 @@ if use_local_gem
 
   gem 'archare_ui', path: '../archare_ui'
 
-  gem 'archare', path: '../archare'
+  gem 'archare',    path: '../archare'
 else
 
   gem 'archare_ui', '0.2.1'
 
-  gem 'archare', '0.1.0'
+  gem 'archare',    '0.1.0'
 end
 
 group :development, :test do
