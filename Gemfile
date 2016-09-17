@@ -60,6 +60,9 @@ gem 'd3-rails'
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0'
 
+# Rails-api
+gem 'rails-api'
+
 if use_local_gem
 
   gem 'archare_ui', path: '../archare_ui'
@@ -82,6 +85,7 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  gem 'rspec-rails', '~> 3.5'
 end
 
 
