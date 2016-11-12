@@ -7,6 +7,8 @@ gem 'puma'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.0'
 
+gem 'rake', '11.3.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -58,9 +60,6 @@ gem 'font-awesome-sass', '~> 4.6.2'
 # d3 for rails
 gem 'd3-rails'
 
-# Access an IRB console on exception pages or by using <%= console %> in views
-gem 'web-console', '~> 2.0'
-
 if use_local_gem
 
   gem 'archare_ui', path: '../archare_ui'
@@ -80,6 +79,9 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
 
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
@@ -94,5 +96,4 @@ group :production do
   # By default Rails 4 will not serve your assets. this can help
   gem 'rails_12factor'
 
-  # gem 'web-console', '~> 2.0'
 end

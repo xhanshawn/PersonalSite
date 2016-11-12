@@ -1,7 +1,7 @@
 class PageContentsController < ApplicationController
   before_action :set_page_content, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize, only: [:show_index_by_name, :show_by_name]
-  skip_before_action :authorize_developer, only: [:show_index_by_name, :show_by_name]
+  before_action :authorize_developer, except: [:show_index_by_name, :show_by_name]
 
   
   # GET /page_contents

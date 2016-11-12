@@ -22,10 +22,9 @@ class ApplicationController < ActionController::Base
         Rails.application.routes.recognize_path(path)
       rescue
         return false
+      end
+      true
     end
-
-  true
-end
 
 
     def authorize_developer
@@ -37,7 +36,4 @@ end
     def current_user
       @user = User.find_by(id: session[:user_id])
     end
-
-  protect_from_forgery with: :exception
-  before_filter :store_last_url
 end
