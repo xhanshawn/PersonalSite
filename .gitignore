@@ -15,7 +15,9 @@
 /log/*
 !/log/.keep
 /tmp
-/vendor/cache/*.gem
+/vendor/cache
+/public/assets/*
+/public/assets/*.json
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
