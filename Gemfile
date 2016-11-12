@@ -1,6 +1,7 @@
 use_local_gem = (ENV['USE_LOCAL'] || '') != ''
 
 source 'https://rubygems.org'
+ruby "2.3.1"
 
 gem 'puma'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
