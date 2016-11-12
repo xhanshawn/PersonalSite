@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'puma'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails', '5.0.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -59,9 +59,6 @@ gem 'd3-rails'
 
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0'
-
-# Rails-api
-gem 'rails-api'
 
 if use_local_gem
 
